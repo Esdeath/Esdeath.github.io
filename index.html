@@ -110,7 +110,7 @@
 				
 				<section class="switch-part switch-part2">
 					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/OC/" style="font-size: 10px;">OC</a> <a href="/tags/Swift/" style="font-size: 10px;">Swift</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/单例/" style="font-size: 10px;">单例</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
+						<a href="/tags/Swift/" style="font-size: 10px;">Swift</a> <a href="/tags/单例/" style="font-size: 10px;">单例</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a>
 					</div>
 				</section>
 				
@@ -204,9 +204,9 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>##1.单例简介<br>单例是一种很常用的设计模式.<br>单例模式的意图是保证一个类仅有一个实例,并提供一个访问它的全局访问点。</p>
+        <h2 id="1-单例简介">1.单例简介</h2><p>单例是一种很常用的设计模式.<br>单例模式的意图是保证一个类仅有一个实例,并提供一个访问它的全局访问点。</p>
 <p>一般情况下, 如果一个类是单例, 那么都会提供一个类方法用于快速创建单例对象.而且这个类方法的名称是有一定的规则: <code>share + 类名称 / default + 类名称 / 类名称开头</code></p>
-<p>##2.OC中单例的实现<br>在OC中实现单例,相对来说比较复杂,需要以下步骤:</p>
+<h2 id="2-OC中单例的实现">2.OC中单例的实现</h2><p>在OC中实现单例,相对来说比较复杂,需要以下步骤:</p>
 <ol>
 <li>提供外界的唯一接口</li>
 <li>需要重写allocWithZone,copyWithZone,mutableCopyWithZone方法.(这个是ARC中的做法,MRC则要考虑内存管理,这里不做介绍).</li>
@@ -214,14 +214,13 @@
 </ol>
 <p>下面自定义一个Tools单例:<br>Tools.h<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">&lt;Foundation/Foundation.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">Tools</span> : <span class="title">NSObject</span>&lt;<span class="title">NSCopying</span>, <span class="title">NSMutableCopying</span>&gt;</span></span><br><span class="line"><span class="comment">// 一般情况下, 如果一个类是单例, 那么都会提供一个类方法用于快速创建单例对象</span></span><br><span class="line"><span class="comment">// 而且这个类方法的名称是有一定的规则: share + 类名称 / default + 类名称 / 类名称开头</span></span><br><span class="line">+ (instancetype)shareTools;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
 <p>Tools.m<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"Tools.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">Tools</span></span></span><br><span class="line">+ (instancetype)shareTools</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> [[<span class="keyword">self</span> alloc] init];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">static</span> Tools *_instance;</span><br><span class="line"><span class="comment">// 由于alloc方法内部会调用allocWithZone: 所以我们只需要保证在该方法只创建一个对象即可</span></span><br><span class="line">+ (instancetype)allocWithZone:(<span class="keyword">struct</span> _<span class="built_in">NSZone</span> *)zone</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">static</span> <span class="built_in">dispatch_once_t</span> onceToken;</span><br><span class="line">    <span class="built_in">dispatch_once</span>(&amp;onceToken, ^&#123;</span><br><span class="line">        _instance = [<span class="keyword">super</span> allocWithZone:zone];</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">return</span> _instance;</span><br><span class="line">&#125;</span><br><span class="line">- (<span class="keyword">id</span>)copyWithZone:(<span class="built_in">NSZone</span> *)zone</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 因为copy方法必须通过实例对象调用, 所以可以直接返回_instance</span></span><br><span class="line">    <span class="keyword">return</span> _instance;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">id</span>)mutableCopyWithZone:(<span class="built_in">NSZone</span> *)zone</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> _instance;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
-<p>##3.Swift中单例的实现</p>
-<p>###1.在Swift中,我们也可以使用GCD来实现单例:<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Tools: NSObject &#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword"> static</span> var instance: Tools?</span><br><span class="line">   <span class="keyword"> static</span> var onceToken: dispatch_once_t = 0</span><br><span class="line"></span><br><span class="line">    class func<span class="function"> shareTools(</span><span class="function">)</span> -&gt; Tools</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="function"> dispatch_once(</span>&amp;onceToken<span class="function">)</span> &#123;<span class="function"> (</span><span class="function">)</span> -&gt; Void in</span><br><span class="line">           <span class="instruction"> instance </span>=<span class="function"> Tools(</span><span class="function">)</span></span><br><span class="line">        &#125;</span><br><span class="line">       <span class="instruction"> return </span>instance!</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###2.let的代码简化<br>我们可以通过使用let来写出更简洁的代码,因为let本身就是线程安全的, 并且只能赋值一次.<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tools</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 注意: 一定要写let, let本身就是线程安全的, 并且只能赋值一次</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> let instance: Tools = Tools()</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">shareTools</span>() -&gt; <span class="title">Tools</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>###3.喵神的实现方式<br>在喵神的Swifter书中,有更为简单的实现方式:(<a href="http://swifter.tips/" target="_blank" rel="external">Swfiter</a>)(建议学Swift的同学都可以买这本书,更新速度比网页快)</p>
+<h2 id="3-Swift中单例的实现">3.Swift中单例的实现</h2><h3 id="1-在Swift中,我们也可以使用GCD来实现单例:">1.在Swift中,我们也可以使用GCD来实现单例:</h3><figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">class Tools: NSObject &#123;</span><br><span class="line"></span><br><span class="line">   <span class="keyword"> static</span> var instance: Tools?</span><br><span class="line">   <span class="keyword"> static</span> var onceToken: dispatch_once_t = 0</span><br><span class="line"></span><br><span class="line">    class func<span class="function"> shareTools(</span><span class="function">)</span> -&gt; Tools</span><br><span class="line">    &#123;</span><br><span class="line">       <span class="function"> dispatch_once(</span>&amp;onceToken<span class="function">)</span> &#123;<span class="function"> (</span><span class="function">)</span> -&gt; Void in</span><br><span class="line">           <span class="instruction"> instance </span>=<span class="function"> Tools(</span><span class="function">)</span></span><br><span class="line">        &#125;</span><br><span class="line">       <span class="instruction"> return </span>instance!</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-let的代码简化">2.let的代码简化</h3><p>我们可以通过使用let来写出更简洁的代码,因为let本身就是线程安全的, 并且只能赋值一次.<br><figure class="highlight actionscript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tools</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 注意: 一定要写let, let本身就是线程安全的, 并且只能赋值一次</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> let instance: Tools = Tools()</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">shareTools</span>() -&gt; <span class="title">Tools</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="3-喵神的实现方式">3.喵神的实现方式</h3><p>在喵神的Swifter书中,有更为简单的实现方式:(<a href="http://swifter.tips/" target="_blank" rel="external">Swfiter</a>)(建议学Swift的同学都可以买这本书,更新速度比网页快)</p>
 <p>下面这段话和代码完全来自喵神的书:<br>在 Swift 1.2 以及之后，如果没有特别的需求，我们推荐使用下面这样的方式来写一个单例：<br><figure class="highlight cs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title">MyManager</span>  &#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">let</span> sharedInstance = MyManager()</span><br><span class="line">    <span class="keyword">class</span> <span class="title">var</span> <span class="title">sharedManager</span> : <span class="title">MyManager</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> sharedInstance</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><strong>写到这里貌似可以结尾了,但是这里有个很本质的问题.那就是单例的意图是:保证一个类仅有一个实例,并提供一个访问它的全局访问点。</strong></p>
 <p><img src="http://img.blog.csdn.net/20151001113557178" alt="这里写图片描述"><br><br><br>通过上面的测试输出结果,显然上述代码无法保证一个类仅有一个实例.因为我们可以使用构造方法来构造其他实例.</p>
-<p>###4.最终实现方式<br>在设计模式领域最权威的一本书,当数”四人帮”的&lt;&lt;设计模式:可复用面向对象软件的基础&gt;&gt;,虽然这本书是C++写的,但是并不妨碍我们讨论单例.<br>以下代码来自来自此书:<br><img src="http://img.blog.csdn.net/20151001103547444" alt="这里写图片描述"><br><br><br>其中SingleTon()是构造函数,相当于Swift中的init().而这里的构造函数的属性是protected表示外面无法访问此构造函数,也就是说外界无法通过构造函数来构造一个对象.</p>
+<h3 id="4-最终实现方式">4.最终实现方式</h3><p>在设计模式领域最权威的一本书,当数”四人帮”的&lt;&lt;设计模式:可复用面向对象软件的基础&gt;&gt;,虽然这本书是C++写的,但是并不妨碍我们讨论单例.<br>以下代码来自来自此书:<br><img src="http://img.blog.csdn.net/20151001103547444" alt="这里写图片描述"><br><br><br>其中SingleTon()是构造函数,相当于Swift中的init().而这里的构造函数的属性是protected表示外面无法访问此构造函数,也就是说外界无法通过构造函数来构造一个对象.</p>
 <p>但是Swift的里面没有protected,没关系我们直接用private就可以了.<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tools</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    private <span class="keyword">static</span> <span class="keyword">let</span> instance: <span class="type">Tools</span> = <span class="type">Tools</span>()</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">func</span> <span class="title">shareTools</span>() -&gt; <span class="title">Tools</span></span><br><span class="line">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> instance</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    private <span class="keyword">override</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><br><br>我们甚至可以直接这么写来实现单例:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tools</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> shareTools: <span class="type">Tools</span> = <span class="type">Tools</span>()</span><br><span class="line">    private <span class="keyword">override</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>用到的时候直接调用成员变量即可.</p>
@@ -234,60 +233,6 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单例/">单例</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-我的第一篇博客-md" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/10/16/我的第一篇博客-md/" class="article-date">
-  	<time datetime="2015-10-16T14:48:14.000Z" itemprop="datePublished">2015-10-16</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/10/16/我的第一篇博客-md/">我的第一篇博客</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OC/">OC</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
 	</div>
 
       
