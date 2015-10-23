@@ -1,0 +1,397 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浪花</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="title: ‘iOS动画中的物理知识应用-碰撞检测’date: 2015-07-16 23:28:20tags:
+
+iOS
+动画
+
+##碰撞检测
+
+源代码：https://github.com/Esdeath/collsion
+
+我相信搞iOS得人，多多少少都知道 弹球这个小游戏。撞击不同的点，就能改变其运动的轨迹。对于很多人来说，如果不知道思路可能觉得小球在屏幕中撞来撞去，碰到墙壁就改变运动方">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浪花">
+<meta property="og:url" content="http://yoursite.com/2015/10/23/2015-07-16/index.html">
+<meta property="og:site_name" content="浪花">
+<meta property="og:description" content="title: ‘iOS动画中的物理知识应用-碰撞检测’date: 2015-07-16 23:28:20tags:
+
+iOS
+动画
+
+##碰撞检测
+
+源代码：https://github.com/Esdeath/collsion
+
+我相信搞iOS得人，多多少少都知道 弹球这个小游戏。撞击不同的点，就能改变其运动的轨迹。对于很多人来说，如果不知道思路可能觉得小球在屏幕中撞来撞去，碰到墙壁就改变运动方">
+<meta property="og:image" content="http://p4.xyx.hao123.com/img/bigNewLogo/20130606_big_ee53a8677d.jpg">
+<meta property="og:image" content="http://img3.imgtn.bdimg.com/it/u=2998400507,1727283470&fm=21&gp=0.jpg">
+<meta property="og:image" content="http://img.blog.csdn.net/20150716233435969">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717004950481">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717005610114">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717005414567">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717005434269">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717005555286">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717005623404">
+<meta property="og:updated_time" content="2015-10-23T01:52:59.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浪花">
+<meta name="twitter:description" content="title: ‘iOS动画中的物理知识应用-碰撞检测’date: 2015-07-16 23:28:20tags:
+
+iOS
+动画
+
+##碰撞检测
+
+源代码：https://github.com/Esdeath/collsion
+
+我相信搞iOS得人，多多少少都知道 弹球这个小游戏。撞击不同的点，就能改变其运动的轨迹。对于很多人来说，如果不知道思路可能觉得小球在屏幕中撞来撞去，碰到墙壁就改变运动方">
+  
+    <link rel="alternative" href="/atom.xml" title="浪花" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/rounded_img_atool.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/rounded_img_atool.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">无尽的浪花</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我喜欢自由的日子,但我更知道自己肩上的责任</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/nettles" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/OpenGL/" style="font-size: 10px;">OpenGL</a> <a href="/tags/Swift/" style="font-size: 10px;">Swift</a> <a href="/tags/iOS/" style="font-size: 10px;">iOS</a> <a href="/tags/单例/" style="font-size: 10px;">单例</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/资料总结/" style="font-size: 10px;">资料总结</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.liveme.org/">David</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">爱炮姐 爱绘里 更爱亚丝娜,爱超人 爱铁人 更爱蝙蝠侠,爱慢走 哎骑行 更爱宅在家</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">无尽的浪花</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/rounded_img_atool.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">无尽的浪花</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我喜欢自由的日子,但我更知道自己肩上的责任</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/nettles" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-2015-07-16" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/23/2015-07-16/" class="article-date">
+  	<time datetime="2015-10-23T01:52:59.000Z" itemprop="datePublished">2015-10-23</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>title: ‘iOS动画中的物理知识应用-碰撞检测’<br>date: 2015-07-16 23:28:20<br>tags:</p>
+<ul>
+<li>iOS</li>
+<li>动画</li>
+</ul>
+<p>##碰撞检测</p>
+<hr>
+<p>源代码：<a href="https://github.com/Esdeath/collsion" target="_blank" rel="external">https://github.com/Esdeath/collsion</a></p>
+<hr>
+<p>我相信搞iOS得人，多多少少都知道 弹球这个小游戏。撞击不同的点，就能改变其运动的轨迹。对于很多人来说，如果不知道思路可能觉得小球在屏幕中撞来撞去，碰到墙壁就改变运动方向似乎很难实现。<br>其实这个只需要一点点iOS绘图基础和动画基础，还要一点点物理知识就OK了。<br><img src="http://p4.xyx.hao123.com/img/bigNewLogo/20130606_big_ee53a8677d.jpg" alt="这里写图片描述"></p>
+<p>###1.速度和位移都是矢量<br>在2D坐标系中，速度和位移都能分解成在x轴和y轴上的分量<br><img src="http://img3.imgtn.bdimg.com/it/u=2998400507,1727283470&amp;fm=21&amp;gp=0.jpg" alt="这里写图片描述"><br>所以可以根据速度在Vx 和 Vy来描述物体的运动情况。界面每次刷新单位时间，利用物体速度分量Vx与Vy的值来计算下次物体出现的位置：</p>
+<ul>
+<li>下次X轴坐标=Vx + 当前X轴坐标</li>
+<li>下次Y轴坐标=Vy + 当前Y轴坐标</li>
+</ul>
+<p>###2.碰撞的速度模型<br><img src="http://img.blog.csdn.net/20150716233435969" alt="这里写图片描述"><br>假设物体撞到屏幕的底边，这时候物体在X轴上的方向不变，y轴方向上速度取反，同理撞到屏幕顶边也是。<br>物理模型：</p>
+<ul>
+<li>Vx =    Vx</li>
+<li>Vy = - Vy</li>
+</ul>
+<p>同理，如果物体撞到左边或者右边：</p>
+<ul>
+<li>Vx =  - Vx</li>
+<li>Vy =    Vy</li>
+</ul>
+<p>###3.代码实现</p>
+<p>####1.新建一个MRView添加到根View上。<br><img src="http://img.blog.csdn.net/20150717004950481" alt="这里写图片描述"></p>
+<p>####2.添加CADisplayLink<br>CADisplayLink是一个能让我们以和屏幕刷新率相同的频率将内容画到屏幕上的定时器。我们在应用中创建一个新的 CADisplayLink 对象，把它添加到一个runloop中，并给它提供一个 target 和selector 在屏幕刷新的时候调用。</p>
+<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">CADisplayLink</span> *link = [<span class="built_in">CADisplayLink</span> displayLinkWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(setNeedsDisplay)];</span><br><span class="line">[link addToRunLoop:[<span class="built_in">NSRunLoop</span> mainRunLoop] forMode:<span class="built_in">NSDefaultRunLoopMode</span>];</span><br></pre></td></tr></table></figure>
+<p>####3.设置成员属性<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//小鸟图片</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>) <span class="built_in">UIImage</span> *imageBird;</span><br><span class="line"><span class="comment">//小鸟的位置</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> birdX;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> birdY;</span><br><span class="line"><span class="comment">//小鸟的速度</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> birdSpeedX;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> birdSpeedY;</span><br></pre></td></tr></table></figure></p>
+<p>####4.初始化<br>这里要注意，要设置从xib，storyboard，还有代码中初始化都必须引用到。CADisplayLink中调用setNeedsDisplay用来不停的重绘。<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//从xib或者storyboard初始化调用</span></span><br><span class="line">- (<span class="keyword">void</span>)awakeFromNib</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span> setUpBird];</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">//从代码初始化调用这个</span></span><br><span class="line">- (instancetype)initWithFrame:(<span class="built_in">CGRect</span>)frame</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame]) &#123;</span><br><span class="line">        [<span class="keyword">self</span> setUpBird];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)setUpBird</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CADisplayLink</span> *link = [<span class="built_in">CADisplayLink</span> displayLinkWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(setNeedsDisplay)];</span><br><span class="line">    [link addToRunLoop:[<span class="built_in">NSRunLoop</span> mainRunLoop] forMode:<span class="built_in">NSDefaultRunLoopMode</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageBird</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"QQ20150714-1"</span>];</span><br><span class="line">    <span class="comment">//设置初始位置</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdX</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdY</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//设置初始速度</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdSpeedX</span> = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdSpeedY</span> = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>####5.绘图<br>主要是判断好，小鸟碰撞四周的时候速度反向<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)drawRect:(<span class="built_in">CGRect</span>)rect</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.imageBird</span> drawInRect:<span class="built_in">CGRectMake</span>(<span class="keyword">self</span><span class="variable">.birdX</span> , <span class="keyword">self</span><span class="variable">.birdY</span>, IMAGEWIDTH, IMAGEHEIGHT)];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.birdX</span> &lt; <span class="number">0</span> || (<span class="keyword">self</span><span class="variable">.birdX</span> &gt; SCREENWIDTH - IMAGEWIDTH) )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.birdSpeedX</span> = -<span class="keyword">self</span><span class="variable">.birdSpeedX</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.birdY</span> &lt; <span class="number">0</span> || (<span class="keyword">self</span><span class="variable">.birdY</span> &gt; SCREENHEIGHT - IMAGEHEIGHT) )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.birdSpeedY</span> = -<span class="keyword">self</span><span class="variable">.birdSpeedY</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdX</span> += <span class="keyword">self</span><span class="variable">.birdSpeedX</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdY</span> += <span class="keyword">self</span><span class="variable">.birdSpeedY</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>####6.完整的代码<br>这里MRView是self.view的子控件。完全覆盖self.view<br><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"MRView.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define SCREENHEIGHT   [UIScreen mainScreen].bounds.size.height</span></span><br><span class="line"><span class="preprocessor">#define SCREENWIDTH    [UIScreen mainScreen].bounds.size.width</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define IMAGEWIDTH  50</span></span><br><span class="line"><span class="preprocessor">#define IMAGEHEIGHT 50</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">MRView</span>()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>) <span class="built_in">UIImage</span> *imageBird;</span><br><span class="line"><span class="comment">//小鸟的位置</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> birdX;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> birdY;</span><br><span class="line"><span class="comment">//小鸟的速度</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> birdSpeedX;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> birdSpeedY;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">MRView</span></span></span><br><span class="line">- (<span class="keyword">void</span>)awakeFromNib</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span> setUpBird];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (instancetype)initWithFrame:(<span class="built_in">CGRect</span>)frame</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame]) &#123;</span><br><span class="line">        [<span class="keyword">self</span> setUpBird];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">-(<span class="keyword">void</span>)setUpBird</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">CADisplayLink</span> *link = [<span class="built_in">CADisplayLink</span> displayLinkWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(setNeedsDisplay)];</span><br><span class="line">    [link addToRunLoop:[<span class="built_in">NSRunLoop</span> mainRunLoop] forMode:<span class="built_in">NSDefaultRunLoopMode</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageBird</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"QQ20150714-1"</span>];</span><br><span class="line">    <span class="comment">//设置初始位置</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdX</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdY</span> = <span class="number">1</span>;</span><br><span class="line">    <span class="comment">//设置初始速度</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdSpeedX</span> = <span class="number">5</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdSpeedY</span> = <span class="number">5</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)drawRect:(<span class="built_in">CGRect</span>)rect</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.imageBird</span> drawInRect:<span class="built_in">CGRectMake</span>(<span class="keyword">self</span><span class="variable">.birdX</span> , <span class="keyword">self</span><span class="variable">.birdY</span>, IMAGEWIDTH, IMAGEHEIGHT)];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.birdX</span> &lt; <span class="number">0</span> || (<span class="keyword">self</span><span class="variable">.birdX</span> &gt; SCREENWIDTH - IMAGEWIDTH) )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.birdSpeedX</span> = -<span class="keyword">self</span><span class="variable">.birdSpeedX</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.birdY</span> &lt; <span class="number">0</span> || (<span class="keyword">self</span><span class="variable">.birdY</span> &gt; SCREENHEIGHT - IMAGEHEIGHT) )</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.birdSpeedY</span> = -<span class="keyword">self</span><span class="variable">.birdSpeedY</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdX</span> += <span class="keyword">self</span><span class="variable">.birdSpeedX</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdY</span> += <span class="keyword">self</span><span class="variable">.birdSpeedY</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure></p>
+<p>####7.结果展示</p>
+<p><img src="http://img.blog.csdn.net/20150717005610114" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20150717005414567" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20150717005434269" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20150717005555286" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20150717005623404" alt="这里写图片描述"></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/10/23/2015-07-20/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          (no title)
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/10/23/2015-07-10/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015-07-16" data-title="" data-url="http://yoursite.com/2015/10/23/2015-07-16/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 无尽的浪花
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>

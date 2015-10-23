@@ -3,35 +3,17 @@
 <head>
   <meta charset="utf-8">
   
-  <title>Swift中的单例模式 | 浪花</title>
+  <title>浪花</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1.单例简介单例是一种很常用的设计模式.单例模式的意图是保证一个类仅有一个实例,并提供一个访问它的全局访问点。
-一般情况下, 如果一个类是单例, 那么都会提供一个类方法用于快速创建单例对象.而且这个类方法的名称是有一定的规则: share + 类名称 / default + 类名称 / 类名称开头
-2.OC中单例的实现在OC中实现单例,相对来说比较复杂,需要以下步骤:
-
-提供外界的唯一接口
-需要重">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Swift中的单例模式">
-<meta property="og:url" content="http://yoursite.com/2014/10/17/2014-8-11/index.html">
+  <meta name="description">
+<meta property="og:type" content="website">
+<meta property="og:title" content="浪花">
+<meta property="og:url" content="http://yoursite.com/page/2/index.html">
 <meta property="og:site_name" content="浪花">
-<meta property="og:description" content="1.单例简介单例是一种很常用的设计模式.单例模式的意图是保证一个类仅有一个实例,并提供一个访问它的全局访问点。
-一般情况下, 如果一个类是单例, 那么都会提供一个类方法用于快速创建单例对象.而且这个类方法的名称是有一定的规则: share + 类名称 / default + 类名称 / 类名称开头
-2.OC中单例的实现在OC中实现单例,相对来说比较复杂,需要以下步骤:
-
-提供外界的唯一接口
-需要重">
-<meta property="og:image" content="http://img.blog.csdn.net/20151001113557178">
-<meta property="og:image" content="http://img.blog.csdn.net/20151001103547444">
-<meta property="og:updated_time" content="2015-10-17T15:13:04.000Z">
+<meta property="og:description">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Swift中的单例模式">
-<meta name="twitter:description" content="1.单例简介单例是一种很常用的设计模式.单例模式的意图是保证一个类仅有一个实例,并提供一个访问它的全局访问点。
-一般情况下, 如果一个类是单例, 那么都会提供一个类方法用于快速创建单例对象.而且这个类方法的名称是有一定的规则: share + 类名称 / default + 类名称 / 类名称开头
-2.OC中单例的实现在OC中实现单例,相对来说比较复杂,需要以下步骤:
-
-提供外界的唯一接口
-需要重">
+<meta name="twitter:title" content="浪花">
+<meta name="twitter:description">
   
     <link rel="alternative" href="/atom.xml" title="浪花" type="application/atom+xml">
   
@@ -190,11 +172,13 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap"><article id="post-2014-8-11" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap">
+  
+    <article id="post-2014-8-10" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2014/10/17/2014-8-11/" class="article-date">
-  	<time datetime="2014-10-16T23:32:59.000Z" itemprop="datePublished">2014-10-17</time>
+      <a href="/2015/10/18/2014-8-10/" class="article-date">
+  	<time datetime="2015-10-18T02:05:20.000Z" itemprop="datePublished">2015-10-18</time>
 </a>
     </div>
   
@@ -206,23 +190,227 @@
       <header class="article-header">
         
   
-    <h1 class="article-title" itemprop="name">
-      Swift中的单例模式
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/18/2014-8-10/">从C/C++到iOS,然后方向OpenGL资料</a>
     </h1>
   
 
       </header>
       
-      <div class="article-info article-info-post">
-        
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>个人经历了从C++/MFC到iOS编程的蜕变.这期间看了不少书,也有不少感悟.<br>首先:个人觉得不管从事任何编程工作,C语言都是必须要学习的语言.如果不是C++的开发者,则只需要学一些C++基本用法就可以了,起码面向对象,STL这些要会.模板的代码要看得懂.<br>其次:个人感觉现在国内的OpenGL方面的资料很少,从事这方面的人也少,但是个人感觉以后三维是移动端的一个方向.自己以前学过点OpenGL方面的知识,所以定下来这个为以后前进的方向.</p>
+<p>以下是个人总结的一些学习资料,希望能帮助更多的朋友.</p>
+<h2 id="语言相关的书籍:">语言相关的书籍:</h2><h3 id="1-C语言">1.C语言</h3><p>C语言我觉得是最值得任何程序员花大量的时间学习的语言.原因是:</p>
+<ol>
+<li>c语言不在可能随着时间的变化而产生太大的变动,最多也就是一点修修补补.可以说是一朝学会,终生受用</li>
+<li>c语言是简约的,就32个关键字,但是基本上现在任何语言都直接或者间接的构建在c语言之上.</li>
+<li>Linux,Windows(C/C++),Unix都是用c语言实现的.</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>书籍名称</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. <a href="http://www.amazon.cn/C%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%E8%AF%AD%E8%A8%80-%E5%85%8B%E5%B0%BC%E6%B1%89/dp/B0011425T8/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1441953111&amp;sr=1-1&amp;keywords=c+programming+language" target="_blank" rel="external">C程序设计语言</a>(经典书籍)</td>
+<td>传说中的”K&amp;R C”,作者是已故的C语言之父Dennis M．Ritchie与贝尔实验室另一位大牛Brian W．Kernighan.作品虽然篇幅很小，但是内容却非常丰富，而且叙述也非常清晰.在StackOverFlow上评价:<code>这本书简洁易读，会教给你三件事：C 编程语言；如何像程序员一样思考；底层计算模型。</code></td>
+</tr>
+<tr>
+<td>2. <a href="http://www.amazon.cn/C-Primer-Plus-%E6%99%AE%E6%8B%89%E5%A1%94/dp/B001171NQ6/ref=sr_1_3?s=books&amp;ie=UTF8&amp;qid=1441953111&amp;sr=1-3&amp;keywords=c+programming+language" target="_blank" rel="external">C Primer Plus</a>(入门)</td>
+<td>一本很经典的入门书籍,内容全面丰富,条理清晰,全面讲述了C语言编程的相关概念和知识.</td>
+</tr>
+<tr>
+<td>3. <a href="http://www.amazon.cn/C%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1-%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95-%E9%87%91/dp/B003BVBOOQ/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1441953721&amp;sr=1-1&amp;keywords=C%E8%AF%AD%E8%A8%80%E7%A8%8B%E5%BA%8F%E8%AE%BE%E8%AE%A1%EF%BC%9A%E7%8E%B0%E4%BB%A3%E6%96%B9%E6%B3%95+K.N.KING" target="_blank" rel="external">C语言程序设计：现代方法</a>(入门)</td>
+<td>被誉为“近10年来最好的一部C语言著作”.全书由易而难、循序渐进、螺旋式地讲述C语言，很好地处理了指针和位运算等难点。尤为强调软件工程和现代编程理念，在知识的阐述中突出工业界的最佳实践、实际经验和编程风格，使读者能够合理运用所学.</td>
+</tr>
+<tr>
+<td>4. <a href="http://www.amazon.cn/C%E5%92%8C%E6%8C%87%E9%92%88-Pointers-On-C-Kenneth-A-Reek/dp/B00163LU68/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1441954328&amp;sr=1-1&amp;keywords=C%E5%92%8C%E6%8C%87%E9%92%88" target="_blank" rel="external">C和指针</a> (进阶)</td>
+<td>对C语言来说,最难的概念就是<code>指针和数组</code>，还有指向数组的指针和指向指针的指针。C和指针花了大量的篇幅和图示来把这些难懂但重要的概念讲的清清楚楚.</td>
+</tr>
+<tr>
+<td>5. <a href="http://www.amazon.cn/C%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8BExpert-C-Programming-Deep-C-Secrets-Peter-Van-Der-Linden/dp/B0012NIW9K/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1441954714&amp;sr=1-1&amp;keywords=c%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B" target="_blank" rel="external">C专家编程</a>(进阶)</td>
+<td>一本很轻松的书籍，它既包含了大量C语言技术细节和编程技巧，也包含了很多有趣的编程轶事，并专门开辟了一章对C++的基础知识进行了介绍.</td>
+</tr>
+<tr>
+<td>6. <a href="http://www.amazon.cn/C%E9%99%B7%E9%98%B1%E4%B8%8E%E7%BC%BA%E9%99%B7-%E5%87%AF%E5%B0%BC%E6%A0%BC/dp/B0012UMPBY/ref=sr_1_2?s=books&amp;ie=UTF8&amp;qid=1441954714&amp;sr=1-2&amp;keywords=c%E4%B8%93%E5%AE%B6%E7%BC%96%E7%A8%8B" target="_blank" rel="external">C陷阱与缺陷</a>(进阶)</td>
+<td>可以看成是 Effective C.里面展示了使用c语言的各种陷阱与技巧.总之不想被各种bug整死,看这本书就对了.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-C++">2.C++</h3><p><strong>C++ 11出来之后,能与时俱进的书籍不是很多,推荐书籍变得容易多了</strong></p>
+<table>
+<thead>
+<tr>
+<th>书籍名称</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. <a href="http://www.amazon.cn/gp/product/0321958322/ref=as_li_ss_tl?ie=UTF8&amp;camp=536&amp;tag=lucida-23&amp;creativeASIN=0321958322&amp;linkCode=as2&amp;creative=3132" target="_blank" rel="external">The C++ Programming Language</a>(经典)</td>
+<td>C++之父Bjarne Stroustrup的作品,C++最权威且最全面的书籍.最新的书籍已经涵盖C++ 11的内容.</td>
+</tr>
+<tr>
+<td>2. <a href="http://www.amazon.cn/C-Primer-%25E6%2596%25AF%25E5%259D%25A6%25E5%2588%25A9%25C2%25B7%25E6%259D%258E%25E6%2599%25AE%25E6%259B%25BC/dp/B00ESUIL0O?SubscriptionId=AKIAJMGEVRIO53UGJCYQ&amp;tag=16-28-282__-23&amp;linkCode=sp1&amp;camp=2025&amp;creative=165953&amp;creativeASIN=B00ESUIL0O" target="_blank" rel="external">C++ Primer</a>(经典)</td>
+<td>Stanley B. Lippman 是第一个C++的编译器的实现者.这本书完全可以当做参考书或者字典来用,该书既适合初学者,也适合一定经验的程序员.</td>
+</tr>
+<tr>
+<td>3. <a href="http://www.amazon.cn/More-Effective-C-35%E4%B8%AA%E6%94%B9%E5%96%84%E7%BC%96%E7%A8%8B%E4%B8%8E%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%9C%89%E6%95%88%E6%96%B9%E6%B3%95-%E6%A2%85%E8%80%B6/dp/B004IP8BD6/ref=sr_1_2?s=books&amp;ie=UTF8&amp;qid=1441957866&amp;sr=1-2&amp;keywords=effective+c" target="_blank" rel="external">Effective C++</a> <a href="http://www.amazon.cn/More-Effective-C-35%E4%B8%AA%E6%94%B9%E5%96%84%E7%BC%96%E7%A8%8B%E4%B8%8E%E8%AE%BE%E8%AE%A1%E7%9A%84%E6%9C%89%E6%95%88%E6%96%B9%E6%B3%95-%E6%A2%85%E8%80%B6/dp/B004IP8BD6/ref=sr_1_2?s=books&amp;ie=UTF8&amp;qid=1441957866&amp;sr=1-2&amp;keywords=effective+c" target="_blank" rel="external">More Effective C++</a> <a href="http://www.amazon.cn/%E4%B8%AD%E6%96%87%E7%89%88Effective-STL-50%E6%9D%A1%E6%9C%89%E6%95%88%E4%BD%BF%E7%94%A8STL%E7%9A%84%E7%BB%8F%E9%AA%8C-Scott-Meyers/dp/B00LL0M4JI/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1441957893&amp;sr=1-1&amp;keywords=effective+stl" target="_blank" rel="external">Effective STL</a></td>
+<td>C++进阶和实战书籍,梅耶尔大师的三部曲,这三本书介绍了如何高效的使用C++和STL.该书最早使用了条款的形式介绍语言的特性和最佳实践方案.对后来很多此类程序书籍产生了巨大的影响.</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-iOS">3.iOS</h3><table>
+<thead>
+<tr>
+<th>书籍名称</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://www.amazon.cn/iOS%E7%BC%96%E7%A8%8B-%E7%A7%91%E5%B0%94/dp/B00RWORA1O/ref=sr_1_1?s=books&amp;ie=UTF8&amp;qid=1441959745&amp;sr=1-1&amp;keywords=iOS" target="_blank" rel="external">iOS编程(第4版)</a></td>
+<td>这本书讲解的非常详细，适合新手。获得过Jolt生产力大奖，是对这本书价值最好的肯定</td>
+</tr>
+<tr>
+<td><a href="http://www.amazon.cn/dp/B00IDSGY06/ref=cm_sw_r_qz_2_dp_A2OPub0CH96YH" target="_blank" rel="external">Effective Objective C 2.0</a></td>
+<td>这显然是从梅耶尔那里得到的灵感.该书详细介绍了高效使用OC的52个方法.</td>
+</tr>
+<tr>
+<td><a href="http://www.amazon.cn/iOS%E7%BC%96%E7%A8%8B%E5%AE%9E%E6%88%98-%E7%BA%B3%E7%9A%AE%E5%B0%94/dp/B00NKZCM3U/ref=sr_1_7?s=books&amp;ie=UTF8&amp;qid=1441959745&amp;sr=1-7&amp;keywords=iOS" target="_blank" rel="external">iOS 7 Programming Pushing the Limits</a></td>
+<td>这本书是实战方面的书，适合进阶。美团移动强力推荐，iOS开发进阶首选</td>
+</tr>
+<tr>
+<td><a href="http://www.amazon.cn/iOS%E5%BC%80%E5%8F%91%E8%BF%9B%E9%98%B6-%E5%94%90%E5%B7%A7/dp/B00R43XG9S/ref=sr_1_2?s=books&amp;ie=UTF8&amp;qid=1441959745&amp;sr=1-2&amp;keywords=iOS" target="_blank" rel="external">iOS开发进阶</a></td>
+<td>这个不用说，国内知名iOS开发者唐巧大大的书。详解讲解了iOS开发中的工具</td>
+<td>实践</td>
+<td>理论，适合有一定基础的人。</td>
+</tr>
+<tr>
+<td><a href="http://wiki.jikexueyuan.com/project/swift/" target="_blank" rel="external">The Swift Programming Language 中文版</a></td>
+<td>苹果官方的书籍,swift方面的权威.入门靠这一本就够了</td>
+</tr>
+<tr>
+<td><a href="http://swifter.tips/buy" target="_blank" rel="external">Swifter</a></td>
+<td>Swift书籍,喵神的作品.本人买了电子版,建议其他人也买电子版本,一直在更新ing.</td>
+</tr>
+<tr>
+<td><a href="http://www.raywenderlich.com/store/ios-apprentice" target="_blank" rel="external">The iOS Apprentice</a></td>
+<td>这个网站出了很多优质的教程</td>
+</tr>
+</tbody>
+</table>
+<h2 id="OpenGL书籍:">OpenGL书籍:</h2><table>
+<thead>
+<tr>
+<th>书籍名称</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="http://item.jd.com/11655699.html" target="_blank" rel="external">OpenGL ES 3.0编程指南</a></td>
+<td>这个应该算是OpenGL最好的书籍了.OpenGL技术专家亲笔撰写，全面介绍OpenGL ES 3.0的各种特性及新增功能</td>
+</tr>
+<tr>
+<td><a href="http://item.jd.com/11566287.html" target="_blank" rel="external">OpenGL编程指南（原书第8版）</a></td>
+<td>传说中的”红宝书”,不过升级之后,封面变白了.内容全面而深入，用清晰易懂的语言阐释OpenGL的各种技术细节、方法和最佳实践，帮助程序员走上OpenGL专家之路</td>
+</tr>
+<tr>
+<td><a href="http://item.jd.com/11008802.html" target="_blank" rel="external">OpenGL超级宝典</a></td>
+<td>传说中蓝宝书,里面的例子十分详细.入门必备</td>
+</tr>
+<tr>
+<td><a href="http://vdisk.weibo.com/s/uwBBteN5RuOs4" target="_blank" rel="external">相关的电子书合集</a></td>
+<td>上面介绍的书籍都有,还有一些其他的经典书籍.不过都是英文的</td>
+</tr>
+</tbody>
+</table>
+<h2 id="OpenGL网站:">OpenGL网站:</h2><table>
+<thead>
+<tr>
+<th>网站名称</th>
+<th>简介</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://open.gl/" target="_blank" rel="external">open.gl</a></td>
+<td>很多人都推荐这个作为入门教程,而且该教程托管在github上,里面的教程有中文版的.</td>
+</tr>
+<tr>
+<td><a href="http://www.opengl-tutorial.org/zh-hans/" target="_blank" rel="external">Tutorials for modern OpenGL (3.3+)</a></td>
+<td>与时俱进的教程,各国语言的都有</td>
+</tr>
+<tr>
+<td><a href="https://www.udacity.com/wiki/cs291/downloads" target="_blank" rel="external">cs291 video downloads</a></td>
+<td>Udacity的公开课,很好的视频教程</td>
+</tr>
+<tr>
+<td><a href="http://ogldev.atspace.co.uk/index.html" target="_blank" rel="external">OpenGLStepBySetp</a></td>
+<td>跟着例子,一步一步学OpenGL,简单实用.</td>
+</tr>
+<tr>
+<td><a href="https://developer.apple.com/opengl-es/" target="_blank" rel="external">OpenGL ES for iOS</a></td>
+<td>苹果官网的opengl教程,有文档,有例子.</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
 	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单例/">单例</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/资料总结/">资料总结</a></li></ul>
 	</div>
 
-        
+      
 
-        <div class="clearfix"></div>
-      </div>
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-2014-08-11" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/17/2014-08-11/" class="article-date">
+  	<time datetime="2015-10-16T23:32:59.000Z" itemprop="datePublished">2015-10-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/17/2014-08-11/">Swift中的单例模式</a>
+    </h1>
+  
+
+      </header>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -251,66 +439,35 @@
       
     </div>
     
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2015/10/18/2014-8-10/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption"><</strong>
-      <div class="article-nav-title">
-        
-          从C/C++到iOS,然后方向OpenGL资料
-        
-      </div>
-    </a>
-  
-  
-</nav>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单例/">单例</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+	</div>
 
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
   
 </article>
 
 
-<div class="share">
-	<!-- JiaThis Button BEGIN -->
-	<div class="jiathis_style">
-		<span class="jiathis_txt">分享到：</span>
-		<a class="jiathis_button_tsina"></a>
-		<a class="jiathis_button_cqq"></a>
-		<a class="jiathis_button_douban"></a>
-		<a class="jiathis_button_weixin"></a>
-		<a class="jiathis_button_tumblr"></a>
-		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
-	</div>
-	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
-	<!-- JiaThis Button END -->
-</div>
-
-
-
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="2014-8-11" data-title="Swift中的单例模式" data-url="http://yoursite.com/2014/10/17/2014-8-11/"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"true"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
 
 
 
 
+
+  
+  
+    <nav id="page-nav">
+      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
+    </nav>
+  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -334,8 +491,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: false,
-		isPost: true,
+		isHome: true,
+		isPost: false,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,
