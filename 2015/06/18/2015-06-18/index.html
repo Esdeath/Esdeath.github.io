@@ -3,17 +3,34 @@
 <head>
   <meta charset="utf-8">
   
-  <title>浪花</title>
+  <title>iOS实现抽屉效果 | 浪花</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description">
-<meta property="og:type" content="website">
-<meta property="og:title" content="浪花">
-<meta property="og:url" content="http://yoursite.com/page/2/index.html">
+  <meta name="description" content="抽屉效果强调内容在iOS中很多应用都用到了抽屉效果，例如腾讯的QQ，百度贴吧…
+———
+1. 最终效果如下图所示———
+2.实现步骤1.开始启动的时候，新建3个不同颜色的View的1.设置3个成员属性，记录三种颜色的View
+123@property (nonatomic,weak) UIView* redView;@property (nonatomic,weak) UIView* greenV">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS实现抽屉效果">
+<meta property="og:url" content="http://yoursite.com/2015/06/18/2015-06-18/index.html">
 <meta property="og:site_name" content="浪花">
-<meta property="og:description">
+<meta property="og:description" content="抽屉效果强调内容在iOS中很多应用都用到了抽屉效果，例如腾讯的QQ，百度贴吧…
+———
+1. 最终效果如下图所示———
+2.实现步骤1.开始启动的时候，新建3个不同颜色的View的1.设置3个成员属性，记录三种颜色的View
+123@property (nonatomic,weak) UIView* redView;@property (nonatomic,weak) UIView* greenV">
+<meta property="og:image" content="http://img.blog.csdn.net/20150713222434764">
+<meta property="og:image" content="http://img.blog.csdn.net/20150713222450673">
+<meta property="og:image" content="http://img.blog.csdn.net/20150713222350421">
+<meta property="og:image" content="http://img.blog.csdn.net/20150713222404007">
+<meta property="og:updated_time" content="2015-10-24T00:11:45.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="浪花">
-<meta name="twitter:description">
+<meta name="twitter:title" content="iOS实现抽屉效果">
+<meta name="twitter:description" content="抽屉效果强调内容在iOS中很多应用都用到了抽屉效果，例如腾讯的QQ，百度贴吧…
+———
+1. 最终效果如下图所示———
+2.实现步骤1.开始启动的时候，新建3个不同颜色的View的1.设置3个成员属性，记录三种颜色的View
+123@property (nonatomic,weak) UIView* redView;@property (nonatomic,weak) UIView* greenV">
   
     <link rel="alternative" href="/atom.xml" title="浪花" type="application/atom+xml">
   
@@ -172,78 +189,7 @@
 		</header>				
 	</div>
 </nav>
-      <div class="body-wrap">
-  
-    <article id="post-2015-06-20" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/20/2015-06-20/" class="article-date">
-  	<time datetime="2015-06-20T13:05:20.000Z" itemprop="datePublished">2015-06-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/20/2015-06-20/">iOS动画之大雪纷飞</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-结果展示">1.结果展示</h2><p>美丽的雪花，勾起了多少骚年美好的回忆。^_^<br><img src="http://img.blog.csdn.net/20150725225227785" alt="这里写图片描述"></p>
-<h2 id="2-制作思路">2.制作思路</h2><p>其实创作这样一个大学纷飞的场景是十分简单的，简单到你看了教程之后想不会都不行。OK，下面国际惯例，讲解一下思路吧。</p>
-<p>1.创建一个数组用来保存大量的雪花</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">_imagesArray = [[<span class="built_in">NSMutableArray</span> alloc] init];</span><br><span class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; ++ i) &#123;</span><br><span class="line">    <span class="built_in">UIImageView</span> *imageView = [[<span class="built_in">UIImageView</span> alloc] initWithImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"snow"</span>]];</span><br><span class="line">    <span class="keyword">float</span> x = IMAGE_WIDTH;</span><br><span class="line">    imageView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(IMAGE_X, -<span class="number">30</span>, x, x);</span><br><span class="line">    imageView<span class="variable">.alpha</span> = IMAGE_ALPHA;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.view</span> addSubview:imageView];</span><br><span class="line">    [_imagesArray addObject:imageView];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>2.使用时钟（CADisplayLink）来控制下雪，为什么不使用NSTimer呢。其实是可以的，只是（CADisplayLink）刷帧更快一些。</p>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//创建时钟，并且添加到主循环中</span></span><br><span class="line"><span class="built_in">CADisplayLink</span> *link = [<span class="built_in">CADisplayLink</span> displayLinkWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(makeSnow)];</span><br><span class="line">[link addToRunLoop:[<span class="built_in">NSRunLoop</span> mainRunLoop] forMode:<span class="built_in">NSDefaultRunLoopMode</span>];</span><br></pre></td></tr></table></figure>
-<p>3.下雪，就是把数组当做队列来使用。</p>
-<ol>
-<li>每次从数组头部取出一个雪花并且删除其在数组中的占位。</li>
-<li>让雪花飘落，通过UIView动画完成frame，transform等改变。</li>
-<li>当动画完成之后，将取出的雪花再次放进数组的尾部</li>
-</ol>
-<figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)makeSnow</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_imagesArray<span class="variable">.count</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">UIImageView</span> *imageView = _imagesArray[<span class="number">0</span>];</span><br><span class="line">        [_imagesArray removeObjectAtIndex:<span class="number">0</span>];</span><br><span class="line">        [<span class="keyword">self</span> snowFall:imageView];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)snowFall:(<span class="built_in">UIImageView</span> *)imageView</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="built_in">UIView</span> animateWithDuration:<span class="number">10</span> animations:^&#123;</span><br><span class="line">        imageView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(imageView<span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.x</span>, Main_Screen_Height, imageView<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, imageView<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>);</span><br><span class="line">        imageView<span class="variable">.transform</span> = <span class="built_in">CGAffineTransformMakeScale</span>(<span class="number">0.3</span>, <span class="number">0.3</span>);</span><br><span class="line">        imageView<span class="variable">.transform</span> = <span class="built_in">CGAffineTransformRotate</span>(imageView<span class="variable">.transform</span>, M_PI);</span><br><span class="line">    &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">        <span class="keyword">float</span> x = IMAGE_WIDTH;</span><br><span class="line">        imageView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(IMAGE_X, -<span class="number">30</span>, x, x);</span><br><span class="line">        [_imagesArray addObject:imageView];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="3-有代码有真相">3.有代码有真相</h2><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#define IMAGE_X                arc4random()%(int)Main_Screen_Width</span></span><br><span class="line"><span class="preprocessor">#define IMAGE_ALPHA            ((float)(arc4random()%10))/10</span></span><br><span class="line"><span class="preprocessor">#define IMAGE_WIDTH            arc4random()%20 + 10</span></span><br><span class="line"><span class="preprocessor">#define PLUS_HEIGHT            Main_Screen_Height/25</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define Main_Screen_Height      [[UIScreen mainScreen] bounds].size.height</span></span><br><span class="line"><span class="preprocessor">#define Main_Screen_Width       [[UIScreen mainScreen] bounds].size.width</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#import <span class="title">"ViewController.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">ViewController</span> ()</span></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span> ,<span class="keyword">strong</span>) <span class="built_in">NSMutableArray</span> *imagesArray;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span> , <span class="keyword">strong</span>) <span class="built_in">UIImageView</span> *imageView;</span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">ViewController</span></span></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)loadView</span><br><span class="line">&#123;</span><br><span class="line">    <span class="built_in">UIImageView</span> *imageView = [[<span class="built_in">UIImageView</span> alloc]initWithFrame:[<span class="built_in">UIScreen</span> mainScreen]<span class="variable">.bounds</span>];</span><br><span class="line">    imageView<span class="variable">.image</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"backgound.jpg"</span>];</span><br><span class="line">    imageView<span class="variable">.contentMode</span>  = <span class="built_in">UIViewContentModeScaleAspectFill</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.view</span> = imageView;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)viewDidLoad</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">super</span> viewDidLoad];</span><br><span class="line"></span><br><span class="line">    _imagesArray = [[<span class="built_in">NSMutableArray</span> alloc] init];</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="number">1000</span>; ++ i) &#123;</span><br><span class="line">        <span class="built_in">UIImageView</span> *imageView = [[<span class="built_in">UIImageView</span> alloc] initWithImage:[<span class="built_in">UIImage</span> imageNamed:<span class="string">@"snow"</span>]];</span><br><span class="line">        <span class="keyword">float</span> x = IMAGE_WIDTH;</span><br><span class="line">        imageView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(IMAGE_X, -<span class="number">30</span>, x, x);</span><br><span class="line">        imageView<span class="variable">.alpha</span> = IMAGE_ALPHA;</span><br><span class="line">        [<span class="keyword">self</span><span class="variable">.view</span> addSubview:imageView];</span><br><span class="line">        [_imagesArray addObject:imageView];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//创建时钟，并且添加到主循环中</span></span><br><span class="line">    <span class="built_in">CADisplayLink</span> *link = [<span class="built_in">CADisplayLink</span> displayLinkWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(makeSnow)];</span><br><span class="line">    [link addToRunLoop:[<span class="built_in">NSRunLoop</span> mainRunLoop] forMode:<span class="built_in">NSDefaultRunLoopMode</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)makeSnow</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (_imagesArray<span class="variable">.count</span> &gt; <span class="number">0</span>) &#123;</span><br><span class="line">        <span class="built_in">UIImageView</span> *imageView = _imagesArray[<span class="number">0</span>];</span><br><span class="line">        [_imagesArray removeObjectAtIndex:<span class="number">0</span>];</span><br><span class="line">        [<span class="keyword">self</span> snowFall:imageView];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)snowFall:(<span class="built_in">UIImageView</span> *)imageView</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="built_in">UIView</span> animateWithDuration:<span class="number">10</span> animations:^&#123;</span><br><span class="line">        imageView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(imageView<span class="variable">.frame</span><span class="variable">.origin</span><span class="variable">.x</span>, Main_Screen_Height, imageView<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.width</span>, imageView<span class="variable">.frame</span><span class="variable">.size</span><span class="variable">.height</span>);</span><br><span class="line">        imageView<span class="variable">.transform</span> = <span class="built_in">CGAffineTransformMakeScale</span>(<span class="number">0.3</span>, <span class="number">0.3</span>);</span><br><span class="line">        imageView<span class="variable">.transform</span> = <span class="built_in">CGAffineTransformRotate</span>(imageView<span class="variable">.transform</span>, M_PI);</span><br><span class="line">    &#125; completion:^(<span class="built_in">BOOL</span> finished) &#123;</span><br><span class="line">        <span class="keyword">float</span> x = IMAGE_WIDTH;</span><br><span class="line">        imageView<span class="variable">.frame</span> = <span class="built_in">CGRectMake</span>(IMAGE_X, -<span class="number">30</span>, x, x);</span><br><span class="line">        [_imagesArray addObject:imageView];</span><br><span class="line">    &#125;];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h2 id="4-Demo也不能少">4.Demo也不能少</h2><p><a href="https://github.com/Esdeath/snow/tree/master/SnowFlyTwo" target="_blank" rel="external">https://github.com/Esdeath/snow/tree/master/SnowFlyTwo</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/UIView/">UIView</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/core-animation/">core animation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
-    <article id="post-2015-06-18" class="article article-type-post" itemscope itemprop="blogPost">
+      <div class="body-wrap"><article id="post-2015-06-18" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
       <a href="/2015/06/18/2015-06-18/" class="article-date">
@@ -259,12 +205,23 @@
       <header class="article-header">
         
   
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/18/2015-06-18/">iOS实现抽屉效果</a>
+    <h1 class="article-title" itemprop="name">
+      iOS实现抽屉效果
     </h1>
   
 
       </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/core-animation/">core animation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
       
     
     <div class="article-entry" itemprop="articleBody">
@@ -295,35 +252,66 @@
       
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/core-animation/">core animation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
   </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/06/20/2015-06-20/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          iOS动画之大雪纷飞
+        
+      </div>
+    </a>
+  
+  
+</nav>
+
   
 </article>
 
 
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015-06-18" data-title="iOS实现抽屉效果" data-url="http://yoursite.com/2015/06/18/2015-06-18/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
 
 
 
-
-  
-  
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span>
-    </nav>
-  
 </div>
       <footer id="footer">
   <div class="outer">
@@ -347,8 +335,8 @@
 		fancybox: true,
 		mathjax: true,
 		animate: true,
-		isHome: true,
-		isPost: false,
+		isHome: false,
+		isPost: true,
 		isArchive: false,
 		isTag: false,
 		isCategory: false,

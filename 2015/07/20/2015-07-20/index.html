@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>iOS动画中的物理知识应用-重力加速度 | 浪花</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="平抛运动还记得初次玩愤怒的小鸟的时候，弹出小鸟那一瞬间，小鸟在空中划出的优美弧线么？还记得小鸟在地上弹起又落下的场景么？这里就介绍一下如何实现平抛运动。
+1.平抛运动的物理知识从图中我们可以看出物体在抛出之后，在X轴方向上速度不变。但是随着时间的变化Y轴方向的速度在变大（红色箭头的长度）。由基本的物理知识我们知道：
+
+Vx = Vx
+Vy = Vy + at
+
+在计算机中进行模拟的时候，我们可以认">
+<meta property="og:type" content="article">
+<meta property="og:title" content="iOS动画中的物理知识应用-重力加速度">
+<meta property="og:url" content="http://yoursite.com/2015/07/20/2015-07-20/index.html">
+<meta property="og:site_name" content="浪花">
+<meta property="og:description" content="平抛运动还记得初次玩愤怒的小鸟的时候，弹出小鸟那一瞬间，小鸟在空中划出的优美弧线么？还记得小鸟在地上弹起又落下的场景么？这里就介绍一下如何实现平抛运动。
+1.平抛运动的物理知识从图中我们可以看出物体在抛出之后，在X轴方向上速度不变。但是随着时间的变化Y轴方向的速度在变大（红色箭头的长度）。由基本的物理知识我们知道：
+
+Vx = Vx
+Vy = Vy + at
+
+在计算机中进行模拟的时候，我们可以认">
+<meta property="og:image" content="http://upload.wikimedia.org/wikipedia/commons/a/ad/Rzutp.gif">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717214338651">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717214356004">
+<meta property="og:image" content="http://img.blog.csdn.net/20150717214424101">
+<meta property="og:updated_time" content="2015-10-24T00:16:06.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="iOS动画中的物理知识应用-重力加速度">
+<meta name="twitter:description" content="平抛运动还记得初次玩愤怒的小鸟的时候，弹出小鸟那一瞬间，小鸟在空中划出的优美弧线么？还记得小鸟在地上弹起又落下的场景么？这里就介绍一下如何实现平抛运动。
+1.平抛运动的物理知识从图中我们可以看出物体在抛出之后，在X轴方向上速度不变。但是随着时间的变化Y轴方向的速度在变大（红色箭头的长度）。由基本的物理知识我们知道：
+
+Vx = Vx
+Vy = Vy + at
+
+在计算机中进行模拟的时候，我们可以认">
+  
+    <link rel="alternative" href="/atom.xml" title="浪花" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/rounded_img_atool.png">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="/img/rounded_img_atool.png" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">无尽的浪花</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">我喜欢自由的日子,但我更知道自己肩上的责任</p>
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>菜单</li>
+						<li>标签</li>
+						
+						<li>友情链接</li>
+						
+						
+						<li>关于我</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="weibo" target="_blank" href="http://weibo.com/nettles" title="weibo">weibo</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/OpenGL/" style="font-size: 10px;">OpenGL</a> <a href="/tags/Swift/" style="font-size: 10px;">Swift</a> <a href="/tags/UIView/" style="font-size: 10px;">UIView</a> <a href="/tags/core-animation/" style="font-size: 13.33px;">core animation</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/动画/" style="font-size: 16.67px;">动画</a> <a href="/tags/单例/" style="font-size: 10px;">单例</a> <a href="/tags/绘图/" style="font-size: 10px;">绘图</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/资料总结/" style="font-size: 10px;">资料总结</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://www.liveme.org/">David</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">爱炮姐 爱绘里 更爱亚丝娜,爱超人 爱铁人 更爱蝙蝠侠,爱慢走 哎骑行 更爱宅在家</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">无尽的浪花</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				<img lazy-src="/img/rounded_img_atool.png" class="js-avatar">
+			</div>
+			<hgroup>
+			  <h1 class="header-author">无尽的浪花</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">我喜欢自由的日子,但我更知道自己肩上的责任</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="weibo" target="_blank" href="http://weibo.com/nettles" title="weibo">weibo</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+      <div class="body-wrap"><article id="post-2015-07-20" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/20/2015-07-20/" class="article-date">
+  	<time datetime="2015-07-20T14:46:20.000Z" itemprop="datePublished">2015-07-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      iOS动画中的物理知识应用-重力加速度
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
+        
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
+	</div>
+
+        
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="平抛运动">平抛运动</h2><p>还记得初次玩愤怒的小鸟的时候，弹出小鸟那一瞬间，小鸟在空中划出的优美弧线么？还记得小鸟在地上弹起又落下的场景么？这里就介绍一下如何实现平抛运动。</p>
+<h3 id="1-平抛运动的物理知识">1.平抛运动的物理知识</h3><p><img src="http://upload.wikimedia.org/wikipedia/commons/a/ad/Rzutp.gif" alt="这里写图片描述"><br>从图中我们可以看出物体在抛出之后，在X轴方向上速度不变。但是随着时间的变化Y轴方向的速度在变大（红色箭头的长度）。<br>由基本的物理知识我们知道：</p>
+<ul>
+<li>Vx = Vx</li>
+<li>Vy = Vy + at</li>
+</ul>
+<p>在计算机中进行模拟的时候，我们可以认为t是一个单位时间，所以在Y轴方向上Vy = Vy + a。这里我们可以给a取一个常量，表示加速度值。现实生活中a = 9.8（或者10）。</p>
+<p>在这个例子中：小鸟将具有水平方向的初速度，且受到向下的重力，即小鸟具有向下的加速度，若碰到地面就会进行反弹，速度反向。</p>
+<h3 id="2-代码实现">2.代码实现</h3><h4 id="1-设置初始量">1.设置初始量</h4><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">- (<span class="keyword">void</span>)setUpStartValue</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">//在屏幕上的初始位置</span></span><br><span class="line">    self.birdX = <span class="number">0</span>;</span><br><span class="line">    self.birdY = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//x，y轴上的初始速度</span></span><br><span class="line">    self.birdSpeedX = <span class="number">10</span>;</span><br><span class="line">    self.birdSpeedY = <span class="number">0</span>;</span><br><span class="line">    <span class="comment">//重力加速度</span></span><br><span class="line">    self.gBirdSpeed = <span class="number">9.8</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="2-模拟重力环境的核心代码">2.模拟重力环境的核心代码</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//在x轴上速度不变，每次刷新的时候，x轴上的位置等于速度，加上前一个位置</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdX</span> += <span class="keyword">self</span><span class="variable">.birdSpeedX</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//在y轴上每次刷新，小鸟的速度增加一个重力加速度</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdSpeedY</span> += <span class="keyword">self</span><span class="variable">.gBirdSpeed</span>;</span><br><span class="line">    <span class="comment">//y轴上的位置等于y轴上增加后的速度，加上前一个位置</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdY</span> += <span class="keyword">self</span><span class="variable">.birdSpeedY</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//碰到x轴屏幕边缘，在x轴上的位置不在发生变化</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.birdX</span> &gt;= SCREENWIDTH - IMAGEWIDTH) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.birdX</span> = SCREENWIDTH - IMAGEWIDTH;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判断是否触地，如果触碰到窗口边界，Vy调整为相反方向</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">self</span><span class="variable">.birdY</span> &gt;= SCREENHEIGHT - IMAGEHEIGHT)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.birdY</span> = SCREENHEIGHT - IMAGEHEIGHT;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.birdSpeedY</span> = -<span class="keyword">self</span><span class="variable">.birdSpeedY</span>;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<h4 id="3-项目的完整代码">3.项目的完整代码</h4><figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import <span class="title">"MRView.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define SCREENHEIGHT   [UIScreen mainScreen].bounds.size.height</span></span><br><span class="line"><span class="preprocessor">#define SCREENWIDTH    [UIScreen mainScreen].bounds.size.width</span></span><br><span class="line"></span><br><span class="line"><span class="preprocessor">#define IMAGEWIDTH     50</span></span><br><span class="line"><span class="preprocessor">#define IMAGEHEIGHT    50</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@interface</span> <span class="title">MRView</span>()</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>) <span class="built_in">UIImage</span> *imageBackgound;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">strong</span>) <span class="built_in">UIImage</span> *imageBird;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> birdX;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> birdY;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> birdSpeedX;</span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> birdSpeedY;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@property</span> (<span class="keyword">nonatomic</span>,<span class="keyword">assign</span>) <span class="built_in">CGFloat</span> gBirdSpeed;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">@implementation</span> <span class="title">MRView</span></span></span><br><span class="line">- (<span class="keyword">void</span>)awakeFromNib</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.contentMode</span> = <span class="built_in">UIViewContentModeRedraw</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.backgroundColor</span> = [<span class="built_in">UIColor</span> blackColor];</span><br><span class="line">    </span><br><span class="line">    [<span class="keyword">self</span> setUpStartValue];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (instancetype)initWithFrame:(<span class="built_in">CGRect</span>)frame</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span> = [<span class="keyword">super</span> initWithFrame:frame]) &#123;</span><br><span class="line">        [<span class="keyword">self</span> setUpStartValue];</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">self</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)touchesBegan:(<span class="built_in">NSSet</span> *)touches withEvent:(<span class="built_in">UIEvent</span> *)event</span><br><span class="line">&#123;</span><br><span class="line"> </span><br><span class="line">    [<span class="keyword">self</span> setUpStartValue];</span><br><span class="line"></span><br><span class="line">    <span class="built_in">CADisplayLink</span> *link = [<span class="built_in">CADisplayLink</span> displayLinkWithTarget:<span class="keyword">self</span> selector:<span class="keyword">@selector</span>(setNeedsDisplay)];</span><br><span class="line">    [link addToRunLoop:[<span class="built_in">NSRunLoop</span> mainRunLoop] forMode:<span class="built_in">NSDefaultRunLoopMode</span>];</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)setUpStartValue</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageBackgound</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"IMG_0465.jpg"</span>];</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.imageBird</span> = [<span class="built_in">UIImage</span> imageNamed:<span class="string">@"QQ20150714-1"</span>];</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdX</span> = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdY</span> = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdSpeedX</span> = <span class="number">10</span>;</span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdSpeedY</span> = <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">self</span><span class="variable">.gBirdSpeed</span> = <span class="number">9</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">- (<span class="keyword">void</span>)drawRect:(<span class="built_in">CGRect</span>)rect</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="keyword">self</span><span class="variable">.imageBird</span> drawInRect:<span class="built_in">CGRectMake</span>(<span class="keyword">self</span><span class="variable">.birdX</span>, <span class="keyword">self</span><span class="variable">.birdY</span>, IMAGEWIDTH,IMAGEHEIGHT)];</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//在x轴上速度不变，每次刷新的时候，x轴上的位置等于速度，加上前一个位置</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdX</span> += <span class="keyword">self</span><span class="variable">.birdSpeedX</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//在y轴上每次刷新，小鸟的速度增加一个重力加速度</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdSpeedY</span> += <span class="keyword">self</span><span class="variable">.gBirdSpeed</span>;</span><br><span class="line">    <span class="comment">//y轴上的位置等于y轴上增加后的速度，加上前一个位置</span></span><br><span class="line">    <span class="keyword">self</span><span class="variable">.birdY</span> += <span class="keyword">self</span><span class="variable">.birdSpeedY</span>;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">//碰到x轴屏幕边缘，在x轴上的位置不在发生变化</span></span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">self</span><span class="variable">.birdX</span> &gt;= SCREENWIDTH - IMAGEWIDTH) &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.birdX</span> = SCREENWIDTH - IMAGEWIDTH;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">//判断是否触地，如果触碰到窗口边界，Vy调整为相反方向</span></span><br><span class="line">    <span class="keyword">if</span>(<span class="keyword">self</span><span class="variable">.birdY</span> &gt;= SCREENHEIGHT - IMAGEHEIGHT)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.birdY</span> = SCREENHEIGHT - IMAGEHEIGHT;</span><br><span class="line">        <span class="keyword">self</span><span class="variable">.birdSpeedY</span> = -<span class="keyword">self</span><span class="variable">.birdSpeedY</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">@end</span></span><br></pre></td></tr></table></figure>
+<h4 id="4-运行结果">4.运行结果</h4><p><img src="http://img.blog.csdn.net/20150717214338651" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20150717214356004" alt="这里写图片描述"></p>
+<p><img src="http://img.blog.csdn.net/20150717214424101" alt="这里写图片描述"></p>
+<h4 id="5-Demo">5.Demo</h4><p><a href="https://github.com/Esdeath/Gravity" target="_blank" rel="external">https://github.com/Esdeath/Gravity</a></p>
+
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2015/07/22/2015-07-22/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
+        
+          iOS开发---绘图
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2015/07/16/2015-07-16/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">iOS动画中的物理知识应用-碰撞检测</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">分享到：</span>
+		<a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+		<a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="2015-07-20" data-title="iOS动画中的物理知识应用-重力加速度" data-url="http://yoursite.com/2015/07/20/2015-07-20/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+</div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2015 无尽的浪花
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css" type="text/css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false
+	}
+</script>
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
+</body>
+</html>
