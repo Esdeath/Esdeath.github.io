@@ -174,70 +174,6 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-2015-06-25" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2015/06/25/2015-06-25/" class="article-date">
-  	<time datetime="2015-06-25T02:05:20.000Z" itemprop="datePublished">2015-06-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2015/06/25/2015-06-25/">iOS动画之倒影</a>
-    </h1>
-  
-
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-结果展示">1.结果展示</h3><p><img src="http://img.blog.csdn.net/20150720015156622" alt="这里写图片描述"></p>
-<h3 id="2-实现思路">2.实现思路</h3><p>1.用复制图层实现，搞个UIImageView展示图片，然后复制UIImageView.</p>
-<p>注意：<code>复制图层只能复制子层，但是UIImageView只有一个主层，并没有子层，因此不能直接复制UIImageView</code>.</p>
-<p>2.正确做法:应该把UIImageView添加到一个UIView上，然后复制UIView的层，就能复制UIImageView.</p>
-<p>注意：<code>默认A控件是B控件的子控件，那么A控件的层就是B控件的层的子层。</code></p>
-<p>3.但是有问题，默认UIView的层不是复制层，我们想把UIView的层变成复制层，重写+layerClass方法。</p>
-<figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">+ (<span class="class"><span class="keyword">Class</span>)<span class="title">layerClass</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">return</span> [CAReplicatorLayer <span class="class"><span class="keyword">class</span>];</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>4.倒影效果：就是就是把复制图片旋转180度，然后往下平移，最好先偏移在，在旋转。</p>
-<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">CAReplicatorLayer *layer = (CAReplicatorLayer *)self.v.layer;</span><br><span class="line"></span><br><span class="line">  layer.instanceCount = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 先Y轴偏移</span></span><br><span class="line">  CATransform3D transform =  CATransform3DMakeTranslation(<span class="number">0</span>, self.v.bounds.size.height, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 在旋转</span></span><br><span class="line">  transform = CATransform3DRotate(transform, M_PI, <span class="number">1</span>, <span class="number">0</span>, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置复制层的形变</span></span><br><span class="line">  layer.instanceTransform = transform;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 设置颜色通道偏移量，相等上一个一点偏移量，就是阴影效果</span></span><br><span class="line">  layer.instanceRedOffset = -<span class="number">0.1</span>;</span><br><span class="line">  layer.instanceGreenOffset = -<span class="number">0.1</span>;</span><br><span class="line">  layer.instanceBlueOffset = -<span class="number">0.1</span>;</span><br><span class="line">  layer.instanceAlphaOffset = -<span class="number">0.1</span>;</span><br></pre></td></tr></table></figure>
-<h4 id="3-Demo实现">3.Demo实现</h4><p><a href="https://github.com/Esdeath/invertedimage" target="_blank" rel="external">https://github.com/Esdeath/invertedimage</a></p>
-
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
-</article>
-
-
-
-
-
-
-
-  
     <article id="post-2015-06-20" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
@@ -423,6 +359,128 @@
       
 	<div class="article-tag tagcloud">
 		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Method-Swizzling/">Method Swizzling</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/runtime/">runtime</a></li></ul>
+	</div>
+
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+  
+    <article id="post-2014-11-05" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/11/05/2014-11-05/" class="article-date">
+  	<time datetime="2014-11-04T23:03:37.000Z" itemprop="datePublished">2014-11-05</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/05/2014-11-05/">开源中国社区</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="官方网站">官方网站</h2><p><a href="https://git.oschina.net/" target="_blank" rel="external">https://git.oschina.net/</a></p>
+<ul>
+<li>开源中国社区成立于2008年8月，其目的是为中国的IT技术人员提供一个全面的、快捷更新的用来检索开源软件以及交流使用开源经验的平台</li>
+<li>目前国内有很多公司会将公司的项目部署在 <code>OSChina</code></li>
+</ul>
+<h3 id="与_GitHUB_的对比">与 <code>GitHUB</code> 的对比</h3><ol>
+<li>服务器在国内，速度更快</li>
+<li>免费账户同样可以建立 <code>私有</code> 项目，而 <code>GitHUB</code> 上要建立私有项目必须 <code>付费</code></li>
+</ol>
+<h3 id="使用">使用</h3><ul>
+<li><p>注册账号</p>
+<ul>
+<li>建议不要使用新浪邮箱，使用新浪邮箱可能会收不到验证邮件</li>
+</ul>
+</li>
+<li><p>添加 SSH 公钥，进入终端，并输入以下命令</p>
+<ul>
+<li>开源中国帮助文档地址：<a href="https://git.oschina.net/oschina/git-osc/wikis/帮助#ssh-keys" target="_blank" rel="external">https://git.oschina.net/oschina/git-osc/wikis/帮助#ssh-keys</a></li>
+</ul>
+</li>
+<li><p>进入.ssh目录</p>
+</li>
+</ul>
+<figure class="highlight vala"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor"># 切换目录，MAC中目录的第一个字符如果是 `.` 表示改文件夹是隐藏文件夹</span></span><br><span class="line">$ cd ~/.ssh</span><br><span class="line"><span class="preprocessor">#如果.ssh文件夹不存在，可以执行指令自行创建</span></span><br><span class="line">$ mkdir ~/.ssh</span><br><span class="line"><span class="preprocessor"># 查看当前目录文件</span></span><br><span class="line">$ ls</span><br></pre></td></tr></table></figure>
+<ul>
+<li>生成 RSA 密钥对</li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>ssh-keygen -t rsa -<span class="constant">C </span><span class="string">"你的邮箱@xxx.com"</span></span><br><span class="line"><span class="comment"># 为了方便，全程回车即可（不用了输入ras文件名及密码）</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>查看公钥内容</li>
+</ul>
+<figure class="highlight crystal"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span>cat ~<span class="regexp">/.ssh/id</span>_rsa.pub</span><br></pre></td></tr></table></figure>
+<ul>
+<li><p>将公钥内容复制并粘贴至</p>
+<ul>
+<li>注意：公钥内容以ssh-rsa开头，你的邮箱结尾， 拷贝时不能多一个空格，也不能少一个空格，格式等必须和生成的公钥一致</li>
+<li><a href="https://git.oschina.net/profile/sshkeys" target="_blank" rel="external">https://git.oschina.net/profile/sshkeys</a></li>
+</ul>
+</li>
+<li><p>测试公钥</p>
+</li>
+</ul>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 测试 SSH 连接</span></span><br><span class="line"><span class="variable">$ </span>ssh -<span class="constant">T</span> git<span class="variable">@git</span>.oschina.net</span><br><span class="line"></span><br><span class="line"><span class="comment"># 终端提示 Welcome to Git<span class="doctag">@OSC</span>, *****!` 说明连接成功</span></span><br></pre></td></tr></table></figure>
+<hr>
+<ul>
+<li>在oschina新建项目</li>
+<li>克隆项目</li>
+</ul>
+<p>配置好sshkey之后， 以后只需要拷贝ssh链接地址，然后利用git指令即可进行相关操作</p>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git clone git@git<span class="class">.oschina</span><span class="class">.net</span>:xxx/ProjectName.git</span><br></pre></td></tr></table></figure>
+<ul>
+<li>注意：oschina仓库对应多种地址，一个是通过http访问的地址，一个是通过ssh访问的地址<ul>
+<li>http方式：<a href="https://git.oschina.net/leaderlee/OC_Advanced_Prepares_Lessons.git" target="_blank" rel="external">https://git.oschina.net/leaderlee/OC_Advanced_Prepares_Lessons.git</a></li>
+<li>ssh方式：git@git.oschina.net:leaderlee/OC_Advanced_Prepares_Lessons.git</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li>添加 <code>gitignore</code></li>
+</ul>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># /Users/NJ-Lee/Desktop/gitignore-master/ 是保存 gitignore 的目录</span></span><br><span class="line"><span class="variable">$ </span>cp /<span class="constant">Users/NJ-Lee/Desktop/</span>gitignore-master/<span class="constant">Swift.</span>gitignore .gitignore</span><br><span class="line"><span class="variable">$ </span>git add .</span><br><span class="line"><span class="variable">$ </span>git commit -m<span class="string">"添加gitignore"</span></span><br><span class="line"><span class="variable">$ </span>git push</span><br></pre></td></tr></table></figure>
+<ul>
+<li>提示：<ul>
+<li>可以从 <code>https://github.com/github/gitignore</code> 获取最新版本的 <code>gitignore</code> 文件</li>
+<li>添加 <code>.gitignore</code> 文件之后，每次提交时不会将个人的项目设置信息（例如：末次打开的文件，调试断点等）提交到服务器，在团队开发中非常重要</li>
+</ul>
+</li>
+</ul>
+
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/git/">git</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/oschina/">oschina</a></li></ul>
 	</div>
 
       
