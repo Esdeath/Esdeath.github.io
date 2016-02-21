@@ -302,7 +302,10 @@
 </ol>
 <h1 id="3-iOS的额外滚动区域处理">3.iOS的额外滚动区域处理</h1><ol>
 <li>不需要自动增加scrollView的额外滚动区域<br><code>self.automaticallyAdjustsScrollViewInsets = NO;</code></li>
-<li><strong>注意：在iOS7以后，导航控制器下的所有UIScrollView默认顶部都会添加额外的滚动区域（64）</strong></li>
+<li><p><strong>注意：在iOS7以后，导航控制器下的所有UIScrollView默认顶部都会添加额外的滚动区域（64）</strong></p>
+</li>
+<li><p>在iOS 7中，苹果引入了一个新的属性，叫做[UIViewController setEdgesForExtendedLayout:]，它的默认值为UIRectEdgeAll。当你的容器是navigation controller时，默认的布局将从navigation bar的顶部开始。这就是为什么所有的UI元素都往上漂移了44pt。</p>
+</li>
 </ol>
 <h1 id="4-移除容器视图中所有子控件">4.移除容器视图中所有子控件</h1><ol>
 <li><p>把容器视图的所有子控件全部移除父控件:</p>
