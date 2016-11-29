@@ -1,90 +1,11 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next muse use-motion" lang="">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
   
-  
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
-
-
-
-
-
-
-<meta name="description">
+  <title>浪花</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description">
 <meta property="og:type" content="website">
 <meta property="og:title" content="浪花">
 <meta property="og:url" content="http://yoursite.com/index.html">
@@ -93,231 +14,256 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="浪花">
 <meta name="twitter:description">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    root: '/',
-    scheme: 'Muse',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: '0',
-      author: '博主'
-    },
-    algolia: {
-      applicationID: '',
-      apiKey: '',
-      indexName: '',
-      hits: {"per_page":10},
-      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
-    }
-  };
-</script>
-
-
-
-  <link rel="canonical" href="http://yoursite.com/"/>
-
-
-
-
-
-  <title> 浪花 </title>
+  
+    <link rel="alternative" href="/atom.xml" title="浪花" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/img/favicon.png">
+  
+  
+      <link rel="stylesheet" href="//cdn.bootcss.com/animate.css/3.5.0/animate.min.css" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css" type="text/css">
+  <link rel="stylesheet" href="/font-awesome/css/font-awesome.min.css">
+  <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+  
+    
+    
+  
+  
+      <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  
+  <!-- 加载特效 -->
+    <script src="/js/pace.js"></script>
+    <link href="/css/pace/pace-theme-flash.css" rel="stylesheet" />
+  <script>
+      var yiliaConfig = {
+          rootUrl: '/',
+          fancybox: true,
+          animate: true,
+          isHome: true,
+          isPost: false,
+          isArchive: false,
+          isTag: false,
+          isCategory: false,
+          open_in_new: false
+      }
+  </script>
 </head>
-
-<body itemscope itemtype="http://schema.org/WebPage" lang="">
-
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">浪花</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">我喜欢自由的日子,但我更知道自己肩上的责任</p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
+<body>
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+    <header id="header" class="inner">
+        <a href="/" class="profilepic">
             
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            <img lazy-src="/img/head.jpg" class="js-avatar">
             
-            首頁
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            歸檔
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            標籤
-          </a>
-        </li>
-      
+        </a>
 
-      
-    </ul>
-  
-
-  
-</nav>
-
-
-
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/09/08/SourceCode/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="无尽的浪花">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="浪花">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="浪花" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
+        <hgroup>
+          <h1 class="header-author"><a href="/" title="Hi Mate">无尽的浪花</a></h1>
+        </hgroup>
 
         
+        <p class="header-subtitle">我喜欢自由的日子,但我更知道自己肩上的责任</p>
         
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
+        
+        
+            <div id="switch-btn" class="switch-btn">
+                <div class="icon">
+                    <div class="icon-ctn">
+                        <div class="icon-wrap icon-house" data-idx="0">
+                            <div class="birdhouse"></div>
+                            <div class="birdhouse_holes"></div>
+                        </div>
+                        <div class="icon-wrap icon-ribbon hide" data-idx="1">
+                            <div class="ribbon"></div>
+                        </div>
+                        
+                        <div class="icon-wrap icon-link hide" data-idx="2">
+                            <div class="loopback_l"></div>
+                            <div class="loopback_r"></div>
+                        </div>
+                        
+                        
+                        <div class="icon-wrap icon-me hide" data-idx="3">
+                            <div class="user"></div>
+                            <div class="shoulder"></div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+                <div class="tips-box hide">
+                    <div class="tips-arrow"></div>
+                    <ul class="tips-inner">
+                        <li>菜单</li>
+                        <li>标签</li>
+                        
+                        <li>友情链接</li>
+                        
+                        
+                        <li>关于我</li>
+                        
+                    </ul>
+                </div>
+            </div>
+        
+
+        <div id="switch-area" class="switch-area">
+            <div class="switch-wrap">
+                <section class="switch-part switch-part1">
+                    <nav class="header-menu">
+                        <ul>
+                        
+                            <li><a href="/Home">博客首页</a></li>
+                        
+                            <li><a href="/works">作品展示</a></li>
+                        
+                            <li><a href="/about">留言打卡</a></li>
+                        
+                            <li><a href="/FrontEndGuide">前端导航</a></li>
+                        
+                        </ul>
+                    </nav>
+                    <nav class="header-nav">
+                        <ul class="social">
+                            
+                                <a class="fl mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                            
+                                <a class="fl github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                            
+                                <a class="fl zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+                            
+                                <a class="fl weibo" target="_blank" href="/#" title="weibo">weibo</a>
+                            
+                                <a class="fl google" target="_blank" href="/#" title="google">google</a>
+                            
+                                <a class="fl twitter" target="_blank" href="/#" title="twitter">twitter</a>
+                            
+                                <a class="fl linkedin" target="_blank" href="/#" title="linkedin">linkedin</a>
+                            
+                        </ul>
+                    </nav>
+                </section>
                 
-                <a class="post-title-link" href="/2016/09/08/SourceCode/" itemprop="url">
-                  iOS关于源代码解析的文章
-                </a>
-              
-            
-          </h1>
-        
+                
+                <section class="switch-part switch-part2">
+                    <div class="widget tagcloud" id="js-tagcloud">
+                        <a href="/tags/C/" style="font-size: 10px;">C++</a> <a href="/tags/C语言/" style="font-size: 10px;">C语言</a> <a href="/tags/Method-Swizzling/" style="font-size: 10px;">Method Swizzling</a> <a href="/tags/OpenGL/" style="font-size: 10px;">OpenGL</a> <a href="/tags/Swift/" style="font-size: 10px;">Swift</a> <a href="/tags/autoLayout/" style="font-size: 10px;">autoLayout</a> <a href="/tags/git/" style="font-size: 10px;">git</a> <a href="/tags/iOS/" style="font-size: 20px;">iOS</a> <a href="/tags/oschina/" style="font-size: 10px;">oschina</a> <a href="/tags/runtime/" style="font-size: 10px;">runtime</a> <a href="/tags/分析/" style="font-size: 10px;">分析</a> <a href="/tags/动漫/" style="font-size: 10px;">动漫</a> <a href="/tags/动画/" style="font-size: 15px;">动画</a> <a href="/tags/单例/" style="font-size: 10px;">单例</a> <a href="/tags/开源库/" style="font-size: 10px;">开源库</a> <a href="/tags/总结/" style="font-size: 10px;">总结</a> <a href="/tags/源代码/" style="font-size: 10px;">源代码</a> <a href="/tags/笔记/" style="font-size: 10px;">笔记</a> <a href="/tags/绘图/" style="font-size: 10px;">绘图</a> <a href="/tags/设计模式/" style="font-size: 10px;">设计模式</a> <a href="/tags/资料总结/" style="font-size: 10px;">资料总结</a>
+                    </div>
+                </section>
+                
+                
+                
+                <section class="switch-part switch-part3">
+                    <div id="js-friends">
+                    
+                      <a target="_blank" class="main-nav-link switch-friends-link" href="http://luuman.github.io/">name</a>
+                    
+                    </div>
+                </section>
+                
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2016-09-08T07:43:27+08:00">
-                2016-09-08
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
+                
+                
+                <section class="switch-part switch-part4">
+                
+                    <div id="js-aboutme">纯海迷、爱运动、爱交友、爱旅行、喜欢接触新鲜事物、迎接新的挑战，更爱游离于错综复杂的编码与逻辑中</div>
+                </section>
+                
+            </div>
         </div>
-      </header>
+    </header>                
+</div>
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+      <div class="overlay">
+          <div class="slider-trigger"></div>
+          <h1 class="header-author js-mobile-header hide"><a href="/" title="Me">无尽的浪花</a></h1>
+      </div>
+    <div class="intrude-less">
+        <header id="header" class="inner">
+            <a href="/" class="profilepic">
+                
+                    <img lazy-src="/img/head.jpg" class="js-avatar">
+                
+            </a>
+            <hgroup>
+              <h1 class="header-author"><a href="/" title="Me">无尽的浪花</a></h1>
+            </hgroup>
+            
+            <p class="header-subtitle">我喜欢自由的日子,但我更知道自己肩上的责任</p>
+            
+            <nav class="header-menu">
+                <ul>
+                
+                    <li><a href="/Home">博客首页</a></li>
+                
+                    <li><a href="/works">作品展示</a></li>
+                
+                    <li><a href="/about">留言打卡</a></li>
+                
+                    <li><a href="/FrontEndGuide">前端导航</a></li>
+                
+                <div class="clearfix"></div>
+                </ul>
+            </nav>
+            <nav class="header-nav">
+                <div class="social">
+                    
+                        <a class="mail" target="_blank" href="http://mail.qq.com/cgi-bin/qm_share?t=qm_mailme&email=PAkNDgsKBQ4MCnxNTRJfU1E" title="mail">mail</a>
+                    
+                        <a class="github" target="_blank" href="https://github.com/luuman" title="github">github</a>
+                    
+                        <a class="zhihu" target="_blank" href="/#" title="zhihu">zhihu</a>
+                    
+                        <a class="weibo" target="_blank" href="/#" title="weibo">weibo</a>
+                    
+                        <a class="google" target="_blank" href="/#" title="google">google</a>
+                    
+                        <a class="twitter" target="_blank" href="/#" title="twitter">twitter</a>
+                    
+                        <a class="linkedin" target="_blank" href="/#" title="linkedin">linkedin</a>
+                    
+                </div>
+            </nav>
+        </header>                
+    </div>
+</nav>
+      <div class="body-wrap">
+  
+    <article id="post-SourceCode" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/09/08/SourceCode/" class="article-date">
+      <time datetime="2016-09-07T23:43:27.000Z" itemprop="datePublished">2016-09-08</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/09/08/SourceCode/">iOS关于源代码解析的文章</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
           
-            <h2 id="1-YYModel">1.YYModel</h2><p><a href="http://www.jianshu.com/p/9d9119d3d1e3" target="_blank" rel="external">YYModel 源码历险记&lt;一&gt; 代码结构</a></p>
+        <h2 id="1-YYModel">1.YYModel</h2><p><a href="http://www.jianshu.com/p/9d9119d3d1e3" target="_blank" rel="external">YYModel 源码历险记&lt;一&gt; 代码结构</a></p>
 <p><a href="http://www.jianshu.com/p/4455f5434dcd" target="_blank" rel="external">YYModel 源码历险记&lt;二&gt; 关于变量类型和编码</a></p>
 <p><a href="http://www.jianshu.com/p/9cc00239c548" target="_blank" rel="external">YYModel 源码历险记&lt;三&gt; 关于ivar，method，property</a></p>
 <p><a href="http://www.jianshu.com/p/c4e5941e6aef" target="_blank" rel="external">YYModel 源码历险记&lt;四&gt; 对Class的封装</a></p>
@@ -330,244 +276,126 @@
 <p><a href="http://www.jianshu.com/p/c36159094e24" target="_blank" rel="external">iOS网络框架－AFNetworking3.1.0源码解读</a></p>
 <p><a href="http://zeeyang.com/2016/05/27/AFNetWorking-six/" target="_blank" rel="external">iOS AFNetWorking源码详解（六）</a></p>
 
-          
-        
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
+    <div class="article-info article-info-index">
+      
       
 
-  
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/分析/">分析</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/源代码/">源代码</a></li></ul>
+    </div>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2016/06/12/动漫驿站-我的动漫笔记/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="无尽的浪花">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="浪花">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="浪花" src="">
-    </span>
-  </span>
-
+      
+      <div class="clearfix"></div>
+    </div>
     
-      <header class="post-header">
+  </div>
+  
+</article>
 
+
+
+
+
+
+
+
+
+  
+    <article id="post-动漫驿站-我的动漫笔记" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/06/12/动漫驿站-我的动漫笔记/" class="article-date">
+      <time datetime="2016-06-12T15:56:36.000Z" itemprop="datePublished">2016-06-12</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/06/12/动漫驿站-我的动漫笔记/" itemprop="url">
-                  动漫驿站,我的动漫笔记
-                </a>
-              
-            
-          </h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2016/06/12/动漫驿站-我的动漫笔记/">动漫驿站,我的动漫笔记</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2016-06-12T23:56:36+08:00">
-                2016-06-12
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
       </header>
+      
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
           
-            <h1 id="猫眼三姐妹">猫眼三姐妹</h1><h2 id="2016-06-12_清明节_雨">2016-06-12 清明节 雨</h2><p>  记得初次看猫眼的时候是2004年,那时候我初三.由当时的教育频道-动漫驿站来播放.我被当时唯美的画面和人物造型所吸引,里面的感情描写的也很细腻.</p>
+        <h1 id="猫眼三姐妹">猫眼三姐妹</h1><h2 id="2016-06-12_清明节_雨">2016-06-12 清明节 雨</h2><p>  记得初次看猫眼的时候是2004年,那时候我初三.由当时的教育频道-动漫驿站来播放.我被当时唯美的画面和人物造型所吸引,里面的感情描写的也很细腻.</p>
 <p>  这次回顾,不仅仅是为了看动漫,更是为了找回一些美好的回忆.希望这些回忆能留在自己的脑中,无论生活的好坏,世界的繁杂,永远有我灵魂栖息的港湾.</p>
 <p>  我打算从今天开始,每天写日记,每天写一些动漫记录,同时希望自己可以规划点时间,来学习日语……</p>
 <p>所有的结束都是一个新的开始.猫眼三姐妹的漫画最后的结局是,猫眼的父亲已经去世了,被自己的双胞胎弟弟所害,弟弟为了赎罪最后自杀了.</p>
 <p>来生瞳在一个大雾天的早上向俊夫说明了真想,当俊夫看到猫眼面孔的那一刻,真想就不言而喻了.其实俊夫内心是期望猫眼就是小瞳的. 但是小瞳觉得自己对俊夫有愧疚,于是留下了订婚戒指,最终去了美国.因为愧疚和内心对俊夫的思念,最终导致身体上的不适.连续高烧,最后经过救治,虽然保住了性命,但是失去了记忆.</p>
 <p>俊夫后来来到了美国,虽然来生瞳还是记不起来他.但是他却是来生瞳唯一不害怕的人.俊夫决定在和来生瞳重新再谈一次恋爱,夕阳铺满的沙滩上.俊夫抓住小瞳的手,两人欢乐的嬉戏着……</p>
 
-          
-        
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
+    <div class="article-info article-info-index">
+      
       
 
-  
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动漫/">动漫</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/笔记/">笔记</a></li></ul>
+    </div>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/07/2015-11-07/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="无尽的浪花">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="浪花">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="浪花" src="">
-    </span>
-  </span>
-
+      
+      <div class="clearfix"></div>
+    </div>
     
-      <header class="post-header">
+  </div>
+  
+</article>
 
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-11-07" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/07/2015-11-07/" class="article-date">
+      <time datetime="2015-11-07T03:18:37.000Z" itemprop="datePublished">2015-11-07</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/07/2015-11-07/" itemprop="url">
-                  使用storyboard或者xib自动布局应该注意的事项
-                </a>
-              
-            
-          </h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/07/2015-11-07/">使用storyboard或者xib自动布局应该注意的事项</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2015-11-07T11:18:37+08:00">
-                2015-11-07
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
       </header>
+      
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
           
-            <h1 id="1-对于Label的处理">1.对于Label的处理</h1><ol>
+        <h1 id="1-对于Label的处理">1.对于Label的处理</h1><ol>
 <li>label在storyboard中使用的时候,只需要设置位置的约束.</li>
 <li>Lines 设置为 0 就可以进行多行显示</li>
 <li>Label需要换行处理,这时候需要在初始化的时候设置 label的属性<code>preferredMaxLayoutWidth</code>.<br>一般设置为<code>[UIScreen mainScreen].bounds.size.width - 常数</code></li>
@@ -594,122 +422,63 @@
 <figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//define this constant if you want to use Masonry without the 'mas_' prefix</span></span><br><span class="line"><span class="hexcolor">#def</span>ine MAS_SHORTHAND</span><br><span class="line"></span><br><span class="line"><span class="comment">//define this constant if you want to enable auto-boxing for default syntax</span></span><br><span class="line"><span class="hexcolor">#def</span>ine MAS_SHORTHAND_GLOBALS</span><br></pre></td></tr></table></figure>
 <p>2.masory的常规用法<br><code>make.left.equalTo(self.view.mas_left).multipliedBy(1.0).offset(20);</code></p>
 
-          
-        
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
+    <div class="article-info article-info-index">
+      
       
 
-  
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/autoLayout/">autoLayout</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li></ul>
+    </div>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/11/06/2015-11-06/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="无尽的浪花">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="浪花">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="浪花" src="">
-    </span>
-  </span>
-
+      
+      <div class="clearfix"></div>
+    </div>
     
-      <header class="post-header">
+  </div>
+  
+</article>
 
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-11-06" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/11/06/2015-11-06/" class="article-date">
+      <time datetime="2015-11-06T05:11:56.000Z" itemprop="datePublished">2015-11-06</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/11/06/2015-11-06/" itemprop="url">
-                  常用的开源库总结
-                </a>
-              
-            
-          </h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/11/06/2015-11-06/">常用的开源库总结</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2015-11-06T13:11:56+08:00">
-                2015-11-06
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
       </header>
+      
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
           
-            <p>#我的微博</p>
+        <p>#我的微博</p>
 <h1 id="1-图文混排">1.图文混排</h1><p><a href="https://github.com/ibireme/YYText" target="_blank" rel="external">YYText</a></p>
 <p><a href="https://github.com/12207480/TYAttributedLabel" target="_blank" rel="external">TYAttributedLabel</a></p>
 <h1 id="2-项目">2.项目</h1><p><a href="https://github.com/jamy0801/LGWeChatKit" target="_blank" rel="external">仿微信</a></p>
@@ -738,122 +507,63 @@
 <li><a href="http://code4app.com/" target="_blank" rel="external">code4app</a></li>
 </ol>
 
-          
-        
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
+    <div class="article-info article-info-index">
+      
       
 
-  
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/开源库/">开源库</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/总结/">总结</a></li></ul>
+    </div>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/18/2014-8-10/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="无尽的浪花">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="浪花">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="浪花" src="">
-    </span>
-  </span>
-
+      
+      <div class="clearfix"></div>
+    </div>
     
-      <header class="post-header">
+  </div>
+  
+</article>
 
+
+
+
+
+
+
+
+
+  
+    <article id="post-2014-8-10" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/18/2014-8-10/" class="article-date">
+      <time datetime="2015-10-18T02:05:20.000Z" itemprop="datePublished">2015-10-18</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/18/2014-8-10/" itemprop="url">
-                  从C/C++到iOS,然后方向OpenGL资料
-                </a>
-              
-            
-          </h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/18/2014-8-10/">从C/C++到iOS,然后方向OpenGL资料</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2015-10-18T10:05:20+08:00">
-                2015-10-18
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
       </header>
+      
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
           
-            <p>个人经历了从C++/MFC到iOS编程的蜕变.这期间看了不少书,也有不少感悟.<br>首先:个人觉得不管从事任何编程工作,C语言都是必须要学习的语言.如果不是C++的开发者,则只需要学一些C++基本用法就可以了,起码面向对象,STL这些要会.模板的代码要看得懂.<br>其次:个人感觉现在国内的OpenGL方面的资料很少,从事这方面的人也少,但是个人感觉以后三维是移动端的一个方向.自己以前学过点OpenGL方面的知识,所以定下来这个为以后前进的方向.</p>
+        <p>个人经历了从C++/MFC到iOS编程的蜕变.这期间看了不少书,也有不少感悟.<br>首先:个人觉得不管从事任何编程工作,C语言都是必须要学习的语言.如果不是C++的开发者,则只需要学一些C++基本用法就可以了,起码面向对象,STL这些要会.模板的代码要看得懂.<br>其次:个人感觉现在国内的OpenGL方面的资料很少,从事这方面的人也少,但是个人感觉以后三维是移动端的一个方向.自己以前学过点OpenGL方面的知识,所以定下来这个为以后前进的方向.</p>
 <p>以下是个人总结的一些学习资料,希望能帮助更多的朋友.</p>
 <h2 id="语言相关的书籍:">语言相关的书籍:</h2><h3 id="1-C语言">1.C语言</h3><p>C语言我觉得是最值得任何程序员花大量的时间学习的语言.原因是:</p>
 <ol>
@@ -1015,122 +725,63 @@
 </tbody>
 </table>
 
-          
-        
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
+    <div class="article-info article-info-index">
+      
       
 
-  
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C语言/">C语言</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/OpenGL/">OpenGL</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/资料总结/">资料总结</a></li></ul>
+    </div>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/10/17/2014-08-11/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="无尽的浪花">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="浪花">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="浪花" src="">
-    </span>
-  </span>
-
+      
+      <div class="clearfix"></div>
+    </div>
     
-      <header class="post-header">
+  </div>
+  
+</article>
 
+
+
+
+
+
+
+
+
+  
+    <article id="post-2014-08-11" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/10/17/2014-08-11/" class="article-date">
+      <time datetime="2015-10-16T23:32:59.000Z" itemprop="datePublished">2015-10-17</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/10/17/2014-08-11/" itemprop="url">
-                  Swift中的单例模式
-                </a>
-              
-            
-          </h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/10/17/2014-08-11/">Swift中的单例模式</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2015-10-17T07:32:59+08:00">
-                2015-10-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
       </header>
+      
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
           
-            <h2 id="1-单例简介">1.单例简介</h2><p>单例是一种很常用的设计模式.<br>单例模式的意图是保证一个类仅有一个实例,并提供一个访问它的全局访问点。</p>
+        <h2 id="1-单例简介">1.单例简介</h2><p>单例是一种很常用的设计模式.<br>单例模式的意图是保证一个类仅有一个实例,并提供一个访问它的全局访问点。</p>
 <p>一般情况下, 如果一个类是单例, 那么都会提供一个类方法用于快速创建单例对象.而且这个类方法的名称是有一定的规则: <code>share + 类名称 / default + 类名称 / 类名称开头</code></p>
 <h2 id="2-OC中单例的实现">2.OC中单例的实现</h2><p>在OC中实现单例,相对来说比较复杂,需要以下步骤:</p>
 <ol>
@@ -1151,122 +802,63 @@
 <p><br><br>我们甚至可以直接这么写来实现单例:<br><figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Tools</span>: <span class="title">NSObject</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">static</span> <span class="keyword">let</span> shareTools: <span class="type">Tools</span> = <span class="type">Tools</span>()</span><br><span class="line">    private <span class="keyword">override</span> <span class="keyword">init</span>() &#123;</span><br><span class="line">        <span class="keyword">super</span>.<span class="keyword">init</span>()</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>用到的时候直接调用成员变量即可.</p>
 
-          
-        
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
+    <div class="article-info article-info-index">
+      
       
 
-  
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Swift/">Swift</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/单例/">单例</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/设计模式/">设计模式</a></li></ul>
+    </div>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/22/2015-07-22/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="无尽的浪花">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="浪花">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="浪花" src="">
-    </span>
-  </span>
-
+      
+      <div class="clearfix"></div>
+    </div>
     
-      <header class="post-header">
+  </div>
+  
+</article>
 
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-07-22" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/22/2015-07-22/" class="article-date">
+      <time datetime="2015-07-22T12:42:18.000Z" itemprop="datePublished">2015-07-22</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/22/2015-07-22/" itemprop="url">
-                  iOS开发---绘图
-                </a>
-              
-            
-          </h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/22/2015-07-22/">iOS开发---绘图</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2015-07-22T20:42:18+08:00">
-                2015-07-22
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
       </header>
+      
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
           
-            <h1 id="绘图操作">绘图操作</h1><p><strong>前言：在iOS开发中，系统已经给我们提供了功能强大的控件，可是很多并不能满足我们的需求。这时候我们需要，自定义一些美观的控件。所用的知识也就是下面的绘图。</strong></p>
+        <h1 id="绘图操作">绘图操作</h1><p><strong>前言：在iOS开发中，系统已经给我们提供了功能强大的控件，可是很多并不能满足我们的需求。这时候我们需要，自定义一些美观的控件。所用的知识也就是下面的绘图。</strong></p>
 <h2 id="1-基本的绘图知识">1.基本的绘图知识</h2><h3 id="1-1图形上下文">1.1图形上下文</h3><ul>
 <li><p>1.1图形上下文（Graphics Context）：是一个CGContextRef类型的数据</p>
 </li>
@@ -1368,122 +960,63 @@
 <p><code>- (void)renderInContext:(CGContextRef)ctx;</code></p>
 <figure class="highlight objectivec"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//截取屏幕</span></span><br><span class="line">+ (<span class="built_in">UIImage</span>*)imageWithCaptureView:(<span class="built_in">UIView</span>*)captureView;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 1.开启上下文</span></span><br><span class="line">    <span class="built_in">UIGraphicsBeginImageContextWithOptions</span>(captureView<span class="variable">.bounds</span><span class="variable">.size</span>, <span class="literal">NO</span>, <span class="number">0.0</span>);</span><br><span class="line">    <span class="comment">// 2.获取当前上下文</span></span><br><span class="line">    <span class="built_in">CGContextRef</span> ctx = <span class="built_in">UIGraphicsGetCurrentContext</span>();</span><br><span class="line">    <span class="comment">// 3.把控制器图层渲染到上下文</span></span><br><span class="line">    [captureView<span class="variable">.layer</span> renderInContext:ctx];</span><br><span class="line">    <span class="comment">// 4.取出新图片</span></span><br><span class="line">    <span class="built_in">UIImage</span>* newImage = <span class="built_in">UIGraphicsGetImageFromCurrentImageContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="built_in">UIGraphicsEndImageContext</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">return</span> newImage;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-          
-        
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
+    <div class="article-info article-info-index">
+      
       
 
-  
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/绘图/">绘图</a></li></ul>
+    </div>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/20/2015-07-20/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="无尽的浪花">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="浪花">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="浪花" src="">
-    </span>
-  </span>
-
+      
+      <div class="clearfix"></div>
+    </div>
     
-      <header class="post-header">
+  </div>
+  
+</article>
 
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-07-20" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/20/2015-07-20/" class="article-date">
+      <time datetime="2015-07-20T14:46:20.000Z" itemprop="datePublished">2015-07-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/20/2015-07-20/" itemprop="url">
-                  iOS动画中的物理知识应用-重力加速度
-                </a>
-              
-            
-          </h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/20/2015-07-20/">iOS动画中的物理知识应用-重力加速度</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2015-07-20T22:46:20+08:00">
-                2015-07-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
       </header>
+      
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
           
-            <h2 id="平抛运动">平抛运动</h2><p>还记得初次玩愤怒的小鸟的时候，弹出小鸟那一瞬间，小鸟在空中划出的优美弧线么？还记得小鸟在地上弹起又落下的场景么？这里就介绍一下如何实现平抛运动。</p>
+        <h2 id="平抛运动">平抛运动</h2><p>还记得初次玩愤怒的小鸟的时候，弹出小鸟那一瞬间，小鸟在空中划出的优美弧线么？还记得小鸟在地上弹起又落下的场景么？这里就介绍一下如何实现平抛运动。</p>
 <h3 id="1-平抛运动的物理知识">1.平抛运动的物理知识</h3><p><img src="http://upload.wikimedia.org/wikipedia/commons/a/ad/Rzutp.gif" alt="这里写图片描述"><br>从图中我们可以看出物体在抛出之后，在X轴方向上速度不变。但是随着时间的变化Y轴方向的速度在变大（红色箭头的长度）。<br>由基本的物理知识我们知道：</p>
 <ul>
 <li>Vx = Vx</li>
@@ -1499,122 +1032,63 @@
 <p><img src="http://img.blog.csdn.net/20150717214424101" alt="这里写图片描述"></p>
 <h4 id="5-Demo">5.Demo</h4><p><a href="https://github.com/Esdeath/Gravity" target="_blank" rel="external">https://github.com/Esdeath/Gravity</a></p>
 
-          
-        
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
+    <div class="article-info article-info-index">
+      
       
 
-  
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
+    </div>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2015/07/16/2015-07-16/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="无尽的浪花">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="浪花">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="浪花" src="">
-    </span>
-  </span>
-
+      
+      <div class="clearfix"></div>
+    </div>
     
-      <header class="post-header">
+  </div>
+  
+</article>
 
+
+
+
+
+
+
+
+
+  
+    <article id="post-2015-07-16" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2015/07/16/2015-07-16/" class="article-date">
+      <time datetime="2015-07-16T15:28:20.000Z" itemprop="datePublished">2015-07-16</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2015/07/16/2015-07-16/" itemprop="url">
-                  iOS动画中的物理知识应用-碰撞检测
-                </a>
-              
-            
-          </h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2015/07/16/2015-07-16/">iOS动画中的物理知识应用-碰撞检测</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2015-07-16T23:28:20+08:00">
-                2015-07-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
       </header>
+      
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
           
-            <h2 id="碰撞检测">碰撞检测</h2><hr>
+        <h2 id="碰撞检测">碰撞检测</h2><hr>
 <p>源代码：<a href="https://github.com/Esdeath/collsion" target="_blank" rel="external">https://github.com/Esdeath/collsion</a></p>
 <hr>
 <p>我相信搞iOS得人，多多少少都知道 弹球这个小游戏。撞击不同的点，就能改变其运动的轨迹。对于很多人来说，如果不知道思路可能觉得小球在屏幕中撞来撞去，碰到墙壁就改变运动方向似乎很难实现。<br>其实这个只需要一点点iOS绘图基础和动画基础，还要一点点物理知识就OK了。<br><img src="http://p4.xyx.hao123.com/img/bigNewLogo/20130606_big_ee53a8677d.jpg" alt="这里写图片描述"></p>
@@ -1646,366 +1120,197 @@
 <p><img src="http://img.blog.csdn.net/20150717005555286" alt="这里写图片描述"></p>
 <p><img src="http://img.blog.csdn.net/20150717005623404" alt="这里写图片描述"></p>
 
-          
-        
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
+    <div class="article-info article-info-index">
+      
       
 
-  
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/动画/">动画</a></li></ul>
+    </div>
 
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="http://yoursite.com/2014/11/20/2014-11-20/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="无尽的浪花">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/avatar.gif">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="浪花">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="浪花" src="">
-    </span>
-  </span>
-
+      
+      <div class="clearfix"></div>
+    </div>
     
-      <header class="post-header">
+  </div>
+  
+</article>
 
+
+
+
+
+
+
+
+
+  
+    <article id="post-2014-11-20" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2014/11/20/2014-11-20/" class="article-date">
+      <time datetime="2014-11-20T07:04:12.000Z" itemprop="datePublished">2014-11-20</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2014/11/20/2014-11-20/" itemprop="url">
-                  接手新项目之 Method Swilling
-                </a>
-              
-            
-          </h1>
-        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2014/11/20/2014-11-20/">接手新项目之 Method Swilling</a>
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">發表於</span>
-              <time title="Дата создания записи" itemprop="dateCreated datePublished" datetime="2014-11-20T15:04:12+08:00">
-                2014-11-20
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
       </header>
+      
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
+    <div class="article-entry" itemprop="articleBody">
       
-      
-
-      
-        
           
-            <p>我们在接手一个新项目的时候,通常搞不清里面的关系.我们都知道,iOS开发采用最广泛的设计模式是MVC,我们只要找到一个Controller,然后再顺藤摸瓜便可找到相应的模型,以及里面的各种View.</p>
+        <p>我们在接手一个新项目的时候,通常搞不清里面的关系.我们都知道,iOS开发采用最广泛的设计模式是MVC,我们只要找到一个Controller,然后再顺藤摸瓜便可找到相应的模型,以及里面的各种View.</p>
 <p>这个时候如果我们能在进入Controller的时候(viewDidAppear:),打印出相应的Controller名称,便可以轻松地定位代码位置.</p>
 <p>那么问题就集中在,我们如何在不知道该Controller在哪里的情况下,还可以在viewDidAppear的时候进行log输出呢?</p>
 <p>这个时候只有通过hook viewDidAppear来实方法的交换了,也就是Method Swizzling.</p>
 <p>OK,实现一个分类<code>UIViewController+Extension.m</code></p>
 <figure class="highlight monkey"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br></pre></td><td class="code"><pre><span class="line"><span class="preprocessor">#import &lt;objc/runtime.h&gt;</span></span><br><span class="line"></span><br><span class="line">@implementation NSObject(Extension)</span><br><span class="line">/**</span><br><span class="line"> *  交换两个类方法</span><br><span class="line"> *</span><br><span class="line"> *  @param <span class="class"><span class="keyword">class</span>          类名称</span></span><br><span class="line"> *  @param originSelector 原始方法名称</span><br><span class="line"> *  @param otherSelector  交换的方法名称</span><br><span class="line"> */</span><br><span class="line">+ (void)swizzleClassMethod:(<span class="class"><span class="keyword">Class</span>)<span class="title">class</span> <span class="title">originSelector</span>:(<span class="title">SEL</span>)<span class="title">originSelector</span> <span class="title">otherSelector</span>:(<span class="title">SEL</span>)<span class="title">otherSelector</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">Method</span> <span class="title">otherMehtod</span> =</span> class_getClassMethod(<span class="class"><span class="keyword">class</span>, <span class="title">otherSelector</span>);</span></span><br><span class="line">    <span class="function"><span class="keyword">Method</span> <span class="title">originMehtod</span> =</span> class_getClassMethod(<span class="class"><span class="keyword">class</span>, <span class="title">originSelector</span>);</span></span><br><span class="line">    // 交换<span class="number">2</span>个方法的实现</span><br><span class="line"></span><br><span class="line">    <span class="keyword">if</span> (class_addMethod(<span class="class"><span class="keyword">class</span>, <span class="title">originSelector</span>, <span class="title">method_getImplementation</span>(<span class="title">otherMehtod</span>), <span class="title">method_getTypeEncoding</span>(<span class="title">otherMehtod</span>))) &#123;</span></span><br><span class="line">        class_replaceMethod(<span class="class"><span class="keyword">class</span>, <span class="title">otherSelector</span>, <span class="title">method_getImplementation</span>(<span class="title">originMehtod</span>), <span class="title">method_getTypeEncoding</span>(<span class="title">originMehtod</span>));</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        method_exchangeImplementations(otherMehtod, originMehtod);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> *  交换两个对象方法</span><br><span class="line"> *</span><br><span class="line"> *  @param <span class="class"><span class="keyword">class</span>          类名称</span></span><br><span class="line"> *  @param originSelector 原始方法名称</span><br><span class="line"> *  @param otherSelector  交换的方法名称</span><br><span class="line"> */</span><br><span class="line">+ (void)swizzleInstanceMethod:(<span class="class"><span class="keyword">Class</span>)<span class="title">class</span> <span class="title">originSelector</span>:(<span class="title">SEL</span>)<span class="title">originSelector</span> <span class="title">otherSelector</span>:(<span class="title">SEL</span>)<span class="title">otherSelector</span></span></span><br><span class="line">&#123;</span><br><span class="line">    <span class="function"><span class="keyword">Method</span> <span class="title">otherMehtod</span> =</span> class_getInstanceMethod(<span class="class"><span class="keyword">class</span>, <span class="title">otherSelector</span>);</span></span><br><span class="line">    <span class="function"><span class="keyword">Method</span> <span class="title">originMehtod</span> =</span> class_getInstanceMethod(<span class="class"><span class="keyword">class</span>, <span class="title">originSelector</span>);</span></span><br><span class="line">    // 交换<span class="number">2</span>个方法的实现</span><br><span class="line">    <span class="keyword">if</span> (class_addMethod(<span class="class"><span class="keyword">class</span>, <span class="title">originSelector</span>, <span class="title">method_getImplementation</span>(<span class="title">otherMehtod</span>), <span class="title">method_getTypeEncoding</span>(<span class="title">originMehtod</span>))) &#123;</span></span><br><span class="line">        class_replaceMethod(<span class="class"><span class="keyword">class</span>, <span class="title">otherSelector</span>, <span class="title">method_getImplementation</span>(<span class="title">originMehtod</span>), <span class="title">method_getTypeEncoding</span>(<span class="title">originMehtod</span>));</span></span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        method_exchangeImplementations(otherMehtod, originMehtod);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">@implementation UIViewController (Extension)</span><br><span class="line"></span><br><span class="line">+ (void)load</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="variable">self</span> swizzleInstanceMethod:<span class="variable">self</span> originSelector:@selector(viewDidAppear:) otherSelector:@selector(mrviewDidAppear:)];</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> *  用来替换viewDidAppear,方便追踪</span><br><span class="line"> *</span><br><span class="line"> *  @param animated 是否有动画</span><br><span class="line"> */</span><br><span class="line">-(void)mrviewDidAppear:(BOOL)animated;</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="variable">self</span> mrviewDidAppear:YES];</span><br><span class="line">    NSString *str =  NSStringFromClass([<span class="variable">self</span> <span class="class"><span class="keyword">class</span>]);</span></span><br><span class="line">    </span><br><span class="line">    NSLog(@<span class="string">"%@-我是好人"</span>,str);</span><br><span class="line">&#125;</span><br><span class="line">@<span class="keyword">end</span></span><br><span class="line"></span><br><span class="line">@implementation NSArray(Extension)</span><br><span class="line">+ (void)load</span><br><span class="line">&#123;</span><br><span class="line">    [<span class="variable">self</span> swizzleInstanceMethod:<span class="variable">self</span> originSelector:@selector(objectAtIndex:) otherSelector:@selector(hm_objectAtIndex:)];</span><br><span class="line">&#125;</span><br><span class="line">/**</span><br><span class="line"> *  用来替换取出数组的元素的方法</span><br><span class="line"> *</span><br><span class="line"> *  @param index 数组下标</span><br><span class="line"> *</span><br><span class="line"> *  @<span class="keyword">return</span> 返回取出的值,如果越界返回nil</span><br><span class="line"> */</span><br><span class="line">- (id)hm_objectAtIndex:(NSUInteger)index</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (index &lt; <span class="variable">self</span>.count) &#123;</span><br><span class="line">        <span class="keyword">return</span> [<span class="variable">self</span> hm_objectAtIndex:index];</span><br><span class="line">    &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">        <span class="keyword">return</span> nil;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@<span class="keyword">end</span></span><br></pre></td></tr></table></figure>
-          
-        
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
     
-  </section>
+    <div class="article-info article-info-index">
+      
+      
 
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Method-Swizzling/">Method Swizzling</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/iOS/">iOS</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/runtime/">runtime</a></li></ul>
     </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
   </div>
+  
+</article>
 
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
 
-      
 
-      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="无尽的浪花" />
-          <p class="site-author-name" itemprop="name">无尽的浪花</p>
-          <p class="site-description motion-element" itemprop="description"></p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">11</span>
-              <span class="site-state-item-name">文章</span>
-            </a>
-          </div>
 
-          
 
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">22</span>
-                <span class="site-state-item-name">標籤</span>
-              </a>
+
+
+
+  
+  
+    <nav id="page-nav">
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+    </nav>
+  
+</div>
+      <footer id="footer">
+    <div class="outer">
+        <div id="footer-info">
+            <div class="footer-left">
+                &copy; 2016 无尽的浪花
             </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
+            <div class="footer-right">
+                <a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/luuman/hexo-theme-spfk" target="_blank">spfk</a> by luuman
+            </div>
         </div>
-
         
+            <div class="visit">
+                
+                    <span id="busuanzi_container_site_pv" style='display:none'>
+                        <span id="site-visit" >海贼到访数: 
+                            <span id="busuanzi_value_site_uv"></span>
+                        </span>
+                    </span>
+                
+                
+                    <span>, </span>
+                
+                
+                    <span id="busuanzi_container_page_pv" style='display:none'>
+                        <span id="page-visit">本页阅读量: 
+                            <span id="busuanzi_value_page_pv"></span>
+                        </span>
+                    </span>
+                
+            </div>
         
-
-        
-        
-
-        
-
-
-      </section>
-
-      
+    </div>
+</footer>
 
     </div>
-  </aside>
+    <script src="https://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js" type="text/javascript"></script>
+<script src="/js/main.js" type="text/javascript"></script>
+
+    <script>
+        $(document).ready(function() {
+            var backgroundnum = 24;
+            var backgroundimg = "url(/background/bg-x.jpg)".replace(/x/gi, Math.ceil(Math.random() * backgroundnum));
+            $("#mobile-nav").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+            $(".left-col").css({"background-image": backgroundimg,"background-size": "cover","background-position": "center"});
+        })
+    </script>
 
 
-        
-      </div>
-    </main>
 
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">无尽的浪花</span>
+
+
+<div class="scroll" id="scroll">
+    <a href="#"><i class="fa fa-arrow-up"></i></a>
+    <a href="#comments"><i class="fa fa-comments-o"></i></a>
+    <a href="#footer"><i class="fa fa-arrow-down"></i></a>
 </div>
+<script>
+    $(document).ready(function() {
+        if ($("#comments").length < 1) {
+            $("#scroll > a:nth-child(2)").hide();
+        };
+    })
+</script>
 
+<script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 強力驅動
-</div>
+  <script language="javascript">
+    $(function() {
+        $("a[title]").each(function() {
+            var a = $(this);
+            var title = a.attr('title');
+            if (title == undefined || title == "") return;
+            a.data('title', title).removeAttr('title').hover(
 
-<div class="theme-info">
-  主題 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Muse
-  </a>
-</div>
-
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+            function() {
+                var offset = a.offset();
+                $("<div id=\"anchortitlecontainer\"></div>").appendTo($("body")).html(title).css({
+                    top: offset.top - a.outerHeight() - 15,
+                    left: offset.left + a.outerWidth()/2 + 1
+                }).fadeIn(function() {
+                    var pop = $(this);
+                    setTimeout(function() {
+                        pop.remove();
+                    }, pop.text().length * 800);
+                });
+            }, function() {
+                $("#anchortitlecontainer").remove();
+            });
+        });
+    });
 </script>
 
 
-
-
-
-
-
-
-
-  
-
-
-
-  
-  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-	
-
-
-
-
-  
-  
-
-  
-
-  
-
-  
-
-  
-
-
+  </div>
 </body>
 </html>
