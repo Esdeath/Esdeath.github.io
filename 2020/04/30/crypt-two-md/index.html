@@ -1,0 +1,989 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="驿路星辰">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="驿路星辰">
+    
+    <meta name="keywords" content="算法,Swift,Dart,iOS,Flutter,C++">
+    
+    <meta name="description" content="">
+    <meta name="description" content="2.1 编码 现代的密码都是建立在计算机的基础之上的，这是因为现代的密码所处理的数据量非常大，而且密码算法也非常复杂，不借助计算机的力量就无法完成加密和解密的操作。 计算机的操作对象并不是文字，而是由0和1排列而成的比特序列。无论是文字、图像、声音、视频还是程序，在计算机中都是用比特序列来表示的。执行加密操作的程序，就是将表示明文的比特序列转换为表示密文的比特序列。 将现实世界中的东西映射为比特序">
+<meta property="og:type" content="article">
+<meta property="og:title" content="2.对称加密（相同密钥加解密)---《图解密码学》">
+<meta property="og:url" content="https://github.com/Esdeath/Esdeath.github.io/2020/04/30/crypt-two-md/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="2.1 编码 现代的密码都是建立在计算机的基础之上的，这是因为现代的密码所处理的数据量非常大，而且密码算法也非常复杂，不借助计算机的力量就无法完成加密和解密的操作。 计算机的操作对象并不是文字，而是由0和1排列而成的比特序列。无论是文字、图像、声音、视频还是程序，在计算机中都是用比特序列来表示的。执行加密操作的程序，就是将表示明文的比特序列转换为表示密文的比特序列。 将现实世界中的东西映射为比特序">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/04/30/crypt-two-md/1538729172517.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/04/30/crypt-two-md/1538729419926.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/04/30/crypt-two-md/1538883542015.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/04/30/crypt-two-md/1538730367361.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/04/30/crypt-two-md/1538731104755.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/04/30/crypt-two-md/1538731285324.png">
+<meta property="article:published_time" content="2020-04-30T02:12:14.000Z">
+<meta property="article:modified_time" content="2022-05-28T19:11:59.836Z">
+<meta property="article:author" content="驿路星辰">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/04/30/crypt-two-md/1538729172517.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>2.对称加密（相同密钥加解密)---《图解密码学》 · iOS</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/Esdeath.github.io/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 30vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/Esdeath.github.io/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/Esdeath.github.io/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/Esdeath.github.io/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/Esdeath.github.io/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/Esdeath.github.io/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/Esdeath.github.io/" >驿路星辰的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">2.对称加密（相同密钥加解密)---《图解密码学》</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/Esdeath.github.io/>驿路星辰的博客</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/Esdeath.github.io/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            2.对称加密（相同密钥加解密)---《图解密码学》
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">2.5k</span>Reading time: <span class="post-count reading-time">8 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/04/30</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/Esdeath.github.io/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/Esdeath.github.io/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h3 id="2-1-编码"><a href="#2-1-编码" class="headerlink" title="2.1 编码"></a>2.1 编码</h3><blockquote>
+<p>现代的密码都是建立在计算机的基础之上的，这是因为现代的密码所处理的数据量非常大，而且密码算法也非常复杂，不借助计算机的力量就无法完成加密和解密的操作。</p>
+<p>计算机的操作对象并不是文字，而是由0和1排列而成的<strong>比特序列</strong>。无论是文字、图像、声音、视频还是程序，在计算机中都是用比特序列来表示的。执行加密操作的程序，就是将表示明文的比特序列转换为表示密文的比特序列。</p>
+<p>将现实世界中的东西映射为比特序列的操作称为<strong>编码（encoding）</strong>。例如midnight（深夜）这个词，我们可以对其中的每个字母逐一进行编码，这种编码规则叫作<strong>ASCII</strong>。</p>
+</blockquote>
+<p><img src="1538729172517.png" alt="1538729172517"></p>
+<blockquote>
+<p>注意这里的m –&gt; 01101101这一转换并不是加密而是编码。尽管在人类看来0和1的序列跟密码没什么两样，但计算机却可以“看懂”这些比特序列，并很快地反应出其所对应的字符 <strong>midnight</strong></p>
+</blockquote>
+<h3 id="2-2-DES"><a href="#2-2-DES" class="headerlink" title="2.2 DES"></a>2.2 DES</h3><h4 id="2-2-1-什么是DES"><a href="#2-2-1-什么是DES" class="headerlink" title="2.2.1 什么是DES"></a>2.2.1 什么是DES</h4><blockquote>
+<p><strong>DES（Data Encryption Standard）</strong>是1977年美国联邦信息处理标准（FIPS）中所采用的一种对称密码（FIPS46.3）。DES一直以来被美国以及其他国家的政府和银行等广泛使用。然而，随着计算机的进步，现在DES已经能够被暴力破解，强度大不如前了。</p>
+<p>RSA公司举办过破泽DES密钥的比赛（DESChallenge），我们可以看一看RSA公司官方公布的比赛结果：</p>
+<ul>
+<li>1997年的DES Challenge1中用了96天破译密钥</li>
+<li>1998年的DES ChallengeIl-I中用了41天破译密钥</li>
+<li>1998年的DES ChallengeII-2中用了56小时破译密钥</li>
+<li>1999年的DES ChallengeIll中只用了22小时15分钟破译密钥</li>
+</ul>
+<p>由于DES的密文可以在短时间内被破译，因此除了用它来解密以前的密文以外，现在我们不应该再使用DES了。</p>
+</blockquote>
+<h4 id="2-2-2-加密和解密"><a href="#2-2-2-加密和解密" class="headerlink" title="2.2.2 加密和解密"></a>2.2.2 加密和解密</h4><blockquote>
+<p>DES是一种将64比特的明文加密成64比特的密文的对称密码算法，<strong>它的密钥长度是56比特</strong>。尽管<font color="red">从规格上来说，DES的密钥长度是64比特，但由于每隔7比特会设置一个用于错误检查的比特，因此实质上其密钥长度是56比特</font>。</p>
+<p><font color="red">DES是以64比特的明文（比特序列）为一个单位来进行加密的</font>，<strong>这个64比特的单位称为分组</strong>。一般来说，以分组为单位进行处理的密码算法称为<strong>分组密码（blockcipher）</strong>，DES就是分组密码的一种。</p>
+<p>DES每次只能加密64比特的数据，如果要加密的明文比较长，就需要对DES加密进行迭代（反复），而迭代的具体方式就称为模式（mode）。</p>
+</blockquote>
+<ul>
+<li><p><strong>DES的加密与解密 - 图例</strong></p>
+<p><img src="1538729419926.png" alt="1538729419926"></p>
+</li>
+</ul>
+<h3 id="2-3-三重DES"><a href="#2-3-三重DES" class="headerlink" title="2.3 三重DES"></a>2.3 三重DES</h3><blockquote>
+<p>现在DES已经可以在现实的时间内被暴力破解，因此我们需要一种用来替代DES的分组密码，三重DES就是出于这个目的被开发出来的。</p>
+<p><strong>三重DES（triple-DES）是为了增加DES的强度，将DES重复3次所得到的一种密码算法，通常缩写为3DES</strong>。</p>
+</blockquote>
+<h4 id="2-3-1-三重DES的加密"><a href="#2-3-1-三重DES的加密" class="headerlink" title="2.3.1 三重DES的加密"></a>2.3.1 三重DES的加密</h4><blockquote>
+<p>三重DES的加解密机制如图所示：</p>
+</blockquote>
+<p><img src="1538883542015.png" alt="1538883542015"></p>
+<p><img src="1538730367361.png" alt="1538730367361"></p>
+<blockquote>
+<p>明文经过三次DES处理才能变成最后的密文，由于<strong>DES密钥的长度实质上是56比特</strong>，因此<font color="red">三重DES的密钥长度就是56×3=168比特, 加上用于错误检测的标志位8x3, 共192bit</font>。</p>
+<p>从上图我们可以发现，三重DES并不是进行三次DES加密（加密–&gt;加密–&gt;加密），而是<font color="red"><strong>加密–&gt;解密–&gt;加密</strong></font>的过程。在加密算法中加人解密操作让人感觉很不可思议，实际上这个方法是IBM公司设计出来的，目的是为了让三重DES能够兼容普通的DES。</p>
+<p><font color="red">当三重DES中所有的密钥都相同时，三重DES也就等同于普通的DES了</font>。这是因为在前两步加密–&gt;解密之后，得到的就是最初的明文。因此，以前用DES加密的密文，就可以通过这种方式用三重DES来进行解密。也就是说，三重DES对DES具备向下兼容性。</p>
+<p>如果密钥1和密钥3使用相同的密钥，而密钥2使用不同的密钥（也就是只使用两个DES密钥），这种三重DES就称为DES-EDE2。EDE表示的是加密（Encryption) –&gt;解密（Decryption)–&gt;加密（Encryption）这个流程。</p>
+<p>密钥1、密钥2、密钥3全部使用不同的比特序列的三重DES称为DES-EDE3。</p>
+</blockquote>
+<blockquote>
+<p>尽管三重DES目前还被银行等机构使用，但其处理速度不高，而且在安全性方面也逐渐显现出了一些问题。</p>
+</blockquote>
+<h3 id="2-4-AES"><a href="#2-4-AES" class="headerlink" title="2.4 AES"></a>2.4 AES</h3><blockquote>
+<p>AES（Advanced Encryption Standard）是取代其前任标准（DES）而成为新标准的一种对称密码算法。全世界的企业和密码学家提交了多个对称密码算法作为AES的候选，最终在2000年从这些候选算法中选出了一种名为<strong>Rijndael</strong>的对称密码算法，并将其确定为了AES。</p>
+<p>Rijndael是由比利时密码学家Joan Daemen和Vincent Rijmen设汁的分组密码算法，今后会有越来越多的密码软件支持这种算法。</p>
+<p><strong>Rijndael的分组长度为128比特</strong>，密钥长度可以以32比特为单位在128比特到256比特的范围内进行选择（不过<strong>在AES的规格中，密钥长度只有128、192和256比特三种</strong>）。</p>
+</blockquote>
+<h4 id="2-4-2-AES的加密和解密"><a href="#2-4-2-AES的加密和解密" class="headerlink" title="2.4.2 AES的加密和解密"></a>2.4.2 AES的加密和解密</h4><blockquote>
+<p>和DES—样，AES算法也是由多个轮所构成的，下图展示了每一轮的大致计算步骤。DES使用Feistel网络作为其基本结构，而AES没有使用Feistel网络，而是使用了SPN Rijndael的输人分组为128比特，也就是16字节。首先，需要逐个字节地对16字节的输入数据进行SubBytes处理。所谓SubBytes,就是以每个字节的值（0～255中的任意值）为索引，从一张拥有256个值的替换表（S-Box）中查找出对应值的处理，也是说，将一个1字节的值替换成另一个1字节的值。</p>
+<p>SubBytes之后需要进行ShiftRows处理，即将SubBytes的输出以字节为单位进行打乱处理。从下图的线我们可以看出，这种打乱处理是有规律的。</p>
+<p>ShiftRows之后需要进行MixCo1umns处理，即对一个4字节的值进行比特运算，将其变为另外一个4字节值。</p>
+<p>最后，需要将MixColumns的输出与轮密钥进行XOR，即进行AddRoundKey处理。到这里，AES的一轮就结東了。实际上，在AES中需要重复进行10 ~ 14轮计算。</p>
+<p>通过上面的结构我们可以发现输入的所有比特在一轮中都会被加密。和每一轮都只加密一半输人的比特的Feistel网络相比，这种方式的优势在于加密所需要的轮数更少。此外，这种方式还有一个优势，即SubBytes，ShiftRows和MixColumns可以分别按字节、行和列为单位进行并行计算。</p>
+</blockquote>
+<p><img src="1538731104755.png" alt="1538731104755"></p>
+<blockquote>
+<p><font color="red">SubBytes        –     字节代换</font></p>
+<p><font color="red">ShiftRows        –    行移位代换</font></p>
+<p><font color="red">MixColumns    –    列混淆    </font></p>
+<p><font color="red">AddRoundKey    –    轮密钥加</font></p>
+</blockquote>
+<blockquote>
+<p>下图展示了AES中一轮的解密过程。从图中我们可以看出，SubBytes、ShiftRows、MixColumns分别存在反向运算InvSubBytes、InvShiftRows、InvMixColumns，这是因为AES不像Feistel网络一样能够用同一种结构实现加密和解密。</p>
+</blockquote>
+<p><img src="1538731285324.png" alt="1538731285324"></p>
+<blockquote>
+<p><font color="red">InvSubBytes        –    逆字节替代</font></p>
+<p><font color="red">InvShiftRows        –    逆行移位</font></p>
+<p><font color="red">InvMixColumns    –    逆列混淆</font></p>
+</blockquote>
+<h3 id="2-5-应选择哪种对称加密"><a href="#2-5-应选择哪种对称加密" class="headerlink" title="2.5 应选择哪种对称加密"></a>2.5 应选择哪种对称加密</h3><blockquote>
+<p>前面我们介绍了DES、三重DES和AES等对称密码，那么我们到底应该使用哪一种对称密码算法呢？</p>
+<ol>
+<li><strong>今后最好不要将DES用于新的用途，因为随着计算机技术的进步，现在用暴力破解法已经能够在现实的时间内完成对DES的破译。但是，在某些情况下也需要保持与旧版本软件的兼容性。</strong></li>
+<li><strong>出于兼容性的因素三重DES在今后还会使用一段时间，但会逐渐被AES所取代。</strong></li>
+<li><strong>今后大家应该使用的算法是AES（Rijndael），因为它安全、快速，而且能够在各种平台上工作。此外，由于全世界的密码学家都在对AES进行不断的验证，因此即便万一发现它有什么缺陷，也会立刻告知全世界并修复这些缺陷。</strong></li>
+</ol>
+<p>一般来说，我们不应该使用任何自制的密码算法，而是应该使用AES。因为AES在其选定过程中，经过了全世界密码学家所进行的高品质的验证工作，而对于自制的密码算法则很难进行这样的验证。 </p>
+</blockquote>
+<h4 id="本章小结"><a href="#本章小结" class="headerlink" title="本章小结"></a>本章小结</h4><blockquote>
+<p>本章中我们介绍了对称密码，以及DES、三重DES、AES和其他一些密码算法。</p>
+<p>使用一种密钥空间巨大，且在算法上没有弱点的对称密码，就可以通过密文来确保明文的机密性。巨大的密钥空间能够抵御暴力破解，算法上没有弱点可以抵御其他类型的攻击。</p>
+<p>然而，用对称密码进行通信时，还会出现密钥的配送问题，即如何将密钥安全地发送给接收者。为了解决密钥配送问题，我们需要非对称加密技术</p>
+<p>本章所介绍的几乎所有的密码算法，都只能将一个固定长度的分组进行加密当需要加密的明文长度超过分组长度时，就需要对密码算法进行迭代下一章我们将探讨对分组密码进行迭代的方法。</p>
+</blockquote>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://github.com/Esdeath/Esdeath.github.io">驿路星辰</a>
+            <p>原文链接：<a href="https://github.com/Esdeath/Esdeath.github.io/2020/04/30/crypt-two-md/">https://github.com/Esdeath/Esdeath.github.io/2020/04/30/crypt-two-md/</a>
+            <p>发表日期：<a href="https://github.com/Esdeath/Esdeath.github.io/2020/04/30/crypt-two-md/">April 30th 2020</a>
+            <p>更新日期：<a href="https://github.com/Esdeath/Esdeath.github.io/2020/04/30/crypt-two-md/">April 30th 2020</a>
+            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/Esdeath.github.io/2020/05/05/crypt-three-md/" title= "3. 分组密码的模式(分组密码是如何迭代)---《图解密码学》">
+                    <div class="nextTitle">3. 分组密码的模式(分组密码是如何迭代)---《图解密码学》</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/Esdeath.github.io/2020/04/29/crypt-one-md/" title= "1.密码学 ---《图解密码学》">
+                    <div class="prevTitle">1.密码学 ---《图解密码学》</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:ayaseeri@126.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/esdeath" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-编码"><span class="toc-number">1.</span> <span class="toc-text">2.1 编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-DES"><span class="toc-number">2.</span> <span class="toc-text">2.2 DES</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-什么是DES"><span class="toc-number">2.1.</span> <span class="toc-text">2.2.1 什么是DES</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-加密和解密"><span class="toc-number">2.2.</span> <span class="toc-text">2.2.2 加密和解密</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-三重DES"><span class="toc-number">3.</span> <span class="toc-text">2.3 三重DES</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-三重DES的加密"><span class="toc-number">3.1.</span> <span class="toc-text">2.3.1 三重DES的加密</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-AES"><span class="toc-number">4.</span> <span class="toc-text">2.4 AES</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2-AES的加密和解密"><span class="toc-number">4.1.</span> <span class="toc-text">2.4.2 AES的加密和解密</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-应选择哪种对称加密"><span class="toc-number">5.</span> <span class="toc-text">2.5 应选择哪种对称加密</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#本章小结"><span class="toc-number">5.1.</span> <span class="toc-text">本章小结</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 16
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/08/29/flutter-ios-plugin-delegate-error/" >Flutter中针对iOS封装Plugin组件注意事项</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/08/29/flutter-mvvm/" >Flutter中使用Provider实现MVVM架构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/06/07/crypt-night/" >9.SSL/TLS(为了更安全的通信)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/05/31/crypt-eight/" >8.证书(为公钥加上数字签名)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/29</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/05/29/crypt-seven/" >7.数字签名(消息到底是谁写的)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/21</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/05/21/crypt-six/" >6.消息认证码(消息被正确传送了吗)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/05/12/crypt-five-md/" >5.单向散列函数(获取消息的指纹)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/08</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/05/08/crypt-four-md/" >4.非对称加密(公钥加密,私钥解密)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/05</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/05/05/crypt-three-md/" >3. 分组密码的模式(分组密码是如何迭代)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/30</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/04/30/crypt-two-md/" >2.对称加密（相同密钥加解密)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/04/29/crypt-one-md/" >1.密码学 ---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/03/27/ios-gcd-ptread/" >iOS 90%人可能都会回答错误的一个多线程基础题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/01/27/how-to-know-highorlow-computer-md/" >如何判断机器的字节顺序是高字节在前还是低字节在前</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/Esdeath.github.io/2019/10/11/swift-function-program/" >【译】Swift和函数式编程的精髓</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/03</span><a class="archive-post-title" href= "/Esdeath.github.io/2019/10/03/how-to-use-functional-program-in-swift/" >【译】如何在swift中使用函数式编程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span><a class="archive-post-title" href= "/Esdeath.github.io/2019/08/28/swift-operator-override/" >【译】如何在swift中使用函数式编程</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/Esdeath.github.io/",
+        author: "驿路星辰"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/Esdeath.github.io/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/Esdeath.github.io/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/Esdeath.github.io/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
