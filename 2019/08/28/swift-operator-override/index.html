@@ -1,0 +1,1009 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="驿路星辰">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="驿路星辰">
+    
+    <meta name="keywords" content="算法,Swift,Dart,iOS,Flutter,C++">
+    
+    <meta name="description" content="">
+    <meta name="description" content="原文链接：https:&#x2F;&#x2F;www.raywenderlich.com&#x2F;4018226-overloading-custom-operators-in-swift swift重载自定义运算符 在本Swift教程中，您将学习如何创建自定义运算符，重载现有运算符以及设置运算符优先级。  运算符是任何编程语言的核心构建模块。 你能想象编程而不使用+或&#x3D;吗？ 运算符非常基础，大多数语言都将它们作为编译器（或">
+<meta property="og:type" content="article">
+<meta property="og:title" content="【译】如何在swift中使用函数式编程">
+<meta property="og:url" content="https://github.com/Esdeath/Esdeath.github.io/2019/08/28/swift-operator-override/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="原文链接：https:&#x2F;&#x2F;www.raywenderlich.com&#x2F;4018226-overloading-custom-operators-in-swift swift重载自定义运算符 在本Swift教程中，您将学习如何创建自定义运算符，重载现有运算符以及设置运算符优先级。  运算符是任何编程语言的核心构建模块。 你能想象编程而不使用+或&#x3D;吗？ 运算符非常基础，大多数语言都将它们作为编译器（或">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/8/28/16cd7213aaf59301~tplv-t2oaga2asx-image.image">
+<meta property="article:published_time" content="2019-08-28T07:50:28.000Z">
+<meta property="article:modified_time" content="2022-05-02T05:51:49.850Z">
+<meta property="article:author" content="驿路星辰">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/8/28/16cd7213aaf59301~tplv-t2oaga2asx-image.image">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>【译】如何在swift中使用函数式编程 · iOS</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/Esdeath.github.io/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 30vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/Esdeath.github.io/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/Esdeath.github.io/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/Esdeath.github.io/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/Esdeath.github.io/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/Esdeath.github.io/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/Esdeath.github.io/" >驿路星辰的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">【译】如何在swift中使用函数式编程</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/Esdeath.github.io/>驿路星辰的博客</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/Esdeath.github.io/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            【译】如何在swift中使用函数式编程
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">4.1k</span>Reading time: <span class="post-count reading-time">16 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2019/08/28</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/Esdeath.github.io/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/Esdeath.github.io/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>原文链接：<br><a href="https://www.raywenderlich.com/4018226-overloading-custom-operators-in-swift" target="_blank" rel="noopener">https://www.raywenderlich.com/4018226-overloading-custom-operators-in-swift</a></p>
+<h2 id="swift重载自定义运算符"><a href="#swift重载自定义运算符" class="headerlink" title="swift重载自定义运算符"></a>swift重载自定义运算符</h2><p> 在本Swift教程中，您将学习如何创建自定义运算符，重载现有运算符以及设置运算符优先级。</p>
+<p> 运算符是任何编程语言的核心构建模块。 你能想象编程而不使用+或=吗？<br> 运算符非常基础，大多数语言都将它们作为编译器（或解释器）的一部分进行处理。 但是Swift编译器并不对大多数操作符进行硬编码，而是为库提供了创建的操作符的方法。 它将工作留给了Swift标准库，用来提供您期望的所有常见操作符。 这种微妙的差异为巨大的定制潜力打开了大门。</p>
+<p> Swift运算符特别强大，因为您可以通过两种方式更改它们以满足您的需求：为现有运算符分配新功能（称为运算符重载），以及创建新的自定义运算符。<br> 在本教程中，您将使用一个简单的<code>Vector</code>结构并构建自己的一组运算符，以组合不同的向量。</p>
+<h3 id="入门"><a href="#入门" class="headerlink" title="入门"></a>入门</h3><p>打开<strong>Xcode</strong>，然后通过<strong>File▶New▶Playground</strong>创建一个<strong>Playground</strong>。 选择空白模板并命名您的<strong>Playground</strong>为<code>CustomOperators</code>。 删除所有默认代码，以便您可以从空白平板开始。</p>
+<p>将以下代码添加到您的<strong>Playground</strong>：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Vector</span> </span>&#123;</span><br><span class="line">  <span class="keyword">let</span> x: <span class="type">Int</span></span><br><span class="line">  <span class="keyword">let</span> y: <span class="type">Int</span></span><br><span class="line">  <span class="keyword">let</span> z: <span class="type">Int</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Vector</span>: <span class="title">ExpressibleByArrayLiteral</span> </span>&#123;</span><br><span class="line">  <span class="keyword">init</span>(arrayLiteral: <span class="type">Int</span>...) &#123;</span><br><span class="line">    <span class="built_in">assert</span>(arrayLiteral.<span class="built_in">count</span> == <span class="number">3</span>, <span class="string">"Must initialize vector with 3 values."</span>)</span><br><span class="line">    <span class="keyword">self</span>.x = arrayLiteral[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">self</span>.y = arrayLiteral[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">self</span>.z = arrayLiteral[<span class="number">2</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Vector</span>: <span class="title">CustomStringConvertible</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> description: <span class="type">String</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"(\(x), \(y), \(z))"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>在这里，您可以定义一个含有三个属性的<code>Vector</code>类型，它遵循两个协议。 <code>CustomStringConvertible</code>协议和<code>description</code>计算属性允许您打印一个友好的字符串用来代表<code>Vector</code>。</p>
+<p>在<code>playground</code>的底部，添加以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> vectorA: <span class="type">Vector</span> = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>]</span><br><span class="line"><span class="keyword">let</span> vectorB = [-<span class="number">2</span>, <span class="number">5</span>, <span class="number">1</span>] <span class="keyword">as</span> <span class="type">Vector</span></span><br></pre></td></tr></table></figure>
+
+<p>在没有初始化器的情况下,你刚刚用了两个<code>Array</code>来创建两个<code>Vector</code>!那是如何发生的呢?<br><code>ExpressibleByArrayLiteral</code>协议提供了一个平滑的接口来初始化<code>Vector</code>。该协议需要一个具有可变参数的不可用初始化程序：<code>init（arrayLiteral：Int ...）</code></p>
+<p>可变参数<code>arrayLiteral</code>允许您传入由逗号分隔的无限数量的值。例如，您可以创建<code>Vector</code>，像这样<code>Vector(arrayLiteral：0）</code>或<code>Vector（arrayLiteral：5,4,3）</code>。</p>
+<p>该协议进一步方便，并允许您直接使用数组进行初始化，只要您明确定义类型，这是您为<code>vectorA</code>和<code>vectorB</code>所做的。</p>
+<p>这种方法的唯一警告是你必须接受任何长度的数组。如果您将此代码放入应用程序中，请记住，如果传入长度不是三的数组，它将会崩溃。如果您尝试初始化少于或多于三个值的<code>Vector</code>，则初始化程序顶部的断言将在开发和内部测试期间在控制台中提醒您。</p>
+<p>单独的矢量很好，但如果你能用它们做事情会更好。正如你在学校时所做的那样，你将开始你学习 <strong>加法</strong> 之旅。</p>
+<h3 id="重载加法运算符"><a href="#重载加法运算符" class="headerlink" title="重载加法运算符"></a>重载加法运算符</h3><p>运算符重载的一个简单示例是加法运算符。 如果您将它与两个数字一起使用，则会发生以下情况：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1</span> + <span class="number">1</span> <span class="comment">// 2</span></span><br></pre></td></tr></table></figure>
+<p>但是，如果对字符串使用相同的加法运算符，则它具有完全不同的行为：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"1"</span> + <span class="string">"1"</span> <span class="comment">// "11"</span></span><br></pre></td></tr></table></figure>
+<p>当+与两个整数一起使用时，它会以算术形式把它们相加。 但是当它与两个字符串一起使用时，它会将它们连接起来。</p>
+<p>为了使运算符重载，您必须实现一个名称为运算符符号的函数。</p>
+<p><strong>注意：</strong> 您可以将重载函数定义为类方法，这是您将在本教程中执行的操作。 这样做时，必须将其声明为<code>static</code>函数，以便可以在没有定义它的实例的情况下访问它。</p>
+<p>在<code>playground</code>最后面添加如下代码:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// MARK: - Operators</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Vector</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> + <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">      <span class="keyword">left</span>.x + <span class="keyword">right</span>.x,</span><br><span class="line">      <span class="keyword">left</span>.y + <span class="keyword">right</span>.y,</span><br><span class="line">      <span class="keyword">left</span>.z + <span class="keyword">right</span>.z</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>此函数将两个向量作为参数，并将它们的和作为新向量返回。 为了让向量相加，只需组成向量的变量相加.</p>
+<p>要测试此功能，请将以下内容添加到<code>playground</code>的底部：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vectorA + vectorB <span class="comment">// (-1, 8, 3)</span></span><br></pre></td></tr></table></figure>
+<p>您可以在<code>playground</code>的右侧边栏中看到向量相加的结果.</p>
+<h3 id="其他类型的运算符"><a href="#其他类型的运算符" class="headerlink" title="其他类型的运算符"></a>其他类型的运算符</h3><p>加法运算符是所谓的<code>infx</code>运算符，意味着它在两个不同的值之间使用。<br>还有其他类型的运算符：</p>
+<ul>
+<li><code>infix</code>：在两个值之间使用，例如加法运算符（例如，1 + 1）</li>
+<li><code>prefix</code>：在值之前添加，如负号运算符（例如-3）。</li>
+<li><code>postfix</code>：在值之后添加，比如强制解包运算符（例如，mayBeNil！）</li>
+<li><code>ternary</code>：在三个值之间插入两个符号。 在Swift中，不支持用户自定义的三元运算符，只有一个内置的三元运算符，您可以在<a href="https://docs.swift.org/swift-book/LanguageGuide/BasicOperators.html#ID71" target="_blank" rel="noopener">Apple的文档中阅读</a>。<br>您要重载的下一个运算符是负号，它将更改<code>Vector</code>的每个变量的符号。 例如，如果将它应用于<code>vectorA</code>，即<code>（1,3,2）</code>，则返回<code>（-1，-3，-2）</code>。</li>
+</ul>
+<p>在这个<code>extension</code>中的前面一个<code>static</code>函数下面添加如下代码:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="keyword">prefix</span> <span class="function"><span class="keyword">func</span> - <span class="params">(vector: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> [-vector.x, -vector.y, -vector.z]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运算符默认是<code>infix</code>类型，如果您希望运算符是其他类型，则需要在函数声明中指定运算符类型。 负号运算符不是<code>infix</code>类型，因此您将<code>prefix</code>修饰符添加到函数声明中。</p>
+<p>在<code>playground</code>的底部，添加以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">-vectorA <span class="comment">// (-1, -3, -2)</span></span><br></pre></td></tr></table></figure>
+<p>在侧栏中检查结果是否正确。</p>
+<p>接下来是减法，我将留给你实现自己。 完成后，请检查以确保您的代码与我的代码类似。 提示：减法与加上一个负数相同。</p>
+<p>试一试，如果您需要帮助，请查看下面的解决方案！</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="function"><span class="keyword">func</span> - <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">left</span> + -<span class="keyword">right</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过添加已下代码到<code>playground</code>底部,测试你的新操作符的输出:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vectorA - vectorB <span class="comment">// (3, -2, 1)</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="不同类型的参数？-没问题！"><a href="#不同类型的参数？-没问题！" class="headerlink" title="不同类型的参数？ 没问题！"></a>不同类型的参数？ 没问题！</h3><p>您还可以通过标量乘法将向量乘以数字。 要将向量乘以2，可以将每个分量乘以2。 你接下来就要实现这个.</p>
+<p>您需要考虑的一件事是参数的顺序。 当你实现加法的时候，顺序无关紧要，因为两个参数都是向量。</p>
+<p>对于标量乘法，您需要考虑<code>Int * Vector</code>和<code>Vector * Int</code>。 如果您只实现其中一种情况，Swift编译器将不会自动知道您希望它以其他顺序工作。</p>
+<p>要实现标量乘法，请在刚刚添加的减法函数下添加以下两个函数：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="function"><span class="keyword">func</span> * <span class="params">(<span class="keyword">left</span>: Int, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> [</span><br><span class="line">    <span class="keyword">right</span>.x * <span class="keyword">left</span>,</span><br><span class="line">    <span class="keyword">right</span>.y * <span class="keyword">left</span>,</span><br><span class="line">    <span class="keyword">right</span>.z * <span class="keyword">left</span></span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//这里用到了上面重载的*运算</span></span><br><span class="line"><span class="keyword">static</span> <span class="function"><span class="keyword">func</span> * <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Int)</span></span> -&gt; <span class="type">Vector</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">right</span> * <span class="keyword">left</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>为避免多次写入相同的代码，第二个函数只是将其参数转发给第一个。</p>
+<p>在数学中，向量有另一个有趣的操作，称为叉乘。 叉乘超出了本教程的范围，但您可以在<a href="https://en.wikipedia.org/wiki/Cross_product" target="_blank" rel="noopener">Cross product Wikipedia</a>页面上了解有关它们的更多信息。</p>
+<p>由于在大多数情况下不鼓励使用自定义符号（谁想在编码时打开表情符号菜单？），重复使用星号进行叉乘操作会非常方便。</p>
+<p>与标量乘法不同，叉乘将两个向量作为参数并返回一个新向量。</p>
+<p>添加以下代码以在刚刚添加的乘法函数之后实现叉乘：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="function"><span class="keyword">func</span> * <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> [</span><br><span class="line">    <span class="keyword">left</span>.y * <span class="keyword">right</span>.z - <span class="keyword">left</span>.z * <span class="keyword">right</span>.y,</span><br><span class="line">    <span class="keyword">left</span>.z * <span class="keyword">right</span>.x - <span class="keyword">left</span>.x * <span class="keyword">right</span>.z,</span><br><span class="line">    <span class="keyword">left</span>.x * <span class="keyword">right</span>.y - <span class="keyword">left</span>.y * <span class="keyword">right</span>.x</span><br><span class="line">  ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>现在，将以下计算添加到<code>playground</code>的底部，同时利用乘法和叉乘运算符：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vectorA * <span class="number">2</span> * vectorB <span class="comment">// (-14, -10, 22)</span></span><br></pre></td></tr></table></figure>
+<p>此代码找到<code>vectorA</code>和2的标量乘法，然后找到该向量与<code>vectorB</code>的交叉乘积。 请注意，星号运算符始终从左向右，因此前面的代码与使用括号分组操作相同，如<code>（vectorA * 2）* vectorB</code>。</p>
+<h3 id="运算符协议"><a href="#运算符协议" class="headerlink" title="运算符协议"></a>运算符协议</h3><p>某些协议需要实现一些运算符符。 例如，符合<code>Equatable</code>的类型必须实现<code>==</code>运算符。 类似的，符合<code>Comparable</code>的类型必须至少实现<code>&lt;</code>和<code>==</code>，因为<code>Comparable</code>继承自<code>Equatable</code>。 <code>Comparable</code>类型也可以选择实现&gt;，&gt;=和&lt;=，但这些运算符具有默认实现。</p>
+<p>对于<code>Vector</code>，<code>Comparable</code>并没有太多意义，但<code>Equatable</code>有意义，因为如果它们的组件全部相等，则两个向量相等。 接下来你将实现<code>Equatable</code>。</p>
+<p>去实现协议，请在<code>playground</code>的末尾添加以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Vector</span>: <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> == <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">left</span>.x == <span class="keyword">right</span>.x &amp;&amp; <span class="keyword">left</span>.y == <span class="keyword">right</span>.y &amp;&amp; <span class="keyword">left</span>.z == <span class="keyword">right</span>.z</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加以下代码在<code>palyground</code>的底部,并且测试他的输出</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vectorA == vectorB <span class="comment">// false</span></span><br></pre></td></tr></table></figure>
+<p>上述代码返回<code>false</code>因为<code>vectorA</code>和<code>vectorB</code>有不同的组件.<br>实现<code>Equatable</code>协议,不仅能够检查这些类型的相等性。 您还获得了自由访问<code>contains(_:)</code>的矢量数组！</p>
+<h3 id="创建自定义运算符"><a href="#创建自定义运算符" class="headerlink" title="创建自定义运算符"></a>创建自定义运算符</h3><p>请记住我们通常不鼓励使用自定义运算符. 当然该规则也有例外。</p>
+<p>关于自定义符号的一个好的经验法则是，只有在满足以下条件时才应使用它们：</p>
+<ul>
+<li>它们的含义是众所周知的，或者对阅读代码的人有意义。</li>
+<li>它们很容易在键盘上打出来.<br>最后一个你要实现的运算符符合这两个条件。 矢量点积运算两个向量并返回单个标量数。 您的运算符会将向量中的每个值乘以另一个向量中的对应值，然后将所有这些乘积相加。<br>点积的符号为<code>•</code>，您可以使用键盘上的<code>Option-8</code>轻松键入。<br>您可能会想，“我可以在本教程中对其他所有操作符执行相同的操作，对吧？”</li>
+</ul>
+<p>不幸的是，你还不能那样做。 在其他情况下，您重载已存在的运算符。 对于新的自定义运算符，您需要首先创建运算符。</p>
+<p>直接在Vector实现最下面，但在<code>CustomStringConvertible</code>扩展之上，添加以下声明：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">infix</span> <span class="keyword">operator</span> •: <span class="type">AdditionPrecedence</span></span><br></pre></td></tr></table></figure>
+<p>将<code>•</code>定义为放在两个其他值之间的运算符，并且与加法运算符<code>+</code>具有相同的优先级。 暂时忽略优先级，因为你会在学到它。</p>
+<p>既然已经注册了此运算符，请在运算符扩展的末尾添加其实现，紧接在运算符<code>*</code>的实现的下面：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">static</span> <span class="function"><span class="keyword">func</span> • <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">left</span>.x * <span class="keyword">right</span>.x + <span class="keyword">left</span>.y * <span class="keyword">right</span>.y + <span class="keyword">left</span>.z * <span class="keyword">right</span>.z</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>添加下面代码到<code>playground</code>测试他的输出:</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vectorA • vectorB <span class="comment">// 15</span></span><br></pre></td></tr></table></figure>
+<p>到目前为止，一切看起来都不错……或者是吗？ 在<code>playground</code>的底部尝试以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vectorA • vectorB + vectorA <span class="comment">// Error!</span></span><br></pre></td></tr></table></figure>
+<p>现在，<code>•</code>和<code>+</code>具有相同的优先级，因此编译器从左到右解析表达式。 编译器将您的代码解释为：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(vectorA • vectorB) + vectorA</span><br></pre></td></tr></table></figure>
+<p>此表达式归结为<code>Int + Vector</code>，您尚未实现并且不打算实现。 你要如何来解决这个问题？</p>
+<h3 id="优先级组-Precedence-Groups"><a href="#优先级组-Precedence-Groups" class="headerlink" title="优先级组(Precedence Groups)"></a>优先级组(Precedence Groups)</h3><p>Swift中的所有运算符都属于一个优先级组，它描述了运算符的运算顺序。 还记得学习小学数学中的操作顺序吗？ 这基本上就是你在这里所要处理的。<br>在Swift标准库中，优先顺序如下：<br><img src="https://p1-jj.byteimg.com/tos-cn-i-t2oaga2asx/gold-user-assets/2019/8/28/16cd7213aaf59301~tplv-t2oaga2asx-image.image" alt="">))</p>
+<p>以下是关于这些运算符的一些注释，您之前可能从来没有看到过它们：</p>
+<ol>
+<li>位移运算符<code>&lt;&lt;</code>和<code>&gt;&gt;</code>用于二进制计算。</li>
+<li>您使用转换运算符<code>is</code>和<code>as</code>来确定或更改值的类型。</li>
+<li><code>nil</code>合并运算符,<code>??</code>为可选类型提供默认值。</li>
+<li>如果您的自定义运算符未指定优先级，则会自动分配<code>DefaultPrecedence</code>。</li>
+<li>三元运算符，<code>？ ：</code>，类似于if-else语句。</li>
+<li><code>AssignmentPrecedence</code>,衍生出来的<code>=</code>，在所有运算之后进行运算。<br>编译器解析类型具有左关联性，所以<code>v1 + v2 + v3 ==（v1 + v2）+ v3</code>。 </li>
+</ol>
+<p>操作符按它们在表中出现的顺序进行解析。 尝试使用括号重写以下代码：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">v1 + v2 * v3 / v4 * v5 == v6 - v7 / v8</span><br></pre></td></tr></table></figure>
+<p>当您准备好检查数学时，请查看下面的解决方案。</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">(v1 + (((v2 * v3) / v4) * v5)) == (v6 - (v7 / v8))</span><br></pre></td></tr></table></figure>
+<p>在大多数情况下，您需要添加括号以使代码更易于阅读。 无论哪种方式，理解编译器评估运算符的顺序都很有用。</p>
+<h3 id="Dot运算符优先级"><a href="#Dot运算符优先级" class="headerlink" title="Dot运算符优先级"></a>Dot运算符优先级</h3><p>你新定义的<code>dot-product</code>不适合任何这些类别。 它的优先级必须小于加号运算符（如前所述），但它是否真的适合<code>CastingPrecedence</code>或<code>RangeFormationPrecedence</code>？</p>
+<p>取而代之，您将为您的点积运算符创建自己的优先级组。</p>
+<p>用以下内容替换<code>•</code>运算符的原始声明：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">precedencegroup <span class="type">DotProductPrecedence</span> &#123;</span><br><span class="line">  lowerThan: <span class="type">AdditionPrecedence</span></span><br><span class="line">  <span class="keyword">associativity</span>: <span class="keyword">left</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">infix</span> <span class="keyword">operator</span> •: <span class="type">DotProductPrecedence</span></span><br></pre></td></tr></table></figure>
+<p>在这里，您创建一个新的优先级组并将其命名为<code>DotProductPrecedence</code>。 您将它放在低于<code>AdditionPrecedence</code>的位置，因为您希望加号运算符优先。 你也可以将它设为左关联，因为你想要从左到右进行评估，就像加法和乘法中一样。 然后，将此新优先级组分配给<code>•</code>运算符。</p>
+<p> <strong>注意</strong>:除了<code>lowerThan</code>之外，您还可以在<code>DotProductPrecedence</code>中指定<code>higherThan</code>。 如果您在单个项目中有多个自定义优先级组，这一点就变得很重要。<br> 你之前写的代码返回了你希望的结果:<br> <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vectorA • vectorB + vectorA <span class="comment">// 29</span></span><br></pre></td></tr></table></figure><br><strong>恭喜💐</strong>–你掌握了自定义运算符</p>
+<h3 id="接下来你可以做些什么"><a href="#接下来你可以做些什么" class="headerlink" title="接下来你可以做些什么"></a>接下来你可以做些什么</h3><p>你可以阅读本教程完整的代码,代码已经在最后面给出.<br>此时，您知道如何根据需要定义Swift操作符。 在本教程中，您专注于在数学领域中使用运算符。 在实践中，您将找到更多使用运算符的方法。</p>
+<p>在<a href="https://github.com/ReactiveCocoa/ReactiveSwift">ReactiveSwift</a>框架中可以看到自定义运算符使用的一个很好的演示。 一个例子是<code>&lt;~</code>用来绑定，这是响应式编程中的一个重要功能。 以下是此运算符的使用示例：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> (signal, <span class="number">_</span>) = <span class="type">Signal</span>&lt;<span class="type">Int</span>, <span class="type">Never</span>&gt;.pipe()</span><br><span class="line"><span class="keyword">let</span> property = <span class="type">MutableProperty</span>(<span class="number">0</span>)</span><br><span class="line">property.producer.startWithValues &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"Property received \($0)"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">property &lt;~ signal</span><br></pre></td></tr></table></figure>
+<p><a href="https://github.com/robb/Cartography">Cartography</a>是另一个大量使用运算符重载的框架。 <code>AutoLayout</code>工具重载相等和比较运算符，以使<code>NSLayoutConstraint</code>创建更简单：</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">constrain(view1, view2) &#123; view1, view2 <span class="keyword">in</span></span><br><span class="line">  view1.width   == (view1.superview!.width - <span class="number">50</span>) * <span class="number">0.5</span></span><br><span class="line">  view2.width   == view1.width - <span class="number">50</span></span><br><span class="line">  view1.height  == <span class="number">40</span></span><br><span class="line">  view2.height  == view1.height</span><br><span class="line">  view1.centerX == view1.superview!.centerX</span><br><span class="line">  view2.centerX == view1.centerX</span><br><span class="line"></span><br><span class="line">  view1.top &gt;= view1.superview!.top + <span class="number">20</span></span><br><span class="line">  view2.top == view1.bottom + <span class="number">20</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>此外，您始终可以参考官方文档<a href="https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html" target="_blank" rel="noopener"> custom operator documentation</a>。</p>
+<p>有了这些新的灵感来源，您可以走出世界，通过运算符重载使代码更简单。 小心不要对自定义运算符太迷恋！：]</p>
+<figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Vector</span>: <span class="title">ExpressibleByArrayLiteral</span> </span>&#123;</span><br><span class="line">  <span class="keyword">init</span>(arrayLiteral: <span class="type">Int</span>...) &#123;</span><br><span class="line">    <span class="built_in">assert</span>(arrayLiteral.<span class="built_in">count</span> == <span class="number">3</span>, <span class="string">"Must initialize vector with 3 values."</span>)</span><br><span class="line">    <span class="keyword">self</span>.x = arrayLiteral[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">self</span>.y = arrayLiteral[<span class="number">1</span>]</span><br><span class="line">    <span class="keyword">self</span>.z = arrayLiteral[<span class="number">2</span>]</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">precedencegroup <span class="type">DotProductPrecedence</span> &#123;</span><br><span class="line">  lowerThan: <span class="type">AdditionPrecedence</span></span><br><span class="line">  <span class="keyword">associativity</span>: <span class="keyword">left</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">infix</span> <span class="keyword">operator</span> •: <span class="type">DotProductPrecedence</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Vector</span>: <span class="title">CustomStringConvertible</span> </span>&#123;</span><br><span class="line">  <span class="keyword">var</span> description: <span class="type">String</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">"(\(x), \(y), \(z))"</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="keyword">let</span> vectorA: <span class="type">Vector</span> = [<span class="number">1</span>, <span class="number">3</span>, <span class="number">2</span>]</span><br><span class="line"><span class="keyword">let</span> vectorB: <span class="type">Vector</span> = [-<span class="number">2</span>, <span class="number">5</span>, <span class="number">1</span>]</span><br><span class="line"></span><br><span class="line"><span class="comment">// MARK: - Operators</span></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Vector</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> + <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">      <span class="keyword">left</span>.x + <span class="keyword">right</span>.x,</span><br><span class="line">      <span class="keyword">left</span>.y + <span class="keyword">right</span>.y,</span><br><span class="line">      <span class="keyword">left</span>.z + <span class="keyword">right</span>.z</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">static</span> <span class="keyword">prefix</span> <span class="function"><span class="keyword">func</span> - <span class="params">(vector: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [-vector.x, -vector.y, -vector.z]</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> - <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">left</span> + -<span class="keyword">right</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> * <span class="params">(<span class="keyword">left</span>: Int, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">      <span class="keyword">right</span>.x * <span class="keyword">left</span>,</span><br><span class="line">      <span class="keyword">right</span>.y * <span class="keyword">left</span>,</span><br><span class="line">      <span class="keyword">right</span>.z * <span class="keyword">left</span></span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> * <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Int)</span></span> -&gt; <span class="type">Vector</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">right</span> * <span class="keyword">left</span></span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> * <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Vector</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> [</span><br><span class="line">      <span class="keyword">left</span>.y * <span class="keyword">right</span>.z - <span class="keyword">left</span>.z * <span class="keyword">right</span>.y,</span><br><span class="line">      <span class="keyword">left</span>.z * <span class="keyword">right</span>.x - <span class="keyword">left</span>.x * <span class="keyword">right</span>.z,</span><br><span class="line">      <span class="keyword">left</span>.x * <span class="keyword">right</span>.y - <span class="keyword">left</span>.y * <span class="keyword">right</span>.x</span><br><span class="line">    ]</span><br><span class="line">  &#125;</span><br><span class="line">  </span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> • <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Int</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">left</span>.x * <span class="keyword">right</span>.x + <span class="keyword">left</span>.y * <span class="keyword">right</span>.y + <span class="keyword">left</span>.z * <span class="keyword">right</span>.z</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vectorA + vectorB <span class="comment">// (-1, 8, 3)</span></span><br><span class="line">-vectorA <span class="comment">// (-1, -3, -2)</span></span><br><span class="line">vectorA - vectorB <span class="comment">// (3, -2, 1)</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">extension</span> <span class="title">Vector</span>: <span class="title">Equatable</span> </span>&#123;</span><br><span class="line">  <span class="keyword">static</span> <span class="function"><span class="keyword">func</span> == <span class="params">(<span class="keyword">left</span>: Vector, <span class="keyword">right</span>: Vector)</span></span> -&gt; <span class="type">Bool</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">left</span>.x == <span class="keyword">right</span>.x &amp;&amp; <span class="keyword">left</span>.y == <span class="keyword">right</span>.y &amp;&amp; <span class="keyword">left</span>.z == <span class="keyword">right</span>.z</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">vectorA == vectorB <span class="comment">// false</span></span><br><span class="line"></span><br><span class="line">vectorA • vectorB <span class="comment">// 15</span></span><br><span class="line"></span><br><span class="line">vectorA • vectorB + vectorA <span class="comment">// 29</span></span><br></pre></td></tr></table></figure>
+
+
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://github.com/Esdeath/Esdeath.github.io">驿路星辰</a>
+            <p>原文链接：<a href="https://github.com/Esdeath/Esdeath.github.io/2019/08/28/swift-operator-override/">https://github.com/Esdeath/Esdeath.github.io/2019/08/28/swift-operator-override/</a>
+            <p>发表日期：<a href="https://github.com/Esdeath/Esdeath.github.io/2019/08/28/swift-operator-override/">August 28th 2019</a>
+            <p>更新日期：<a href="https://github.com/Esdeath/Esdeath.github.io/2019/08/28/swift-operator-override/">August 28th 2019</a>
+            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/Esdeath.github.io/2019/10/03/how-to-use-functional-program-in-swift/" title= "【译】如何在swift中使用函数式编程">
+                    <div class="nextTitle">【译】如何在swift中使用函数式编程</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:ayaseeri@126.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/esdeath" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#swift重载自定义运算符"><span class="toc-number">1.</span> <span class="toc-text">swift重载自定义运算符</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#入门"><span class="toc-number">1.1.</span> <span class="toc-text">入门</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#重载加法运算符"><span class="toc-number">1.2.</span> <span class="toc-text">重载加法运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#其他类型的运算符"><span class="toc-number">1.3.</span> <span class="toc-text">其他类型的运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#不同类型的参数？-没问题！"><span class="toc-number">1.4.</span> <span class="toc-text">不同类型的参数？ 没问题！</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#运算符协议"><span class="toc-number">1.5.</span> <span class="toc-text">运算符协议</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#创建自定义运算符"><span class="toc-number">1.6.</span> <span class="toc-text">创建自定义运算符</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#优先级组-Precedence-Groups"><span class="toc-number">1.7.</span> <span class="toc-text">优先级组(Precedence Groups)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Dot运算符优先级"><span class="toc-number">1.8.</span> <span class="toc-text">Dot运算符优先级</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#接下来你可以做些什么"><span class="toc-number">1.9.</span> <span class="toc-text">接下来你可以做些什么</span></a></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 16
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/08/29/flutter-ios-plugin-delegate-error/" >Flutter中针对iOS封装Plugin组件注意事项</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/08/29/flutter-mvvm/" >Flutter中使用Provider实现MVVM架构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/06/07/crypt-night/" >9.SSL/TLS(为了更安全的通信)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/05/31/crypt-eight/" >8.证书(为公钥加上数字签名)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/29</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/05/29/crypt-seven/" >7.数字签名(消息到底是谁写的)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/21</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/05/21/crypt-six/" >6.消息认证码(消息被正确传送了吗)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/05/12/crypt-five-md/" >5.单向散列函数(获取消息的指纹)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/08</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/05/08/crypt-four-md/" >4.非对称加密(公钥加密,私钥解密)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/05</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/05/05/crypt-three-md/" >3. 分组密码的模式(分组密码是如何迭代)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/30</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/04/30/crypt-two-md/" >2.对称加密（相同密钥加解密)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/04/29/crypt-one-md/" >1.密码学 ---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/03/27/ios-gcd-ptread/" >iOS 90%人可能都会回答错误的一个多线程基础题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span><a class="archive-post-title" href= "/Esdeath.github.io/2020/01/27/how-to-know-highorlow-computer-md/" >如何判断机器的字节顺序是高字节在前还是低字节在前</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/Esdeath.github.io/2019/10/11/swift-function-program/" >【译】Swift和函数式编程的精髓</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/03</span><a class="archive-post-title" href= "/Esdeath.github.io/2019/10/03/how-to-use-functional-program-in-swift/" >【译】如何在swift中使用函数式编程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span><a class="archive-post-title" href= "/Esdeath.github.io/2019/08/28/swift-operator-override/" >【译】如何在swift中使用函数式编程</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/Esdeath.github.io/",
+        author: "驿路星辰"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/Esdeath.github.io/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/Esdeath.github.io/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/Esdeath.github.io/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
