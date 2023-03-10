@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="en">
+    <!-- title -->
+
+
+
+
+<!-- keywords -->
+
+
+
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" >
+    <meta name="author" content="驿路星辰">
+    <meta name="renderer" content="webkit">
+    <meta name="copyright" content="驿路星辰">
+    
+    <meta name="keywords" content="算法,Swift,Dart,iOS,Flutter,C++">
+    
+    <meta name="description" content="">
+    <meta name="description" content="8. 证书1&quot;证书 -- 为公钥加上数字签名&quot;   要开车得先考驾照．驾照上面记有本人的照片、姓名、出生日期等个人信息．以及有效期、准驾车辆的类型等信息，并由公安局在上面盖章。我们只要看到驾照，就可以知道公安局认定此人具有驾驶车辆的资格。 公钥证书（Public-Key Certificate，PKC)其实和驾照很相似，里面记有姓名、组织、邮箱地址等个人信息，以及属于此人的公钥，并由认证机构（Ce">
+<meta property="og:type" content="article">
+<meta property="og:title" content="8.证书(为公钥加上数字签名)---《图解密码学》">
+<meta property="og:url" content="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="8. 证书1&quot;证书 -- 为公钥加上数字签名&quot;   要开车得先考驾照．驾照上面记有本人的照片、姓名、出生日期等个人信息．以及有效期、准驾车辆的类型等信息，并由公安局在上面盖章。我们只要看到驾照，就可以知道公安局认定此人具有驾驶车辆的资格。 公钥证书（Public-Key Certificate，PKC)其实和驾照很相似，里面记有姓名、组织、邮箱地址等个人信息，以及属于此人的公钥，并由认证机构（Ce">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/1538736605294.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/1533293270573.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/03113237-5408b6ece0c84744b106e639ddf4956b.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/03113237-1369f659d6e4496e8bb3a742198cef63.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/1533294208392.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/1533294414623.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/1533294685323.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/1533294711691.png">
+<meta property="og:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/1538758063013.png">
+<meta property="article:published_time" content="2020-05-31T13:22:12.000Z">
+<meta property="article:modified_time" content="2022-05-28T19:11:20.277Z">
+<meta property="article:author" content="驿路星辰">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/1538736605294.png">
+    <meta http-equiv="Cache-control" content="no-cache">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    
+    <title>8.证书(为公钥加上数字签名)---《图解密码学》 · iOS</title>
+    <style type="text/css">
+    @font-face {
+        font-family: 'Oswald-Regular';
+        src: url("/font/Oswald-Regular.ttf");
+    }
+
+    body {
+        margin: 0;
+    }
+
+    header,
+    footer,
+    .back-top,
+    .sidebar,
+    .container,
+    .site-intro-meta,
+    .toc-wrapper {
+        display: none;
+    }
+
+    .site-intro {
+        position: relative;
+        z-index: 3;
+        width: 100%;
+        /* height: 30vh; */
+        overflow: hidden;
+    }
+
+    .site-intro-placeholder {
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        left: 0;
+        width: calc(100% + 300px);
+        height: 100%;
+        background: repeating-linear-gradient(-45deg, #444 0, #444 80px, #333 80px, #333 160px);
+        background-position: center center;
+        transform: translate3d(-226px, 0, 0);
+        animation: gradient-move 2.5s ease-out 0s infinite;
+    }
+
+    @keyframes gradient-move {
+        0% {
+            transform: translate3d(-226px, 0, 0);
+        }
+        100% {
+            transform: translate3d(0, 0, 0);
+        }
+    }
+
+</style>
+
+    <link rel="preload" href= "/css/style.css?v=20180824" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    <link rel="stylesheet" href= "/css/mobile.css?v=20180824" media="(max-width: 980px)">
+    
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'" />
+    
+    <!-- /*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+/* This file is meant as a standalone workflow for
+- testing support for link[rel=preload]
+- enabling async CSS loading in browsers that do not support rel=preload
+- applying rel preload css once loaded, whether supported or not.
+*/ -->
+<script>
+(function( w ){
+	"use strict";
+	// rel=preload support test
+	if( !w.loadCSS ){
+		w.loadCSS = function(){};
+	}
+	// define on the loadCSS obj
+	var rp = loadCSS.relpreload = {};
+	// rel=preload feature support test
+	// runs once and returns a function for compat purposes
+	rp.support = (function(){
+		var ret;
+		try {
+			ret = w.document.createElement( "link" ).relList.supports( "preload" );
+		} catch (e) {
+			ret = false;
+		}
+		return function(){
+			return ret;
+		};
+	})();
+
+	// if preload isn't supported, get an asynchronous load by using a non-matching media attribute
+	// then change that media back to its intended value on load
+	rp.bindMediaToggle = function( link ){
+		// remember existing media attr for ultimate state, or default to 'all'
+		var finalMedia = link.media || "all";
+
+		function enableStylesheet(){
+			link.media = finalMedia;
+		}
+
+		// bind load handlers to enable media
+		if( link.addEventListener ){
+			link.addEventListener( "load", enableStylesheet );
+		} else if( link.attachEvent ){
+			link.attachEvent( "onload", enableStylesheet );
+		}
+
+		// Set rel and non-applicable media type to start an async request
+		// note: timeout allows this to happen async to let rendering continue in IE
+		setTimeout(function(){
+			link.rel = "stylesheet";
+			link.media = "only x";
+		});
+		// also enable media after 3 seconds,
+		// which will catch very old browsers (android 2.x, old firefox) that don't support onload on link
+		setTimeout( enableStylesheet, 3000 );
+	};
+
+	// loop through link elements in DOM
+	rp.poly = function(){
+		// double check this to prevent external calls from running
+		if( rp.support() ){
+			return;
+		}
+		var links = w.document.getElementsByTagName( "link" );
+		for( var i = 0; i < links.length; i++ ){
+			var link = links[ i ];
+			// qualify links to those with rel=preload and as=style attrs
+			if( link.rel === "preload" && link.getAttribute( "as" ) === "style" && !link.getAttribute( "data-loadcss" ) ){
+				// prevent rerunning on link
+				link.setAttribute( "data-loadcss", true );
+				// bind listeners to toggle media back
+				rp.bindMediaToggle( link );
+			}
+		}
+	};
+
+	// if unsupported, run the polyfill
+	if( !rp.support() ){
+		// run once at least
+		rp.poly();
+
+		// rerun poly on an interval until onload
+		var run = w.setInterval( rp.poly, 500 );
+		if( w.addEventListener ){
+			w.addEventListener( "load", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		} else if( w.attachEvent ){
+			w.attachEvent( "onload", function(){
+				rp.poly();
+				w.clearInterval( run );
+			} );
+		}
+	}
+
+
+	// commonjs
+	if( typeof exports !== "undefined" ){
+		exports.loadCSS = loadCSS;
+	}
+	else {
+		w.loadCSS = loadCSS;
+	}
+}( typeof global !== "undefined" ? global : this ) );
+</script>
+
+    <link rel="icon" href= "/assets/favicon.ico" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js" as="script" />
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js" as="script" />
+    <link rel="preload" href="/scripts/main.js" as="script" />
+    <link rel="preload" as="font" href="/font/Oswald-Regular.ttf" crossorigin>
+    <link rel="preload" as="font" href="https://at.alicdn.com/t/font_327081_1dta1rlogw17zaor.woff" crossorigin>
+    
+    <!-- fancybox -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.2.5/jquery.fancybox.min.js" defer></script>
+    <!-- 百度统计  -->
+    
+    <!-- 谷歌统计  -->
+    
+<meta name="generator" content="Hexo 4.2.1"></head>
+
+    
+        <body class="post-body">
+    
+    
+<header class="header">
+
+    <div class="read-progress"></div>
+    <div class="header-sidebar-menu">&#xe775;</div>
+    <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >驿路星辰的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">8.证书(为公钥加上数字签名)---《图解密码学》</a>
+            </div>
+    </div>
+    
+    <a class="home-link" href=/>驿路星辰的博客</a>
+</header>
+    <div class="wrapper">
+        <div class="site-intro" style="
+
+
+
+
+
+
+
+height:50vh;
+">
+    
+    <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
+            
+    <div class="site-intro-placeholder"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
+    <div class="site-intro-meta">
+        <!-- 标题  -->
+        <h1 class="intro-title">
+            <!-- 主页  -->
+            
+            8.证书(为公钥加上数字签名)---《图解密码学》
+            <!-- 404 -->
+            
+        </h1>
+        <!-- 副标题 -->
+        <p class="intro-subtitle">
+            <!-- 主页副标题  -->
+            
+            
+            <!-- 404 -->
+            
+        </p>
+        <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">6.6k</span>Reading time: <span class="post-count reading-time">24 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2020/05/31</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
+        
+    </div>
+</div>
+        <script>
+ 
+  // get user agent
+  var browser = {
+    versions: function () {
+      var u = window.navigator.userAgent;
+      return {
+        userAgent: u,
+        trident: u.indexOf('Trident') > -1, //IE内核
+        presto: u.indexOf('Presto') > -1, //opera内核
+        webKit: u.indexOf('AppleWebKit') > -1, //苹果、谷歌内核
+        gecko: u.indexOf('Gecko') > -1 && u.indexOf('KHTML') == -1, //火狐内核
+        mobile: !!u.match(/AppleWebKit.*Mobile.*/), //是否为移动终端
+        ios: !!u.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/), //ios终端
+        android: u.indexOf('Android') > -1 || u.indexOf('Linux') > -1, //android终端或者uc浏览器
+        iPhone: u.indexOf('iPhone') > -1 || u.indexOf('Mac') > -1, //是否为iPhone或者安卓QQ浏览器
+        iPad: u.indexOf('iPad') > -1, //是否为iPad
+        webApp: u.indexOf('Safari') == -1, //是否为web应用程序，没有头部与底部
+        weixin: u.indexOf('MicroMessenger') == -1, //是否为微信浏览器
+        uc: u.indexOf('UCBrowser') > -1 //是否为android下的UC浏览器
+      };
+    }()
+  }
+  console.log("userAgent:" + browser.versions.userAgent);
+
+  // callback
+  function fontLoaded() {
+    console.log('font loaded');
+    if (document.getElementsByClassName('site-intro-meta')) {
+      document.getElementsByClassName('intro-title')[0].classList.add('intro-fade-in');
+      document.getElementsByClassName('intro-subtitle')[0].classList.add('intro-fade-in');
+      var postIntros = document.getElementsByClassName('post-intros')[0]
+      if (postIntros) {
+        postIntros.classList.add('post-fade-in');
+      }
+    }
+  }
+
+  // UC不支持跨域，所以直接显示
+  function asyncCb(){
+    if (browser.versions.uc) {
+      console.log("UCBrowser");
+      fontLoaded();
+    } else {
+      WebFont.load({
+        custom: {
+          families: ['Oswald-Regular']
+        },
+        loading: function () {  //所有字体开始加载
+          // console.log('loading');
+        },
+        active: function () {  //所有字体已渲染
+          fontLoaded();
+        },
+        inactive: function () { //字体预加载失败，无效字体或浏览器不支持加载
+          console.log('inactive: timeout');
+          fontLoaded();
+        },
+        timeout: 5000 // Set the timeout to two seconds
+      });
+    }
+  }
+
+  function asyncErr(){
+    console.warn('script load from CDN failed, will load local script')
+  }
+
+  // load webfont-loader async, and add callback function
+  function async(u, cb, err) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (cb) { o.addEventListener('load', function (e) { cb(null, e); }, false); }
+    if (err) { o.addEventListener('error', function (e) { err(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+
+  var asyncLoadWithFallBack = function(arr, success, reject) {
+      var currReject = function(){
+        reject()
+        arr.shift()
+        if(arr.length)
+          async(arr[0], success, currReject)
+        }
+
+      async(arr[0], success, currReject)
+  }
+
+  asyncLoadWithFallBack([
+    "https://cdn.jsdelivr.net/npm/webfontloader@1.6.28/webfontloader.min.js", 
+    "https://cdn.bootcss.com/webfont/1.6.28/webfontloader.js",
+    "/lib/webfontloader.min.js"
+  ], asyncCb, asyncErr)
+</script>        
+        <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
+        <div class="container container-unloaded">
+            <main class="main post-page">
+    <article class="article-entry">
+        <h2 id="8-证书"><a href="#8-证书" class="headerlink" title="8. 证书"></a>8. 证书</h2><figure class="highlight dart"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"证书 -- 为公钥加上数字签名"</span></span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>要开车得先考驾照．驾照上面记有本人的照片、姓名、出生日期等个人信息．以及有效期、准驾车辆的类型等信息，并由公安局在上面盖章。我们只要看到驾照，就可以知道公安局认定此人具有驾驶车辆的资格。</p>
+<p>公钥证书（Public-Key Certificate，PKC)其实和驾照很相似，里面记有姓名、组织、邮箱地址等个人信息，以及属于此人的公钥，并由认证机构（Certification Authority、Certifying Authority, CA）施加数字签名。只要看到公钥证书，我们就可以知道认证机构认定该公钥的确属于此人。公钥证书也简称为证书（certificate）。</p>
+<p>可能很多人都没听说过认证机构，认证机构就是能够认定 “公钥确实属于此人”，并能够生成数字签名的个人或者组织。认证机构中有国际性组织和政府所设立的组织，也有通过提供认证服务来盈利的一般企业，此外个人也可以成立认证机构。</p>
+</blockquote>
+<h3 id="8-1-证书的应用场景"><a href="#8-1-证书的应用场景" class="headerlink" title="8.1 证书的应用场景"></a>8.1 证书的应用场景</h3><blockquote>
+<p>下面我们来通过证书的代表性应用场景来理解证书的作用。</p>
+<p>下图展示了Alice向Bob发送密文的场景，在生成密文时所使用的Bob的公钥是通过认证机构获取的。</p>
+<p>认证机构必须是可信的，对于“可信的第三方”，下图中会使用Trent这个名字，这个词是从trust（信任）一词演变而来的。</p>
+</blockquote>
+<p><img src="1538736605294.png" alt="1538736605294"></p>
+<blockquote>
+<p>下面让我们对照着上图来看一看这些步骤具体都做了些什么。</p>
+<ol>
+<li><p><font color="red" size=4>Bob生成密钥对</font></p>
+<p>要使用公钥密码进行通信，首先需要生成密钥对。Bob生成了一对公钥和私钥，并将私钥自行妥善保管。在这里，密钥对是由Bob自己生成的，也可以由认证机构代为生成。</p>
+</li>
+<li><p><font color="red" size=4>Bob在认证机构Trent注册自己的公钥</font></p>
+<ul>
+<li><p>在这里Bob则将公钥发送给了认证机构Trent，这是因为Bob需要请认证机构Trent对他的公钥加上数字签名（也就是生成证书）。  </p>
+</li>
+<li><p>Trent收到Bob的公钥后，会确认所收到的公钥是否为Bob本人所有（参见专栏：身份确认和认证业务准则）</p>
+<blockquote>
+<p><font color="red" size=5>专栏：身份确认和认证业务准则</font></p>
+<p>认证机构确认”本人”身份的方法和认证机构的认证业务准则（CertificatePractice Statement, CPS，的内容有关。如果认证机构提供的是测试用的服务，那么可能完全不会进行任何身份确认。如果是政府部门运營的认证机构，可能就需要根据法律规定来进行身份确认。如果是企业面向内部设立的认证机构，那就可能会给部门负责人打电话直接确认。</p>
+<p>例如，VeriSign的认证业务准则中将身份确认分为Class1 ~ 3共三个等级</p>
+<ul>
+<li>Class1：通过向邮箱发送件来确认本人身份</li>
+<li>Class2：通过第三方数据库来确认本人身份</li>
+<li>Class3：通过当面认证和身份证明来确认本人身份</li>
+</ul>
+<p>等级越高，身份确认越严格。</p>
+</blockquote>
+</li>
+</ul>
+</li>
+<li><p><font color="red" size=4>认证机构Trent用自己的私钥对Bob的公钥施加数字签名并生成证书</font></p>
+<p>Trent对Bob的公钥加上数字签名。为了生成数字签名，需要Trent自身的私钥，因此Trent需要事先生成好密钥对。</p>
+</li>
+<li><p><font color="red" size=4>Alice得到带有认证机构Trent的数字签名的Bob的公钥（证书）</font></p>
+<p>现在Alice需要向Bob发送密文，因此她从Trent处获取证书。证书中包含了Bob的公钥。</p>
+</li>
+<li><p><font color="red" size=4>Alice使用认证机构Trent的公钥验证数字签名，确认Bob的公钥的合法性</font></p>
+<p>Alice使用认证机构Trent的公钥对证书中的数字签名进行验证。如果验证成功，就相当于确认了证书中所包含的公钥的确是属于Bob的。到这里，Alice就得到了合法的Bob的公钥。</p>
+</li>
+<li><p><font color="red" size=4>Alice用Bob的公钥加密消息并发送给Bob</font></p>
+<p>Alice用Bob的公钥加密要发送的消息，并将消息发送给Bob。</p>
+</li>
+<li><p><font color="red" size=4>Bob用自己的私钥解密密文得到Alice的消息</font></p>
+<p>Bob收到Alice发送的密文，然后用自己的私钥解密，这样就能够看到Alice的消息了。</p>
+</li>
+</ol>
+<p><font color="blue" size=4>上面就是利用认证机构Trent进行公钥密码通信的流程。其中1、2、3这几个步骤仅在注册新公钥时才会进行，并不是每次通信都需要。此外，步骤 4 仅在Alice第一次用公钥密码向Bob发送消息时才需要进行，只要Alice将Bob的公钥保存在电脑中，在以后的通信中就可以直接使用了。</font></p>
+</blockquote>
+<h3 id="8-2-证书标准规范X-509"><a href="#8-2-证书标准规范X-509" class="headerlink" title="8.2 证书标准规范X.509"></a>8.2 证书标准规范X.509</h3><blockquote>
+<p>证书是由认证机构颁发的，使用者需要对证书进行验证，因此如果证书的格式千奇百怪那就不方便了。于是，人们制定了证书的标准规范，其中使用最广泛的是由ITU（International TelecommumcationUnion，国际电信联盟）和ISO（IntemationalOrganizationforStandardization, 国际标准化组织）制定的X.509规范。很多应用程序都支持x.509并将其作为证书生成和交换的标准规范。</p>
+<p>X.509是一种非常通用的证书格式。所有的证书都符合ITU-T X.509国际标准，因此(理论上)为一种应用创建的证书可以用于任何其他符合X.509标准的应用。X.509证书的结构是用ASN1(Abstract Syntax Notation One)进行描述数据结构，并使用ASN.1语法进行编码。 </p>
+<p>在一份证书中，必须证明公钥及其所有者的姓名是一致的。对X.509证书来说，认证者总是<a href="https://baike.baidu.com/item/CA" target="_blank" rel="noopener">CA</a>或由CA指定的人，一份X.509证书是一些标准字段的集合，这些字段包含有关用户或设备及其相应公钥的信息。X.509标准定义了证书中应该包含哪些信息，并描述了这些信息是如何编码的(即数据格式)</p>
+<p>一般来说，一个数字证书内容可能包括基本数据（版本、序列号) 、所签名对象信息（ 签名算法类型、签发者信息、有效期、被签发人、签发的公开密钥）、CA的数字签名，等等。</p>
+</blockquote>
+<h4 id="8-2-1-证书规范"><a href="#8-2-1-证书规范" class="headerlink" title="8.2.1 证书规范"></a>8.2.1 证书规范</h4><blockquote>
+<p>前使用最广泛的标准为ITU和ISO联合制定的X.509的 v3版本规范 (RFC5280）, 其中定义了如下证书信息域：</p>
+<ul>
+<li><font color="red">版本号(Version Number）</font>：规范的版本号，目前为版本3，值为0x2；</li>
+<li><font color="red">序列号（Serial Number）</font>：由CA维护的为它所发的每个证书分配的一的列号，用来追踪和撤销证书。只要拥有签发者信息和序列号，就可以唯一标识一个证书，最大不能过20个字节；</li>
+</ul>
+<ul>
+<li><p><font color="red">签名算法（Signature Algorithm）</font>：数字签名所采用的算法，如：</p>
+<ul>
+<li>sha256-with-RSA-Encryption </li>
+<li>ccdsa-with-SHA2S6；</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><font color="red">颁发者（Issuer）</font>：发证书单位的标识信息，如 ” C=CN，ST=Beijing, L=Beijing, O=org.example.com，CN=ca.org。example.com ”；</li>
+</ul>
+<ul>
+<li><font color="red">有效期(Validity)</font>:  证书的有效期很，包括起止时间。</li>
+<li><font color="red">主体(Subject)</font> : 证书拥有者的标识信息（Distinguished Name），如：” C=CN，ST=Beijing, L=Beijing, CN=person.org.example.com”；</li>
+</ul>
+<ul>
+<li><font color="red">主体的公钥信息(SubJect Public Key Info）</font>：所保护的公钥相关的信息：<ul>
+<li>公钥算法 (Public Key Algorithm）公钥采用的算法；</li>
+<li>主体公钥（Subject Unique Identifier）：公钥的内容。</li>
+</ul>
+</li>
+<li><font color="red">颁发者唯一号（Issuer Unique Identifier）</font>：代表颁发者的唯一信息，仅2、3版本支持，可选；</li>
+<li><font color="red">主体唯一号（Subject Unique Identifier）</font>：代表拥有证书实体的唯一信息，仅2，3版本支持，可选：</li>
+</ul>
+<ul>
+<li><font color="red">扩展（Extensions，可选）</font>: 可选的一些扩展。中可能包括：<ul>
+<li>Subject Key Identifier：实体的秘钥标识符，区分实体的多对秘钥；</li>
+<li>Basic Constraints：一指明是否属于CA;</li>
+<li>Authority Key Identifier：证书颁发者的公钥标识符；</li>
+<li>CRL Distribution Points: 撤销文件的颁发地址；</li>
+<li>Key Usage：证书的用途或功能信息。</li>
+</ul>
+</li>
+</ul>
+<p>此外，证书的颁发者还需要对证书内容利用自己的私钥添加签名， 以防止别人对证书的内容进行篡改。</p>
+</blockquote>
+<h4 id="8-2-2-证书格式"><a href="#8-2-2-证书格式" class="headerlink" title="8.2.2 证书格式"></a>8.2.2 证书格式</h4><blockquote>
+<p>X.509规范中一般推荐使用PEM(Privacy Enhanced Mail）格式来存储证书相关的文件。证书文件的文件名后缀一般为 .crt 或 .cer 。对应私钥文件的文件名后缀一般为 .key。证书请求文件的文件名后綴为 .csr 。有时候也统一用pem作为文件名后缀。</p>
+<p>PEM格式采用文本方式进行存储。一般包括首尾标记和内容块，内容块采用Base64进行编码。</p>
+<p><strong>编码格式总结:</strong></p>
+<ul>
+<li><strong>X.509 DER(Distinguished Encoding Rules)编码，后缀为：.der .cer .crt</strong></li>
+<li><strong>X.509 BASE64编码(PEM格式)，后缀为：.pem .cer .crt</strong></li>
+</ul>
+<p>例如，一个PEM格式（base64编码）的示例证书文件内容如下所示：</p>
+</blockquote>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">-----BEGIN CERTIFICATE-----</span><br><span class="line">MIIDyjCCArKgAwIBAgIQdZfkKrISoINLporOrZLXPTANBgkqhkiG9w0BAQsFADBn</span><br><span class="line">MSswKQYDVQQLDCJDcmVhdGVkIGJ5IGh0dHA6Ly93d3cuZmlkZGxlcjIuY29tMRUw</span><br><span class="line">EwYDVQQKDAxET19OT1RfVFJVU1QxITAfBgNVBAMMGERPX05PVF9UUlVTVF9GaWRk</span><br><span class="line">bGVyUm9vdDAeFw0xNzA0MTExNjQ4MzhaFw0yMzA0MTExNjQ4MzhaMFoxKzApBgNV</span><br><span class="line">BAsMIkNyZWF0ZWQgYnkgaHR0cDovL3d3dy5maWRkbGVyMi5jb20xFTATBgNVBAoM</span><br><span class="line">DERPX05PVF9UUlVTVDEUMBIGA1UEAwwLKi5iYWlkdS5jb20wggEiMA0GCSqGSIb3</span><br><span class="line">DQEBAQUAA4IBDwAwggEKAoIBAQDX0AM198jxwRoKgwWsd9oj5vI0and9v9SB9Chl</span><br><span class="line">gZEu6G9ZA0C7BucsBzJ2bl0Mf6qq0Iee1DfeydfEKyTmBKTafgb2DoQE3OHZjy0B</span><br><span class="line">QTJrsOdf5s636W5gJp4f7CUYYA/<span class="number">3e1</span>nxr/+AuG44Idlsi17TWodVKjsQhjzH+bK6</span><br><span class="line"><span class="number">8</span>ukQZyel1SgBeQOivzxXe0rhXzrocoeKZFmUxLkUpm+/mX1syDTdaCmQ6LT4KYYi</span><br><span class="line">soKe4f+r2tLbUzPKxtk2F1v3ZLOjiRdzCOA27e5n88zdAFrCmMB4teG/azCSAH3g</span><br><span class="line">Yb6vaAGaOnKyDLGunW51sSesWBpHceJnMfrhwxCjiv707JZtAgMBAAGjfzB9MA4G</span><br><span class="line">A1UdDwEB/wQEAwIEsDATBgNVHSUEDDAKBggrBgEFBQcDATAWBgNVHREEDzANggsq</span><br><span class="line">LmJhaWR1LmNvbTAfBgNVHSMEGDAWgBQ9UIffUQSuwWGOm+o74JffZJNadjAdBgNV</span><br><span class="line">HQ4EFgQUQh8IksZqcMVmKrIibTHLbAgLRGgwDQYJKoZIhvcNAQELBQADggEBAC5Y</span><br><span class="line">JndwXpm0W+<span class="number">9</span>SUlQhAUSE9LZh+DzcSmlCWtBk+SKBwmAegbfNSf6CgCh0VY6iIhbn</span><br><span class="line">GlszqgAOAqVMxAEDlR/YJTOlAUXFw8KICsWdvE01xtHqhk1tCK154Otci60Wu+tz</span><br><span class="line"><span class="number">1</span>t8999GPbJskecbRDGRDSA/gQGZJuL0rnmIuz3macSVn6tH7NwdoNeN68Uj3Qyt5</span><br><span class="line">orYv1IFm8t55224ga8ac1y90hK4R5HcvN71aIjMKrikgynK0E+g45QypHRIe/z0S</span><br><span class="line">/<span class="number">1</span>W/<span class="number">6</span>rqTgfN6OWc0c15hPeJbTtkntB5Fqd0sfsnKkW6jPsKQ+z/+vZ5XqzdlFupQ</span><br><span class="line"><span class="number">29</span>F14ei8ZHl9aLIHP5s=</span><br><span class="line">-----END CERTIFICATE-----</span><br></pre></td></tr></table></figure>
+
+<p>证书中的解析出来的内容：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line">Certificate:</span><br><span class="line">    Data:</span><br><span class="line">        Version: <span class="number">3</span> (<span class="number">0x2</span>)</span><br><span class="line">        Serial Number:</span><br><span class="line">            <span class="number">10</span>:e6:fc:<span class="number">62</span>:b7:<span class="number">41</span>:<span class="number">8</span>a:d5:<span class="number">00</span>:<span class="number">5</span>e:<span class="number">45</span>:b6</span><br><span class="line">    Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">        Issuer: C=BE, O=GlobalSign nv-sa, CN=GlobalSign Organization Validation CA-SHA256-G2</span><br><span class="line">        Validity</span><br><span class="line">            Not Before: Nov <span class="number">21</span> <span class="number">08</span>:<span class="number">00</span>:<span class="number">00</span> <span class="number">2016</span> GMT</span><br><span class="line">            Not After : Nov <span class="number">22</span> <span class="number">07</span>:<span class="number">59</span>:<span class="number">59</span> <span class="number">2017</span> GMT</span><br><span class="line">        Subject: C=US, ST=California, L=San Francisco, O=Wikimedia Foundation, Inc., CN=*.wikipedia.org</span><br><span class="line">        Subject Public Key Info:</span><br><span class="line">            Public Key Algorithm: id-ecPublicKey</span><br><span class="line">                Public-Key: (<span class="number">256</span> bit)</span><br><span class="line">                pub: </span><br><span class="line">                    <span class="number">04</span>:c9:<span class="number">22</span>:<span class="number">69</span>:<span class="number">31</span>:<span class="number">8</span>a:d6:<span class="number">6</span>c:ea:da:c3:<span class="number">7</span>f:<span class="number">2</span>c:ac:a5:</span><br><span class="line">                    af:c0:<span class="number">02</span>:ea:<span class="number">81</span>:cb:<span class="number">65</span>:b9:fd:<span class="number">0</span>c:<span class="number">6</span>d:<span class="number">46</span>:<span class="number">5</span>b:c9:<span class="number">1</span>e:</span><br><span class="line">                    ed:b2:ac:<span class="number">2</span>a:<span class="number">1</span>b:<span class="number">4</span>a:ec:<span class="number">80</span>:<span class="number">7</span>b:e7:<span class="number">1</span>a:<span class="number">51</span>:e0:df:f7:</span><br><span class="line">                    c7:<span class="number">4</span>a:<span class="number">20</span>:<span class="number">7</span>b:<span class="number">91</span>:<span class="number">4</span>b:<span class="number">20</span>:<span class="number">07</span>:<span class="number">21</span>:ce:cf:<span class="number">68</span>:<span class="number">65</span>:<span class="number">8</span>c:c6:</span><br><span class="line">                    <span class="number">9</span>d:<span class="number">3</span>b:ef:d5:c1</span><br><span class="line">                ASN1 OID: prime256v1</span><br><span class="line">                NIST CURVE: P<span class="number">-256</span></span><br><span class="line">        X509v3 extensions:</span><br><span class="line">            X509v3 Key Usage: critical</span><br><span class="line">                Digital Signature, Key Agreement</span><br><span class="line">            Authority Information Access: </span><br><span class="line">                CA Issuers - URI:http:<span class="comment">//secure.globalsign.com/cacert/gsorganizationvalsha2g2r1.crt</span></span><br><span class="line">                OCSP - URI:http:<span class="comment">//ocsp2.globalsign.com/gsorganizationvalsha2g2</span></span><br><span class="line"></span><br><span class="line">            X509v3 Certificate Policies: </span><br><span class="line">                Policy: <span class="number">1.3</span><span class="number">.6</span><span class="number">.1</span><span class="number">.4</span><span class="number">.1</span><span class="number">.4146</span><span class="number">.1</span><span class="number">.20</span></span><br><span class="line">                  CPS: https:<span class="comment">//www.globalsign.com/repository/</span></span><br><span class="line">                Policy: <span class="number">2.23</span><span class="number">.140</span><span class="number">.1</span><span class="number">.2</span><span class="number">.2</span></span><br><span class="line"></span><br><span class="line">            X509v3 Basic Constraints: </span><br><span class="line">                CA:FALSE</span><br><span class="line">            X509v3 CRL Distribution Points: </span><br><span class="line"></span><br><span class="line">                Full Name:</span><br><span class="line">                  URI:http:<span class="comment">//crl.globalsign.com/gs/gsorganizationvalsha2g2.crl</span></span><br><span class="line"></span><br><span class="line">            X509v3 Subject Alternative Name: </span><br><span class="line">                DNS:*.wikipedia.org, DNS:*.m.mediawiki.org, DNS:*.m.wikibooks.org, DNS:*.m.wikidata.org, DNS:*.m.wikimedia.org, DNS:*.m.wikimediafoundation.org, DNS:*.m.wikinews.org, DNS:*.m.wikipedia.org, DNS:*.m.wikiquote.org, DNS:*.m.wikisource.org, DNS:*.m.wikiversity.org, DNS:*.m.wikivoyage.org, DNS:*.m.wiktionary.org, DNS:*.mediawiki.org, DNS:*.planet.wikimedia.org, DNS:*.wikibooks.org, DNS:*.wikidata.org, DNS:*.wikimedia.org, DNS:*.wikimediafoundation.org, DNS:*.wikinews.org, DNS:*.wikiquote.org, DNS:*.wikisource.org, DNS:*.wikiversity.org, DNS:*.wikivoyage.org, DNS:*.wiktionary.org, DNS:*.wmfusercontent.org, DNS:*.zero.wikipedia.org, DNS:mediawiki.org, DNS:w.wiki, DNS:wikibooks.org, DNS:wikidata.org, DNS:wikimedia.org, DNS:wikimediafoundation.org, DNS:wikinews.org, DNS:wikiquote.org, DNS:wikisource.org, DNS:wikiversity.org, DNS:wikivoyage.org, DNS:wiktionary.org, DNS:wmfusercontent.org, DNS:wikipedia.org</span><br><span class="line">            X509v3 Extended Key Usage: </span><br><span class="line">                TLS Web Server Authentication, TLS Web Client Authentication</span><br><span class="line">            X509v3 Subject Key Identifier: </span><br><span class="line">                <span class="number">28</span>:<span class="number">2</span>A:<span class="number">26</span>:<span class="number">2</span>A:<span class="number">57</span>:<span class="number">8</span>B:<span class="number">3</span>B:CE:B4:D6:AB:<span class="number">54</span>:EF:D7:<span class="number">38</span>:<span class="number">21</span>:<span class="number">2</span>C:<span class="number">49</span>:<span class="number">5</span>C:<span class="number">36</span></span><br><span class="line">            X509v3 Authority Key Identifier: </span><br><span class="line">                keyid:<span class="number">96</span>:DE:<span class="number">61</span>:F1:BD:<span class="number">1</span>C:<span class="number">16</span>:<span class="number">29</span>:<span class="number">53</span>:<span class="number">1</span>C:C0:CC:<span class="number">7</span>D:<span class="number">3</span>B:<span class="number">83</span>:<span class="number">00</span>:<span class="number">40</span>:E6:<span class="number">1</span>A:<span class="number">7</span>C</span><br><span class="line"></span><br><span class="line">    Signature Algorithm: sha256WithRSAEncryption</span><br><span class="line">         <span class="number">8</span>b:c3:ed:d1:<span class="number">9</span>d:<span class="number">39</span>:<span class="number">6</span>f:af:<span class="number">40</span>:<span class="number">72</span>:bd:<span class="number">1</span>e:<span class="number">18</span>:<span class="number">5</span>e:<span class="number">30</span>:<span class="number">54</span>:<span class="number">23</span>:<span class="number">35</span>:</span><br><span class="line">         ...</span><br></pre></td></tr></table></figure>
+
+<h4 id="8-2-3-CA证书"><a href="#8-2-3-CA证书" class="headerlink" title="8.2.3 CA证书"></a>8.2.3 CA证书</h4><blockquote>
+<p>理论上，人人都可以找个证书工具，自己做一个证书。那如何防止坏人自己制作证书出来骗人捏？<br>CA是Certificate Authority的缩写，也叫“证书授权中心”。</p>
+<p>它是负责管理和签发证书的第三方机构, 好比一个可信任的中介公司。一般来说，CA必须是所有行业和所有公众都信任的、认可的。因此它必须具有足够的权威性。比如现实生活中我们要去公安局去办理身份证一样。</p>
+</blockquote>
+<ul>
+<li><p>CA证书</p>
+<blockquote>
+<p>CA 证书，顾名思义，就是CA颁发的证书。</p>
+<p>前面已经说了，人人都可以找工具制作证书。但是因为你不是权威的CA机关，你自己搞的证书不具有权威性。</p>
+</blockquote>
+</li>
+<li><p>证书信任链</p>
+<blockquote>
+<p>证书直接是可以有信任关系的, 通过一个证书可以证明另一个证书也是真实可信的. 实际上，证书之间的信任关系，是可以嵌套的。比如，C 信任 A1，A1 信任 A2，A2 信任 A3……这个叫做证书的信任链。只要你信任链上的头一个证书，那后续的证书，都是可以信任滴。 </p>
+<p>假设 C 证书信任 A 和 B；然后 A 信任 A1 和 A2；B 信任 B1 和 B2。则它们之间，构成如下的一个树形关系（一个倒立的树）。 </p>
+</blockquote>
+<p><img src="1533293270573.png" alt="1533293270573"></p>
+<blockquote>
+<p>处于最顶上的树根位置的那个证书，就是“<strong>根证书</strong>”。除了根证书，其它证书都要依靠上一级的证书，来证明自己。那谁来证明“根证书”可靠捏？实际上，根证书自己证明自己是可靠滴（或者换句话说，根证书是不需要被证明滴）。</p>
+<p>聪明的同学此刻应该意识到了：根证书是整个证书体系安全的根本。所以，如果某个证书体系中，根证书出了问题（不再可信了），那么所有被根证书所信任的其它证书，也就不再可信了。</p>
+</blockquote>
+</li>
+<li><p>证书有啥用</p>
+<blockquote>
+<ol>
+<li><p><strong>验证网站是否可信（针对HTTPS）</strong> </p>
+<p>通常，我们如果访问某些敏感的网页（比如用户登录的页面），其协议都会使用 HTTPS 而不是 HTTP。因为 HTTP 协议是明文的，一旦有坏人在偷窥你的网络通讯，他/她就可以看到网络通讯的内容（比如你的密码、银行帐号、等）；而 HTTPS 是加密的协议，可以保证你的传输过程中，坏蛋无法偷窥。</p>
+<p>但是，千万不要以为，HTTPS 协议有了加密，就可高枕无忧了。光有加密是不够滴。假设有某人搞了一个假的网银的站点，然后诱骗你上这个站点。假设真的点击登录了就被骗了。</p>
+<p>为了防止坏人这么干，HTTPS 协议除了有加密的机制，还有一套证书的机制。通过证书来确保，某个站点确实就是某个站点。</p>
+<p>有了证书之后，当你的浏览器在访问某个 HTTPS 网站时，会验证该站点上的 CA 证书。如果浏览器发现该证书没有问题（证书被某个根证书信任、证书上绑定的域名和该网站的域名一致、证书没有过期），那么页面就直接打开；否则的话，浏览器会给出一个警告，告诉你该网站的证书存在某某问题，是否继续访问该站点？下面给出 IE 和 Firefox 的抓图： </p>
+<p><img src="03113237-5408b6ece0c84744b106e639ddf4956b.png" alt="img"> </p>
+<p><img src="03113237-1369f659d6e4496e8bb3a742198cef63.png" alt="img"> </p>
+<p>大多数知名的网站，如果用了 HTTPS 协议，其证书都是可信的（也就不会出现上述警告）。所以，今后你如果上某个知名网站，发现浏览器跳出上述警告，你就要小心啦！ </p>
+</li>
+<li><p><strong>验证某文件是否可信（是否被篡改）</strong> </p>
+<p>证书除了可以用来验证某个网站，还可以用来验证某个文件是否被篡改。具体是通过证书来制作文件的数字签名。制作数字签名的过程太专业，咱就不说了。后面专门告诉大家如何验证文件的数字签名。考虑到大多数人用 Windows 系统，俺就拿 Windows 的例子来说事儿。</p>
+<p>比如，俺手头有一个 Google Chrome的安装文件（带有数字签名）。当俺查看该文件的属性，会看到如下的界面。眼神好的同学，会注意到到上面有个“<strong>数字签名</strong>”的标签页。如果没有出现这个标签页，就说明该文件没有附带数字签名。</p>
+<p><img src="1533294208392.png" alt="1533294208392"></p>
+<p>一般来说，签名列表中，有且仅有一个签名。选中它，点“<strong>详细信息</strong>”按钮。跳出如下界面：</p>
+<p>通常这个界面会显示一行字：“<strong>该数字签名正常</strong>”（图中红圈标出）。如果有这行字，就说明该文件从出厂到你手里，中途没有被篡改过（是原装滴、是纯洁滴）。如果该文件被篡改过了（比如，感染了病毒、被注入木马），那么对话框会出现一个警告提示“<strong>该数字签名无效</strong>” </p>
+<p><img src="1533294414623.png" alt="1533294414623"></p>
+<p>不论签名是否正常，你都可以点“查看证书”按钮。这时候，会跳出证书的对话框。如下： </p>
+<p><img src="1533294685323.png" alt="1533294685323"></p>
+<p><img src="1533294711691.png" alt="1533294711691"></p>
+<p>从后一个界面，可以看到刚才说的证书信任链。图中的信任链有3层：</p>
+<ul>
+<li>第1层是根证书（verisign）。</li>
+<li>第2层是 symantec 专门用来签名的证书。</li>
+<li>第3层是 Google自己的证书。 </li>
+</ul>
+<p>目前大多数知名的公司（或组织机构），其发布的可执行文件（比如软件安装包、驱动程序、安全补丁），都带有数字签名。你可以自己去看一下。</p>
+<p>建议大伙儿在安装软件之前，都先看看是否有数字签名？如果有，就按照上述步骤验证一把。一旦数字签名是坏的，那可千万别装。</p>
+</li>
+</ol>
+</blockquote>
+</li>
+</ul>
+<h3 id="8-3-公钥基础设施（PKI）"><a href="#8-3-公钥基础设施（PKI）" class="headerlink" title="8.3 公钥基础设施（PKI）"></a>8.3 公钥基础设施（PKI）</h3><blockquote>
+<p>仅制定证书的规范还不足以支持公钥的实际运用，我们还需要很多其他的规范，例如证书应该由谁来颁发，如何颁发，私钥泄露时应该如何作废证书，计算机之间的数据交换应采用怎样的格式等。这一节我们将介绍能够使公钥的运用更加有效的公钥基础设施。</p>
+</blockquote>
+<h4 id="8-3-1-什么是公钥基础设施"><a href="#8-3-1-什么是公钥基础设施" class="headerlink" title="8.3.1 什么是公钥基础设施"></a>8.3.1 什么是公钥基础设施</h4><blockquote>
+<p>公钥基础设施（Public-Key infrastructure）是为了能够更有效地运用公钥而制定的一系列规范和规格的总称。公钥基础设施一般根据其英语缩写而简称为PKI。</p>
+<p>PKI只是一个总称，而并非指某一个单独的规范或规格。例如，RSA公司所制定的PKCS（Public-Key Cryptography Standards，公钥密码标准）系列规范也是PKI的一种，而互联网规格RFC（Requestfor Comments）中也有很多与PKI相关的文档。此外，X.509这样的规范也是PKI的一种。在开发PKI程序时所使用的由各个公司编写的API（Application Programming Interface, 应用程序编程接口）和规格设计书也可以算是PKI的相关规格。</p>
+<p>因此，根据具体所采用的规格，PKI也会有很多变种，这也是很多人难以整体理解PKI的原因之一。</p>
+<p>为了帮助大家整体理解PKI,我们来简单总结一下PKI的基本组成要素（用户、认证机构、仓库）以及认证机构所负责的工作。</p>
+</blockquote>
+<h4 id="8-3-2-PKI的组成要素"><a href="#8-3-2-PKI的组成要素" class="headerlink" title="8.3.2 PKI的组成要素"></a>8.3.2 PKI的组成要素</h4><p>PKI的组成要素主要有以下三个：</p>
+<ul>
+<li>用户 — 使用PKI的人</li>
+<li>认证机构 — 颁发证书的人</li>
+<li>仓库 — 保存证书的数据库</li>
+</ul>
+<p><img src="1538758063013.png" alt="1538758063013"></p>
+<h5 id="用户"><a href="#用户" class="headerlink" title="用户"></a>用户</h5><blockquote>
+<p>用户就是像Alice、Bob这样使用PKI的人。用户包括两种：一种是希望使用PKI注册自己的公钥的人，另一种是希望使用已注册的公钥的人。我们来具体看一下这两种用户所要进行的操作。</p>
+</blockquote>
+<ul>
+<li><strong>注册公钥的用户所进行的操作</strong><ul>
+<li>生成密钥对（也可以由认证机构生成）</li>
+<li>在认证机构注册公钥</li>
+<li>向认证机构申请证书</li>
+<li>根据需要申请作废已注册的公钥</li>
+<li>解密接收到的密文</li>
+<li>对消息进行数字签名</li>
+</ul>
+</li>
+</ul>
+<ul>
+<li><p><strong>使用已注册公钥的用户所进行的操作</strong></p>
+<ul>
+<li>将消息加密后发送给接收者</li>
+<li>验证数字签名</li>
+</ul>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* </span></span><br><span class="line"><span class="comment">==================== 小知识点 ==================== </span></span><br><span class="line"><span class="comment">浏览器如何验证SSL证书</span></span><br><span class="line"><span class="comment">1. 在IE浏览器的菜单中点击“工具 /Internet选项”，选择“内容”标签，点击“证书”按钮，然后就可以看到IE</span></span><br><span class="line"><span class="comment">   浏览器已经信任了许多“中级证书颁发机构”和“受信任的根证书颁发机 构。当我们在访问该网站时，浏览器</span></span><br><span class="line"><span class="comment">   就会自动下载该网站的SSL证书，并对证书的安全性进行检查。</span></span><br><span class="line"><span class="comment">2. 由于证书是分等级的，网站拥有者可能从根证书颁发机构领到证书，也可能从根证书的下一级（如某个国家</span></span><br><span class="line"><span class="comment">   的认证中心，或者是某个省发出的证书）领到证书。假设我们正在访问某个使用 了 SSL技术的网站，IE浏</span></span><br><span class="line"><span class="comment">   览器就会收到了一个SSL证书，如果这个证书是由根证书颁发机构签发的，IE浏览器就会按照下面的步骤来</span></span><br><span class="line"><span class="comment">   检查：浏览器使用内 置的根证书中的公钥来对收到的证书进行认证，如果一致，就表示该安全证书是由可信</span></span><br><span class="line"><span class="comment">   任的颁证机构签发的，这个网站就是安全可靠的；如果该SSL证书不是根服 务器签发的，浏览器就会自动检</span></span><br><span class="line"><span class="comment">   查上一级的发证机构，直到找到相应的根证书颁发机构，如果该根证书颁发机构是可信的，这个网站的SSL证</span></span><br><span class="line"><span class="comment">   书也是可信的。</span></span><br><span class="line"><span class="comment">*/</span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ul>
+<h5 id="认证机构（CA）"><a href="#认证机构（CA）" class="headerlink" title="认证机构（CA）"></a>认证机构（CA）</h5><blockquote>
+<p>认证机构（Certification Authority，CA）是对证书进行管理的人。上面的图中我们给它起了一个名字叫作Trent。认证机构具体所进行的操作如下：</p>
+</blockquote>
+<ul>
+<li><p><strong>生成密钥对 (也可以由用户生成)</strong></p>
+<blockquote>
+<p>生成密钥对有两种方式：一种是由PKI用户自行生成，一种是由认证机构来生成。在认证机构生成用户密钥对的情况下，认证机构需要将私钥发送给用户，这时就需要使用PKCS#12（Personal Information Exchange Syntax Standard）等规范。</p>
+</blockquote>
+</li>
+<li><p>在注册公钥时对本人身份进行认证, 生成并颁发证书</p>
+<blockquote>
+<p>在用户自行生成密钥对的情况下，用户会请求认证机构来生成证书。申请证书时所使用的规范是由PKCS#10（Certification Request Syntax Standard）定义的。</p>
+<p>认证机构根据其认证业务准则（Certification Practice Statement，CPS）对用户的身份进行认证，并生成证书。在生成证书时，需要使用认证机构的私钥来进行数字签名。生成的证书格式是由PKCS#6 （Extended-Certificate Syntax Standard）和 X.509定义的。</p>
+</blockquote>
+</li>
+<li><p>作废证书</p>
+<blockquote>
+<p>当用户的私钥丢失、被盗时，认证机构需要对证书进行作废（revoke）。此外，即便私钥安然无恙，有时候也需要作废证书，例如用户从公司离职导致其失去私钥的使用权限，或者是名称变更导致和证书中记载的内容不一致等情况。</p>
+<p>纸质证书只要撕毁就可以作废了，但这里的证书是数字信息，即便从仓库中删除也无法作废，因为用户会保存证书的副本，但认证机构又不能人侵用户的电脑将副本删除。</p>
+<p>要作废证书，认证机构需要制作一张证书==<strong>作废清单（Certificate Revocation List),简称为CRL</strong>==。</p>
+<p>CRL是认证机构宣布作废的证书一览表，具体来说，是一张已作废的证书序列号的清单，并由认证机构加上数字签名。证书序列号是认证机构在颁发证书时所赋予的编号，在证书中都会记载。</p>
+<p>PKI用户需要从认证机构获取最新的CRL,并查询自己要用于验证签名（或者是用于加密）的公钥证书是否已经作废这个步骤是非常重要的。</p>
+<p>假设我们手上有Bob的证书，该证书有合法的认证机构签名，而且也在有效期内，但仅凭这些还不能说明该证书一定是有效的，还需要查询认证机构最新的CRL，并确认该证书是否有效。一般来说，这个检查不是由用户自身来完成的，而是应该由处理该证书的软件来完成，但有很多软件并没有及时更能CRL。</p>
+</blockquote>
+</li>
+</ul>
+<blockquote>
+<p>认证机构的工作中，公钥注册和本人身份认证这一部分可以由注册机构（Registration Authority，RA) 来分担。这样一来，认证机构就可以将精力集中到颁发证书上，从而减轻了认证机构的负担。不过，引入注册机构也有弊端，比如说认证机构需要对注册机构本身进行认证，而且随着组成要素的增加，沟通过程也会变得复杂，容易遭受攻击的点也会增。</p>
+</blockquote>
+<h5 id="仓库"><a href="#仓库" class="headerlink" title="仓库"></a>仓库</h5><blockquote>
+<p>仓库（repository）是一个保存证书的数据库，PKI用户在需要的时候可以从中获取证书．它的作用有点像打电话时用的电话本。在本章开头的例子中，尽管没特别提到，但Alice获取Bob的证书时，就可以使用仓库。仓库也叫作证书目录。</p>
+</blockquote>
+<h4 id="8-3-3-各种各样的PKI"><a href="#8-3-3-各种各样的PKI" class="headerlink" title="8.3.3 各种各样的PKI"></a>8.3.3 各种各样的PKI</h4><blockquote>
+<p>公钥基础设施（PKI）这个名字总会引起一些误解，比如说“面向公众的权威认证机构只有一个”，或者“全世界的公钥最终都是由一个根CA来认证的”，其实这些都是不正确的。认证机构只要对公钥进行数字签名就可以了，因此任何人都可以成为认证机构，实际上世界上已经有无数个认证机构了。</p>
+<p>国家、地方政府、医院、图书馆等公共组织和团体可以成立认证机构来实现PKI,公司也可以出于业务需要在内部实现PKI,甚至你和你的朋友也可以以实验为目的来构建PKI。</p>
+<p>在公司内部使用的情况下，认证机构的层级可以像上一节中一样和公司的组织层级一一对应，也可以不一一对应。例如，如果公司在东京、大阪、北海道和九州都成立了分公司，也可以采取各个分公司之间相互认证的结构。在认证机构的运营方面，可以购买用于构建PKI的软件产品由自己公司运营，也可以使用VeriSign等外部认证服务。具体要采取怎样的方式，取决于目的和规模，并没有一定之规。 </p>
+</blockquote>
+
+    </article>
+    <!-- license  -->
+    
+        <div class="license-wrapper">
+            <p>Author：<a href="https://github.com/Esdeath/Esdeath.github.io">驿路星辰</a>
+            <p>原文链接：<a href="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/">https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/</a>
+            <p>发表日期：<a href="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/">May 31st 2020</a>
+            <p>更新日期：<a href="https://github.com/Esdeath/Esdeath.github.io/2020/05/31/crypt-eight/">May 31st 2020</a>
+            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
+        </div>
+    
+    <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2020/06/07/crypt-night/" title= "9.SSL/TLS(为了更安全的通信)---《图解密码学》">
+                    <div class="nextTitle">9.SSL/TLS(为了更安全的通信)---《图解密码学》</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/05/29/crypt-seven/" title= "7.数字签名(消息到底是谁写的)---《图解密码学》">
+                    <div class="prevTitle">7.数字签名(消息到底是谁写的)---《图解密码学》</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
+    
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
+</main>
+            <!-- profile -->
+            
+        </div>
+        <footer class="footer footer-unloaded">
+    <!-- social  -->
+    
+    <div class="social">
+        
+    
+        
+            
+                <a href="mailto:ayaseeri@126.com" class="iconfont-archer email" title=email ></a>
+            
+        
+    
+        
+            
+                <a href="//github.com/esdeath" class="iconfont-archer github" target="_blank" title=github></a>
+            
+        
+    
+        
+    
+        
+    
+
+    </div>
+    
+    <!-- powered by Hexo  -->
+    <div class="copyright">
+        <span id="hexo-power">Powered by <a href="https://hexo.io/" target="_blank">Hexo</a></span><span class="iconfont-archer power">&#xe635;</span><span id="theme-info">theme <a href="https://github.com/fi3ework/hexo-theme-archer" target="_blank">Archer</a></span>
+    </div>
+    <!-- 不蒜子  -->
+    
+    <div class="busuanzi-container">
+    
+     
+    <span id="busuanzi_container_site_pv">PV: <span id="busuanzi_value_site_pv"></span> :)</span>
+    
+    </div>
+    
+</footer>
+    </div>
+    <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#8-证书"><span class="toc-number">1.</span> <span class="toc-text">8. 证书</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-证书的应用场景"><span class="toc-number">1.1.</span> <span class="toc-text">8.1 证书的应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-证书标准规范X-509"><span class="toc-number">1.2.</span> <span class="toc-text">8.2 证书标准规范X.509</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#8-2-1-证书规范"><span class="toc-number">1.2.1.</span> <span class="toc-text">8.2.1 证书规范</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-2-2-证书格式"><span class="toc-number">1.2.2.</span> <span class="toc-text">8.2.2 证书格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-2-3-CA证书"><span class="toc-number">1.2.3.</span> <span class="toc-text">8.2.3 CA证书</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-公钥基础设施（PKI）"><span class="toc-number">1.3.</span> <span class="toc-text">8.3 公钥基础设施（PKI）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#8-3-1-什么是公钥基础设施"><span class="toc-number">1.3.1.</span> <span class="toc-text">8.3.1 什么是公钥基础设施</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-3-2-PKI的组成要素"><span class="toc-number">1.3.2.</span> <span class="toc-text">8.3.2 PKI的组成要素</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#用户"><span class="toc-number">1.3.2.1.</span> <span class="toc-text">用户</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#认证机构（CA）"><span class="toc-number">1.3.2.2.</span> <span class="toc-text">认证机构（CA）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#仓库"><span class="toc-number">1.3.2.3.</span> <span class="toc-text">仓库</span></a></li></ol></li><li class="toc-item toc-level-4"><a class="toc-link" href="#8-3-3-各种各样的PKI"><span class="toc-number">1.3.3.</span> <span class="toc-text">8.3.3 各种各样的PKI</span></a></li></ol></li></ol></li></ol>
+    </div>
+    
+    <div class="back-top iconfont-archer">&#xe639;</div>
+    <div class="sidebar sidebar-hide">
+    <ul class="sidebar-tabs sidebar-tabs-active-0">
+        <li class="sidebar-tab-archives"><span class="iconfont-archer">&#xe67d;</span><span class="tab-name">Archive</span></li>
+        <li class="sidebar-tab-tags"><span class="iconfont-archer">&#xe61b;</span><span class="tab-name">Tag</span></li>
+        <li class="sidebar-tab-categories"><span class="iconfont-archer">&#xe666;</span><span class="tab-name">Cate</span></li>
+    </ul>
+    <div class="sidebar-content sidebar-content-show-archive">
+          <div class="sidebar-panel-archives">
+    <!-- 在ejs中将archive按照时间排序 -->
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <div class="total-and-search">
+        <div class="total-archive">
+        Total : 16
+        </div>
+        <!-- search  -->
+        
+    </div>
+    
+    <div class="post-archive">
+    
+    
+    
+    
+    <div class="archive-year"> 2020 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2020/08/29/flutter-ios-plugin-delegate-error/" >Flutter中针对iOS封装Plugin组件注意事项</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2020/08/29/flutter-mvvm/" >Flutter中使用Provider实现MVVM架构</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2020/06/07/crypt-night/" >9.SSL/TLS(为了更安全的通信)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/31</span><a class="archive-post-title" href= "/2020/05/31/crypt-eight/" >8.证书(为公钥加上数字签名)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/29</span><a class="archive-post-title" href= "/2020/05/29/crypt-seven/" >7.数字签名(消息到底是谁写的)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/21</span><a class="archive-post-title" href= "/2020/05/21/crypt-six/" >6.消息认证码(消息被正确传送了吗)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/12</span><a class="archive-post-title" href= "/2020/05/12/crypt-five-md/" >5.单向散列函数(获取消息的指纹)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/08</span><a class="archive-post-title" href= "/2020/05/08/crypt-four-md/" >4.非对称加密(公钥加密,私钥解密)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">05/05</span><a class="archive-post-title" href= "/2020/05/05/crypt-three-md/" >3. 分组密码的模式(分组密码是如何迭代)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/30</span><a class="archive-post-title" href= "/2020/04/30/crypt-two-md/" >2.对称加密（相同密钥加解密)---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">04/29</span><a class="archive-post-title" href= "/2020/04/29/crypt-one-md/" >1.密码学 ---《图解密码学》</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">03/27</span><a class="archive-post-title" href= "/2020/03/27/ios-gcd-ptread/" >iOS 90%人可能都会回答错误的一个多线程基础题</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">01/27</span><a class="archive-post-title" href= "/2020/01/27/how-to-know-highorlow-computer-md/" >如何判断机器的字节顺序是高字节在前还是低字节在前</a>
+        </li>
+    
+    
+    
+    
+    
+        </ul>
+    
+    <div class="archive-year"> 2019 </div>
+    <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/11</span><a class="archive-post-title" href= "/2019/10/11/swift-function-program/" >【译】Swift和函数式编程的精髓</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">10/03</span><a class="archive-post-title" href= "/2019/10/03/how-to-use-functional-program-in-swift/" >【译】如何在swift中使用函数式编程</a>
+        </li>
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">08/28</span><a class="archive-post-title" href= "/2019/08/28/swift-operator-override/" >【译】如何在swift中使用函数式编程</a>
+        </li>
+    
+    </div>
+  </div>
+        <div class="sidebar-panel-tags">
+    <div class="sidebar-tags-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-tags-empty">&#xe678;</div>
+    <div class="tag-load-fail" style="display: none; color: #ccc; font-size: 0.6rem;">
+    缺失模块。<br/>
+    1、请确保node版本大于6.2<br/>
+    2、在博客根目录（注意不是archer根目录）执行以下命令：<br/>
+    <span style="color: #f75357; font-size: 1rem; line-height: 2rem;">npm i hexo-generator-json-content --save</span><br/>
+    3、在根目录_config.yml里添加配置：
+    <pre style="color: #787878; font-size: 0.6rem;">
+jsonContent:
+  meta: false
+  pages: false
+  posts:
+    title: true
+    date: true
+    path: true
+    text: false
+    raw: false
+    content: false
+    slug: false
+    updated: false
+    comments: false
+    link: false
+    permalink: false
+    excerpt: false
+    categories: true
+    tags: true</pre>
+    </div> 
+    <div class="sidebar-tags-list"></div>
+</div>
+        <div class="sidebar-panel-categories">
+    <div class="sidebar-categories-name">
+    
+    </div>
+    <div class="iconfont-archer sidebar-categories-empty">&#xe678;</div>
+    <div class="sidebar-categories-list"></div>
+</div>
+    </div>
+</div> 
+    <script>
+    var siteMeta = {
+        root: "/",
+        author: "驿路星辰"
+    }
+</script>
+    <!-- CDN failover -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+    <script type="text/javascript">
+        if (typeof window.$ === 'undefined')
+        {
+            console.warn('jquery load from jsdelivr failed, will load local script')
+            document.write('<script src="/lib/jquery.min.js">\x3C/script>')
+        }
+    </script>
+    <script src="/scripts/main.js"></script>
+    <!-- algolia -->
+    
+    <!-- busuanzi  -->
+    
+    <script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    
+    <!-- CNZZ  -->
+    
+    </div>
+    <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
+     
+    </body>
+</html>
+
+
