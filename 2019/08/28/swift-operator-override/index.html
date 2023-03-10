@@ -23,7 +23,7 @@
     <meta name="description" content="原文链接：https:&#x2F;&#x2F;www.raywenderlich.com&#x2F;4018226-overloading-custom-operators-in-swift swift重载自定义运算符 在本Swift教程中，您将学习如何创建自定义运算符，重载现有运算符以及设置运算符优先级。  运算符是任何编程语言的核心构建模块。 你能想象编程而不使用+或&#x3D;吗？ 运算符非常基础，大多数语言都将它们作为编译器（或">
 <meta property="og:type" content="article">
 <meta property="og:title" content="【译】如何在swift中使用函数式编程">
-<meta property="og:url" content="https://github.com/Esdeath/Esdeath.github.io/2019/08/28/swift-operator-override/index.html">
+<meta property="og:url" content="http://www.ayaseeri.com/2019/08/28/swift-operator-override/index.html">
 <meta property="og:site_name" content="Hexo">
 <meta property="og:description" content="原文链接：https:&#x2F;&#x2F;www.raywenderlich.com&#x2F;4018226-overloading-custom-operators-in-swift swift重载自定义运算符 在本Swift教程中，您将学习如何创建自定义运算符，重载现有运算符以及设置运算符优先级。  运算符是任何编程语言的核心构建模块。 你能想象编程而不使用+或&#x3D;吗？ 运算符非常基础，大多数语言都将它们作为编译器（或">
 <meta property="og:locale" content="en_US">
@@ -522,9 +522,9 @@ height:50vh;
 <p>在这里，您创建一个新的优先级组并将其命名为<code>DotProductPrecedence</code>。 您将它放在低于<code>AdditionPrecedence</code>的位置，因为您希望加号运算符优先。 你也可以将它设为左关联，因为你想要从左到右进行评估，就像加法和乘法中一样。 然后，将此新优先级组分配给<code>•</code>运算符。</p>
 <p> <strong>注意</strong>:除了<code>lowerThan</code>之外，您还可以在<code>DotProductPrecedence</code>中指定<code>higherThan</code>。 如果您在单个项目中有多个自定义优先级组，这一点就变得很重要。<br> 你之前写的代码返回了你希望的结果:<br> <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vectorA • vectorB + vectorA <span class="comment">// 29</span></span><br></pre></td></tr></table></figure><br><strong>恭喜💐</strong>–你掌握了自定义运算符</p>
 <h3 id="接下来你可以做些什么"><a href="#接下来你可以做些什么" class="headerlink" title="接下来你可以做些什么"></a>接下来你可以做些什么</h3><p>你可以阅读本教程完整的代码,代码已经在最后面给出.<br>此时，您知道如何根据需要定义Swift操作符。 在本教程中，您专注于在数学领域中使用运算符。 在实践中，您将找到更多使用运算符的方法。</p>
-<p>在<a href="https://github.com/ReactiveCocoa/ReactiveSwift">ReactiveSwift</a>框架中可以看到自定义运算符使用的一个很好的演示。 一个例子是<code>&lt;~</code>用来绑定，这是响应式编程中的一个重要功能。 以下是此运算符的使用示例：</p>
+<p>在<a href="https://github.com/ReactiveCocoa/ReactiveSwift" target="_blank" rel="noopener">ReactiveSwift</a>框架中可以看到自定义运算符使用的一个很好的演示。 一个例子是<code>&lt;~</code>用来绑定，这是响应式编程中的一个重要功能。 以下是此运算符的使用示例：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">let</span> (signal, <span class="number">_</span>) = <span class="type">Signal</span>&lt;<span class="type">Int</span>, <span class="type">Never</span>&gt;.pipe()</span><br><span class="line"><span class="keyword">let</span> property = <span class="type">MutableProperty</span>(<span class="number">0</span>)</span><br><span class="line">property.producer.startWithValues &#123;</span><br><span class="line">  <span class="built_in">print</span>(<span class="string">"Property received \($0)"</span>)</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">property &lt;~ signal</span><br></pre></td></tr></table></figure>
-<p><a href="https://github.com/robb/Cartography">Cartography</a>是另一个大量使用运算符重载的框架。 <code>AutoLayout</code>工具重载相等和比较运算符，以使<code>NSLayoutConstraint</code>创建更简单：</p>
+<p><a href="https://github.com/robb/Cartography" target="_blank" rel="noopener">Cartography</a>是另一个大量使用运算符重载的框架。 <code>AutoLayout</code>工具重载相等和比较运算符，以使<code>NSLayoutConstraint</code>创建更简单：</p>
 <figure class="highlight swift"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">constrain(view1, view2) &#123; view1, view2 <span class="keyword">in</span></span><br><span class="line">  view1.width   == (view1.superview!.width - <span class="number">50</span>) * <span class="number">0.5</span></span><br><span class="line">  view2.width   == view1.width - <span class="number">50</span></span><br><span class="line">  view1.height  == <span class="number">40</span></span><br><span class="line">  view2.height  == view1.height</span><br><span class="line">  view1.centerX == view1.superview!.centerX</span><br><span class="line">  view2.centerX == view1.centerX</span><br><span class="line"></span><br><span class="line">  view1.top &gt;= view1.superview!.top + <span class="number">20</span></span><br><span class="line">  view2.top == view1.bottom + <span class="number">20</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>此外，您始终可以参考官方文档<a href="https://docs.swift.org/swift-book/LanguageGuide/AdvancedOperators.html" target="_blank" rel="noopener"> custom operator documentation</a>。</p>
 <p>有了这些新的灵感来源，您可以走出世界，通过运算符重载使代码更简单。 小心不要对自定义运算符太迷恋！：]</p>
@@ -536,10 +536,10 @@ height:50vh;
     <!-- license  -->
     
         <div class="license-wrapper">
-            <p>Author：<a href="https://github.com/Esdeath/Esdeath.github.io">驿路星辰</a>
-            <p>原文链接：<a href="https://github.com/Esdeath/Esdeath.github.io/2019/08/28/swift-operator-override/">https://github.com/Esdeath/Esdeath.github.io/2019/08/28/swift-operator-override/</a>
-            <p>发表日期：<a href="https://github.com/Esdeath/Esdeath.github.io/2019/08/28/swift-operator-override/">August 28th 2019</a>
-            <p>更新日期：<a href="https://github.com/Esdeath/Esdeath.github.io/2019/08/28/swift-operator-override/">August 28th 2019</a>
+            <p>Author：<a href="http://www.ayaseeri.com">驿路星辰</a>
+            <p>原文链接：<a href="http://www.ayaseeri.com/2019/08/28/swift-operator-override/">http://www.ayaseeri.com/2019/08/28/swift-operator-override/</a>
+            <p>发表日期：<a href="http://www.ayaseeri.com/2019/08/28/swift-operator-override/">August 28th 2019</a>
+            <p>更新日期：<a href="http://www.ayaseeri.com/2019/08/28/swift-operator-override/">August 28th 2019</a>
             <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -649,6 +649,8 @@ top:50vh;
     <div class="sidebar-content sidebar-content-show-archive">
           <div class="sidebar-panel-archives">
     <!-- 在ejs中将archive按照时间排序 -->
+    
+    
     
     
     
