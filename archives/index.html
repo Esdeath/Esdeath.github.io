@@ -354,17 +354,19 @@
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/08/29/flutter-mvvm/" >
+        <a class="abstract-title" href = "/2020/08/29/flutter-ios-plugin-delegate-error/" >
             
-                <span>Flutter中使用Provider实现MVVM架构</span>
+                <span>Flutter中针对iOS封装Plugin组件注意事项</span>
         </a>
         <div class="abstract-content">
-            MVVM介绍MVVM架构分为M(Model)、V(View)、VM(ViewModel)三个部分，他们分别处理自己的分工，在View和Model之间使用ViewModel作为中介者，使View和Model不受业务逻辑影响。
-Model: 模型层，处理Api数据、模型相关业务
-View: 视图层，UI呈现、使用者互动等。
-ViewModel: 视图模型，处理逻辑、将数据绑定给View展示。
-Controller: 负责主要事情就是将View和ViewModel进行绑定，生命周期管理
-MVVM的核心思想即：通过ViewModel在View和Model之间建立一个连接，实现View和Model...
+            封装Plugin组件注意事项问题类型:https://github.com/flutter/flutter/issues/74024iOS组件可能要用到appdelegate中的相关的回调方法。此时针对具有bool返回值会有的回调方法会有问题:
+
+如果返回YES ,则先调用的组件会导致后调用的组件相同的回调方法无法执行
+如果返回NO,在冷启动的时候,回调方法不会被吊起。
+
+处理方法可以通过统一返回FlutterPluginAppLifeCycleDelegate调用方法来处理
+1.声明FlutterPluginAppLifeCycleDelegate
+123456@interface Y...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -382,19 +384,17 @@ MVVM的核心思想即：通过ViewModel在View和Model之间建立一个连接�
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/08/29/flutter-ios-plugin-delegate-error/" >
+        <a class="abstract-title" href = "/2020/08/29/flutter-mvvm/" >
             
-                <span>Flutter中针对iOS封装Plugin组件注意事项</span>
+                <span>Flutter中使用Provider实现MVVM架构</span>
         </a>
         <div class="abstract-content">
-            封装Plugin组件注意事项问题类型:https://github.com/flutter/flutter/issues/74024iOS组件可能要用到appdelegate中的相关的回调方法。此时针对具有bool返回值会有的回调方法会有问题:
-
-如果返回YES ,则先调用的组件会导致后调用的组件相同的回调方法无法执行
-如果返回NO,在冷启动的时候,回调方法不会被吊起。
-
-处理方法可以通过统一返回FlutterPluginAppLifeCycleDelegate调用方法来处理
-1.声明FlutterPluginAppLifeCycleDelegate
-123456@interface Y...
+            MVVM介绍MVVM架构分为M(Model)、V(View)、VM(ViewModel)三个部分，他们分别处理自己的分工，在View和Model之间使用ViewModel作为中介者，使View和Model不受业务逻辑影响。
+Model: 模型层，处理Api数据、模型相关业务
+View: 视图层，UI呈现、使用者互动等。
+ViewModel: 视图模型，处理逻辑、将数据绑定给View展示。
+Controller: 负责主要事情就是将View和ViewModel进行绑定，生命周期管理
+MVVM的核心思想即：通过ViewModel在View和Model之间建立一个连接，实现View和Model...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -872,8 +872,6 @@ Alice 和 Bob 的故事
     
     
     
-    
-    
     <div class="total-and-search">
         <div class="total-archive">
         Total : 16
@@ -892,12 +890,12 @@ Alice 和 Bob 的故事
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2020/08/29/flutter-mvvm/" >Flutter中使用Provider实现MVVM架构</a>
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2020/08/29/flutter-ios-plugin-delegate-error/" >Flutter中针对iOS封装Plugin组件注意事项</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2020/08/29/flutter-ios-plugin-delegate-error/" >Flutter中针对iOS封装Plugin组件注意事项</a>
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2020/08/29/flutter-mvvm/" >Flutter中使用Provider实现MVVM架构</a>
         </li>
     
     
