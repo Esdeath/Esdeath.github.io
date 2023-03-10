@@ -13,8 +13,8 @@ timezone: ''
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://kurumi.gitee.io/shanks/
-root: /shanks/
+url: https://github.com/Esdeath/Esdeath.github.io
+root: /Esdeath.github.io/
 permalink: :year/:month/:day/:title/
 permalink_defaults:
 pretty_urls:
@@ -99,6 +99,6 @@ theme: archer
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: 'git'
-  repo: git@gitee.com:kurumi/shanks.git
+  repo: git@github.com:Esdeath/Esdeath.github.io.git
   branch: master
 
