@@ -1,5 +1,5 @@
 ---
-title: difference-between-Inkwell-GestureDetector
+title: InkWell 与 GestureDetector的区别
 date: 2023-04-19 09:22:12
 tags:
 ---
