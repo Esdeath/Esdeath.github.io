@@ -20,17 +20,21 @@
     <meta name="keywords" content="算法,Swift,Dart,iOS,Flutter,C++">
     
     <meta name="description" content="">
-    <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
-<meta property="og:url" content="http://www.ayaseeri.com/archives/2019/10/index.html">
+    <meta name="description" content="在 Flutter 中，你可以使用 Dart 的内置方法 listEquals 来比较两个列表是否相等。listEquals 方法会比较两个列表的长度和元素，如果长度相等且每个元素都相等（使用 &#x3D;&#x3D; 运算符比较），那么这两个列表就被认为是相等的。 123456List&lt;int&gt; list1 &#x3D; [1, 2, 3];List&lt;int&gt; list2 &#x3D; [1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Flutter如何比较两个list是否相等">
+<meta property="og:url" content="http://www.ayaseeri.com/2023/01/04/how-to-compare-to-list-are-equal/index.html">
 <meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="在 Flutter 中，你可以使用 Dart 的内置方法 listEquals 来比较两个列表是否相等。listEquals 方法会比较两个列表的长度和元素，如果长度相等且每个元素都相等（使用 &#x3D;&#x3D; 运算符比较），那么这两个列表就被认为是相等的。 123456List&lt;int&gt; list1 &#x3D; [1, 2, 3];List&lt;int&gt; list2 &#x3D; [1">
 <meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2023-01-04T02:38:18.000Z">
+<meta property="article:modified_time" content="2023-05-04T02:43:51.828Z">
 <meta property="article:author" content="驿路星辰">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>iOS</title>
+    <title>Flutter如何比较两个list是否相等 · iOS</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -211,12 +215,23 @@
 <meta name="generator" content="Hexo 4.2.1"></head>
 
     
+        <body class="post-body">
+    
     
 <header class="header">
 
     <div class="read-progress"></div>
     <div class="header-sidebar-menu">&#xe775;</div>
     <!-- post页的toggle banner  -->
+    
+    <div class="banner">
+            <div class="blog-title">
+                <a href="/" >驿路星辰的博客</a>
+            </div>
+            <div class="post-title">
+                <a href="#" class="post-name">Flutter如何比较两个list是否相等</a>
+            </div>
+    </div>
     
     <a class="home-link" href=/>驿路星辰的博客</a>
 </header>
@@ -228,24 +243,68 @@
 
 
 
+
+height:50vh;
 ">
     
     <!-- 主页  -->
+    
+    
+    <!-- 404页  -->
             
     <div class="site-intro-placeholder"></div>
-    <div class="site-intro-img" style="background-image: url(/)"></div>
+    <div class="site-intro-img" style="background-image: url(/intro/post-bg.jpg)"></div>
     <div class="site-intro-meta">
         <!-- 标题  -->
         <h1 class="intro-title">
             <!-- 主页  -->
+            
+            Flutter如何比较两个list是否相等
+            <!-- 404 -->
             
         </h1>
         <!-- 副标题 -->
         <p class="intro-subtitle">
             <!-- 主页副标题  -->
             
+            
+            <!-- 404 -->
+            
         </p>
         <!-- 文章页meta -->
+        
+            <div class="post-intros">
+                <!-- 文章页标签  -->
+                
+                
+                    <div class="post-intro-read">
+                        <span>Word count: <span class="post-count word-count">537</span>Reading time: <span class="post-count reading-time">2 min</span></span>
+                    </div>
+                
+                <div class="post-intro-meta">
+                    <span class="post-intro-calander iconfont-archer">&#xe676;</span>
+                    <span class="post-intro-time">2023/01/04</span>
+                    
+                    <span id="busuanzi_container_page_pv" class="busuanzi-pv">
+                        <span class="iconfont-archer">&#xe602;</span>
+                        <span id="busuanzi_value_page_pv"></span>
+                    </span>
+                    
+                    <span class="shareWrapper">
+                        <span class="iconfont-archer shareIcon">&#xe71d;</span>
+                        <span class="shareText">Share</span>
+                        <ul class="shareList">
+                            <li class="iconfont-archer share-qr" data-type="qr">&#xe75b;
+                                <div class="share-qrcode"></div>
+                            </li>
+                            <li class="iconfont-archer" data-type="weibo">&#xe619;</li>
+                            <li class="iconfont-archer" data-type="qzone">&#xe62e;</li>
+                            <li class="iconfont-archer" data-type="twitter">&#xe634;</li>
+                            <li class="iconfont-archer" data-type="facebook">&#xe67a;</li>
+                        </ul>
+                    </span>
+                </div>
+            </div>
         
     </div>
 </div>
@@ -346,64 +405,66 @@
 </script>        
         <img class="loading" src="/assets/loading.svg" style="display: block; margin: 6rem auto 0 auto; width: 6rem; height: 6rem;" />
         <div class="container container-unloaded">
-            <main class="main index-page">
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/10/11/swift-function-program/" >
-            
-                <span>【译】Swift和函数式编程的精髓</span>
-        </a>
-        <div class="abstract-content">
-            我想说这真的是一篇非常非常好的文章，它通过对一个实例的API的优化，教会我们如何写出优美简洁的Swift的函数式代码。但是这个文章是视频中作者的口述，所以翻译过程中难免有不当之处。大家可以对着视频和原文进行观看和对比。
-原文地址
-介绍Swift第一次被公布的一周后，我写了一篇名为“Swift不是函数式”的博文。两年后，Swift仍然不是函数式。这篇文章并没有对此进行阐述，而是将讨论函数式语言几十年来的经验和研究，我们可以用自己快速的方式将这些经验和研究带入Swift。
-什么是函数式编程它是单子、仿函数、haskell和优雅的代码。
-函数式编程不是一种语言或语法，而是一种思考问题的方式。函...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/10/11</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
+            <main class="main post-page">
+    <article class="article-entry">
+        <p>在 Flutter 中，你可以使用 Dart 的内置方法 listEquals 来比较两个列表是否相等。listEquals 方法会比较两个列表的长度和元素，如果长度相等且每个元素都相等（使用 == 运算符比较），那么这两个列表就被认为是相等的。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">List&lt;int&gt; list1 &#x3D; [1, 2, 3];</span><br><span class="line">List&lt;int&gt; list2 &#x3D; [1, 2, 3];</span><br><span class="line">List&lt;int&gt; list3 &#x3D; [1, 2, 4];</span><br><span class="line"></span><br><span class="line">bool areList1AndList2Equal &#x3D; listEquals(list1, list2); &#x2F;&#x2F; 返回 true</span><br><span class="line">bool areList1AndList3Equal &#x3D; listEquals(list1, list3); &#x2F;&#x2F; 返回 false</span><br></pre></td></tr></table></figure>
+<p>请注意，<code>listEquals</code> 方法会使用<code>==</code> 运算符比较列表元素，因此对于自定义对象，你可能需要在类中重写 <code>==</code> 运算符和 <code>hashCode</code> 方法，以便正确地进行比较。<br>在 <code>Dart</code> 中，如果要比较两个自定义对象，通常需要重写 <code>==</code> 运算符和 <code>hashCode</code> 方法。这是因为默认情况下，<code>==</code> 运算符仅比较两个对象的引用，而不是它们的内容。<code>hashCode</code> 方法则用于在集合（如 <code>HashSet</code> 或 <code>HashMap</code>）中标识对象。</p>
+<p>以下是一个自定义对象 Person 的示例，演示如何重写 <code>==</code> 运算符和 <code>hashCode</code> 方法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">class Person &#123;</span><br><span class="line">  final String name;</span><br><span class="line">  final int age;</span><br><span class="line"></span><br><span class="line">  Person(this.name, this.age);</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 重写 &#x3D;&#x3D; 运算符</span><br><span class="line">  @override</span><br><span class="line">  bool operator &#x3D;&#x3D;(Object other) &#123;</span><br><span class="line">    &#x2F;&#x2F; 判断是否为同一类型</span><br><span class="line">    if (other is! Person) &#123;</span><br><span class="line">      return false;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; 比较内容</span><br><span class="line">    return name &#x3D;&#x3D; other.name &amp;&amp; age &#x3D;&#x3D; other.age;</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  &#x2F;&#x2F; 重写 hashCode 方法</span><br><span class="line">  @override</span><br><span class="line">  int get hashCode &#123;</span><br><span class="line">    &#x2F;&#x2F; 使用 bitwise XOR 运算符将各属性的 hashCode 组合在一起</span><br><span class="line">    return name.hashCode ^ age.hashCode;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>现在，你可以正确地比较两个 Person 对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Person person1 &#x3D; Person(&quot;Alice&quot;, 30);</span><br><span class="line">Person person2 &#x3D; Person(&quot;Alice&quot;, 30);</span><br><span class="line">Person person3 &#x3D; Person(&quot;Bob&quot;, 25);</span><br><span class="line"></span><br><span class="line">bool arePerson1AndPerson2Equal &#x3D; person1 &#x3D;&#x3D; person2; &#x2F;&#x2F; 返回 true</span><br><span class="line">bool arePerson1AndPerson3Equal &#x3D; person1 &#x3D;&#x3D; person3; &#x2F;&#x2F; 返回 false</span><br></pre></td></tr></table></figure>
+<p>请注意，重写 <code>==</code> 运算符和 <code>hashCode</code> 方法时，需要确保它们的实现是一致的。即，如果两个对象的 <code>==</code> 运算符返回 <code>true</code>，那么它们的 <code>hashCode</code> 也应该相同。这是因为 <code>hashCode</code> 用于在集合中标识对象，如果不保持一致性，可能会导致意外的行为。</p>
+
     </article>
+    <!-- license  -->
     
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2019/10/03/how-to-use-functional-program-in-swift/" >
-            
-                <span>【译】如何在swift中使用函数式编程</span>
-        </a>
-        <div class="abstract-content">
-            翻译：https://www.raywenderlich.com/9222-an-introduction-to-functional-programming-in-swift#toc-anchor-012
-在本教程中，您将逐步学习如何开始使用函数式编程以及如何编写声明性代码而不是命令式代码。
-swift于2014年在WWDC上进入编程世界的大门，它不仅仅是一门新的编程语言。 它为iOS和macOS平台的软件开发提供了便利。
-本教程重点介绍其中一种方法：函数式编程，简称FP。 您将了解FP中使用的各种方法和技术。
-开始创建一个新的playground通过选择File ▸ New ▸ Pl...
+        <div class="license-wrapper">
+            <p>Author：<a href="http://www.ayaseeri.com">驿路星辰</a>
+            <p>原文链接：<a href="http://www.ayaseeri.com/2023/01/04/how-to-compare-to-list-are-equal/">http://www.ayaseeri.com/2023/01/04/how-to-compare-to-list-are-equal/</a>
+            <p>发表日期：<a href="http://www.ayaseeri.com/2023/01/04/how-to-compare-to-list-are-equal/">January 4th 2023</a>
+            <p>更新日期：<a href="http://www.ayaseeri.com/2023/01/04/how-to-compare-to-list-are-equal/">January 4th 2023</a>
+            <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2019/10/03</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
     
     <!-- paginator  -->
+    <ul class="post-paginator">
+        <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2023/04/19/difference-between-Inkwell-GestureDetector/" title= "difference-between-Inkwell-GestureDetector">
+                    <div class="nextTitle">difference-between-Inkwell-GestureDetector</div>
+                </a>
+            
+        </li>
+        <li class="previous">
+            
+                <div class="prevSlogan">Previous Post</div>
+                <a href= "/2020/08/29/flutter-ios-plugin-delegate-error/" title= "Flutter中针对iOS封装Plugin组件注意事项">
+                    <div class="prevTitle">Flutter中针对iOS封装Plugin组件注意事项</div>
+                </a>
+            
+        </li>
+    </ul>
+    <!-- 评论插件 -->
+    <!-- 来必力City版安装代码 -->
+
+<!-- City版安装代码已完成 -->
     
+    
+    <!-- gitalk评论 -->
+
+    <!-- utteranc评论 -->
+
+    <!-- partial('_partial/comment/changyan') -->
+    <!--PC版-->
+
+
+    
+    
+
+    <!-- 评论 -->
 </main>
             <!-- profile -->
             
@@ -449,6 +510,24 @@ swift于2014年在WWDC上进入编程世界的大门，它不仅仅是一门新�
 </footer>
     </div>
     <!-- toc -->
+    
+    <div class="toc-wrapper" style=
+    
+
+
+
+
+
+
+
+top:50vh;
+
+    >
+        <div class="toc-catalog">
+            <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
+        </div>
+        
+    </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>
     <div class="sidebar sidebar-hide">
@@ -854,6 +933,8 @@ jsonContent:
     
     </div>
     <!-- async load share.js -->
+    
+        <script src="/scripts/share.js" async></script>    
      
     </body>
 </html>
