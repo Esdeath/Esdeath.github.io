@@ -1,9 +1,8 @@
 ---
-title: InkWell 与 GestureDetector的区别
+title: InkWell与GestureDetector的区别
 date: 2023-04-19 09:22:12
 tags:
 ---
-
 ## InkWell 与 GestureDetector
 
 `InkWell` 和 `GestureDetector` 都是 Flutter 中用于处理用户交互事件的小部件。它们的主要区别在于它们的视觉表现和用途。
