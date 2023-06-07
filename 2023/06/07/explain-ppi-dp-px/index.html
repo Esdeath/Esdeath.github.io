@@ -20,26 +20,21 @@
     <meta name="keywords" content="算法,Swift,Dart,iOS,Flutter,C++">
     
     <meta name="description" content="">
-    <meta name="description" content="1&quot;非对称加密也叫公钥密码: 使用公钥加密, 使用私钥解密&quot;    在对称密码中，由于加密和解密的密钥是相同的，因此必须向接收者配送密钥。用于解密的密钥必须被配送给接收者，这一问题称为密钥配送问题。如果使用非对称加密也可以称为公钥密码，则无需向接收者配送用于解密的密钥，这样就解决了密钥配送问题。可以说非对称加密是密码学历史上最伟大的发明。 非对称加密中，密钥分为加密密钥和解密密">
+    <meta name="description" content="理解Flutter中的PPI、DPI、逻辑像素、物理像素在移动应用开发中，有几个术语经常用于描述屏幕显示和分辨率。对于Flutter开发者来说，清楚地理解这些术语及其之间的关系非常重要。在本篇技术博文中，我们将解释PPI、DPI、逻辑像素、物理像素、px和dp的含义，以及它们在Flutter中的相互关系. PPI和DPIPPI代表每英寸像素密度，而DPI代表每英寸点密度。在移动设备上，PPI和DP">
 <meta property="og:type" content="article">
-<meta property="og:title" content="4.非对称加密(公钥加密,私钥解密)---《图解密码学》">
-<meta property="og:url" content="http://www.ayaseeri.com/2020/05/08/crypt-four-md/index.html">
+<meta property="og:title" content="理解Flutter中的PPI、DPI、逻辑像素、物理像素">
+<meta property="og:url" content="http://www.ayaseeri.com/2023/06/07/explain-ppi-dp-px/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="1&quot;非对称加密也叫公钥密码: 使用公钥加密, 使用私钥解密&quot;    在对称密码中，由于加密和解密的密钥是相同的，因此必须向接收者配送密钥。用于解密的密钥必须被配送给接收者，这一问题称为密钥配送问题。如果使用非对称加密也可以称为公钥密码，则无需向接收者配送用于解密的密钥，这样就解决了密钥配送问题。可以说非对称加密是密码学历史上最伟大的发明。 非对称加密中，密钥分为加密密钥和解密密">
+<meta property="og:description" content="理解Flutter中的PPI、DPI、逻辑像素、物理像素在移动应用开发中，有几个术语经常用于描述屏幕显示和分辨率。对于Flutter开发者来说，清楚地理解这些术语及其之间的关系非常重要。在本篇技术博文中，我们将解释PPI、DPI、逻辑像素、物理像素、px和dp的含义，以及它们在Flutter中的相互关系. PPI和DPIPPI代表每英寸像素密度，而DPI代表每英寸点密度。在移动设备上，PPI和DP">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://www.ayaseeri.com/2020/05/08/crypt-four-md/1538732295130.png">
-<meta property="og:image" content="http://www.ayaseeri.com/2020/05/08/crypt-four-md/1538732846031.png">
-<meta property="og:image" content="http://www.ayaseeri.com/2020/05/08/crypt-four-md/1538732904820.png">
-<meta property="og:image" content="http://www.ayaseeri.com/2020/05/08/crypt-four-md/1538732995510.png">
-<meta property="article:published_time" content="2020-05-08T10:10:10.000Z">
-<meta property="article:modified_time" content="2022-05-28T19:11:29.093Z">
+<meta property="article:published_time" content="2023-06-07T06:24:12.000Z">
+<meta property="article:modified_time" content="2023-06-07T06:58:05.458Z">
 <meta property="article:author" content="驿路星辰">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://www.ayaseeri.com/2020/05/08/crypt-four-md/1538732295130.png">
     <meta http-equiv="Cache-control" content="no-cache">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     
-    <title>4.非对称加密(公钥加密,私钥解密)---《图解密码学》 · iOS</title>
+    <title>理解Flutter中的PPI、DPI、逻辑像素、物理像素 · iOS</title>
     <style type="text/css">
     @font-face {
         font-family: 'Oswald-Regular';
@@ -234,7 +229,7 @@
                 <a href="/" >驿路星辰的博客</a>
             </div>
             <div class="post-title">
-                <a href="#" class="post-name">4.非对称加密(公钥加密,私钥解密)---《图解密码学》</a>
+                <a href="#" class="post-name">理解Flutter中的PPI、DPI、逻辑像素、物理像素</a>
             </div>
     </div>
     
@@ -264,7 +259,7 @@ height:50vh;
         <h1 class="intro-title">
             <!-- 主页  -->
             
-            4.非对称加密(公钥加密,私钥解密)---《图解密码学》
+            理解Flutter中的PPI、DPI、逻辑像素、物理像素
             <!-- 404 -->
             
         </h1>
@@ -283,12 +278,12 @@ height:50vh;
                 
                 
                     <div class="post-intro-read">
-                        <span>Word count: <span class="post-count word-count">2.9k</span>Reading time: <span class="post-count reading-time">10 min</span></span>
+                        <span>Word count: <span class="post-count word-count">2.3k</span>Reading time: <span class="post-count reading-time">8 min</span></span>
                     </div>
                 
                 <div class="post-intro-meta">
                     <span class="post-intro-calander iconfont-archer">&#xe676;</span>
-                    <span class="post-intro-time">2020/05/08</span>
+                    <span class="post-intro-time">2023/06/07</span>
                     
                     <span id="busuanzi_container_page_pv" class="busuanzi-pv">
                         <span class="iconfont-archer">&#xe602;</span>
@@ -412,175 +407,83 @@ height:50vh;
         <div class="container container-unloaded">
             <main class="main post-page">
     <article class="article-entry">
-        <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&quot;非对称加密也叫公钥密码: 使用公钥加密, 使用私钥解密&quot;</span><br></pre></td></tr></table></figure>
-
-<p><img src="1538732295130.png" alt="1538732295130"></p>
-<blockquote>
-<p>在对称密码中，由于加密和解密的密钥是相同的，因此必须向接收者配送密钥。用于解密的密钥必须被配送给接收者，这一问题称为<font color="red">密钥配送问题</font>。如果使用非对称加密也可以称为公钥密码，则无需向接收者配送用于解密的密钥，这样就解决了密钥配送问题。可以说非对称加密是密码学历史上最伟大的发明。</p>
-<p>非对称加密中，密钥分为加密密钥和解密密钥两种。发送者用加密密钥对消息进行加密，接收者用解密密钥对密文进行解密。要理解公钥密码，清楚地区分加密密钥和解密密钥是非常重要的。加密密钥是发送者加密时使用的，而解密密钥则是接收者解密时使用的。</p>
-<p>仔细思考一下加密密钥和解密密钥的区别，我们可以发现：</p>
-<ul>
-<li>发送者只需要加密密钥</li>
-<li>接收者只需要解密密钥</li>
-<li>解密密钥不可以被窃听者获取</li>
-<li>加密密钥被窃听者获取也没问题</li>
-</ul>
-<p>也就是说，解密密钥从一开始就是由接收者自己保管的，因此只要将加密密钥发给发送者就可以解决密钥配送问题了，而根本不需要配送解密密钥。</p>
-<p>非对称加密中，加密密钥一般是公开的。正是由于加密密钥可以任意公开，因此该密钥被称为<strong>公钥（publickey）</strong>。公钥可以通过邮件直接发送给接收者，也可以刊登在报纸的广告栏上，做成看板放在街上，或者做成网页公开给世界上任何人，而完全不必担心被窃听者窃取。</p>
-<p>当然，我们也没有必要非要将公钥公开给全世界所有的人，但至少我们需要将公钥发送给需要使用公钥进行加密的通信对象（也就是给自己发送密文的发送者）。</p>
-<p>相对地，<strong>解密密钥是绝对不能公开的，这个密钥只能由你自己来使用，因此称为私钥（privatekey）</strong>。私钥不可以被别人知道，也不可以将它发送给别人，甚至也不能发送给自己的通信对象。</p>
-<p>公钥和私钥是一一对应的，一对公钥和私钥统称为<strong>密钥对（keypair）</strong>。由公钥进行加密的密文，必须使用与该公钥配对的私钥才能够解密。密钥对中的两个密钥之间具有非常密切的关系(数学上的关系)一一因此公钥和私钥是不能分别单独生成的。</p>
-<p>公钥密码的使用者需要生成一个包括公钥和私钥的密钥对，其中公钥会被发送给别人，而私钥则仅供自己使用。稍后我们将具体尝试生成一个密钥对。</p>
-</blockquote>
-<h3 id="4-1-非对称加密通信流程"><a href="#4-1-非对称加密通信流程" class="headerlink" title="4.1 非对称加密通信流程"></a>4.1 非对称加密通信流程</h3><blockquote>
-<p>下面我们来看一看使用公钥密码的通信流程。和以前一样、我们还是假设Alice要给Bob发送一条消息，Alice是发送者，Bob是接收者，而这一次窃听者Eve依然能够窃所到他们之间的通信内容。</p>
-<p>在公非对称加密通信中，通信过程是由接收者Bob来启动的。</p>
+        <h1 id="理解Flutter中的PPI、DPI、逻辑像素、物理像素"><a href="#理解Flutter中的PPI、DPI、逻辑像素、物理像素" class="headerlink" title="理解Flutter中的PPI、DPI、逻辑像素、物理像素"></a>理解Flutter中的PPI、DPI、逻辑像素、物理像素</h1><p>在移动应用开发中，有几个术语经常用于描述屏幕显示和分辨率。对于Flutter开发者来说，清楚地理解这些术语及其之间的关系非常重要。在本篇技术博文中，我们将解释PPI、DPI、逻辑像素、物理像素、px和dp的含义，以及它们在Flutter中的相互关系.</p>
+<h2 id="PPI和DPI"><a href="#PPI和DPI" class="headerlink" title="PPI和DPI"></a>PPI和DPI</h2><p>PPI代表每英寸像素密度，而DPI代表每英寸点密度。在移动设备上，PPI和DPI通常可以互换使用，用来表示屏幕的像素密度。它们表示每英寸屏幕上的像素或点的数量。较高的PPI或DPI值表示更高的像素密度，图像更清晰、细节更丰富。</p>
+<h3 id="计算手机的PPI"><a href="#计算手机的PPI" class="headerlink" title="计算手机的PPI"></a>计算手机的PPI</h3><p>要计算手机的PPI，需要知道手机屏幕的分辨率和尺寸。PPI可以使用以下公式计算：</p>
+<p>PPI = √(像素宽度^2 + 像素高度^2) / 屏幕对角线长度</p>
+<p>其中，像素宽度和像素高度是屏幕的水平和垂直像素数量，屏幕对角线长度是屏幕的实际对角线长度。</p>
+<p>举个例子，假设一个手机屏幕的分辨率是1080x1920像素，屏幕尺寸是5英寸：</p>
+<p>像素宽度 = 1080<br>像素高度 = 1920<br>屏幕对角线长度 = 5英寸</p>
+<p>根据公式计算：</p>
+<p>PPI = √(1080^2 + 1920^2) / 5</p>
+<p>最终得到的结果即为该手机屏幕的PPI。</p>
+<p>请注意，不同手机型号和品牌的屏幕规格和分辨率各不相同，因此具体的PPI值会有所变化。</p>
+<h2 id="逻辑像素和物理像素"><a href="#逻辑像素和物理像素" class="headerlink" title="逻辑像素和物理像素"></a>逻辑像素和物理像素</h2><p>在Flutter中，逻辑像素和物理像素是与屏幕显示相关的基本概念。我们来详细了解一下：</p>
+<h3 id="逻辑像素（dp或dip）"><a href="#逻辑像素（dp或dip）" class="headerlink" title="逻辑像素（dp或dip）"></a>逻辑像素（dp或dip）</h3><p>逻辑像素，也称为设备独立像素（dp或dip），是Flutter用于布局和渲染的虚拟像素单位。它们提供了一种在不同物理像素密度设备上设计用户界面的一致性单位。Flutter使用逻辑像素进行界面设计，以确保不同屏幕密度的设备上显示出一致的视觉效果。</p>
+<h3 id="物理像素（px）"><a href="#物理像素（px）" class="headerlink" title="物理像素（px）"></a>物理像素（px）</h3><p>物理像素通常用px表示，代表设备屏幕上的实际像素。这些像素是屏幕上最小的可见单位，决定了屏幕的分辨率和显示能力。当渲染应用程序时，Flutter会根据屏幕的物理像素密度将逻辑像素映射到物理像素。</p>
+<h3 id="逻辑像素和物理像素之间的转换"><a href="#逻辑像素和物理像素之间的转换" class="headerlink" title="逻辑像素和物理像素之间的转换"></a>逻辑像素和物理像素之间的转换</h3><p>在Flutter中，可以通过设备的像素比例（缩放因子）来进行逻辑像素和物理像素之间的转换。以下是转换的方法：</p>
+<p>将逻辑像素转换为物理像素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double 物理像素 &#x3D; 逻辑像素 * MediaQuery.of(context).devicePixelRatio;</span><br></pre></td></tr></table></figure>
+<p>将物理像素转换为逻辑像素：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">double 逻辑像素 &#x3D; 物理像素 &#x2F; MediaQuery.of(context).devicePixelRatio;</span><br></pre></td></tr></table></figure>
+<p>Flutter提供了<code>MediaQuery</code>类来获取设备的相关信息，如像素比例、屏幕尺寸和边距。通过使用<code>MediaQuery.of(context)</code>，可以获取上下文中的相关信息来执行准确的像素转换。</p>
+<h2 id="使用逻辑像素的好处"><a href="#使用逻辑像素的好处" class="headerlink" title="使用逻辑像素的好处"></a>使用逻辑像素的好处</h2><p>在Flutter中使用逻辑像素（dp）具有以下几个优点：</p>
 <ol>
-<li><p>Bob生成一个包含公钥和私钥的密钥对。</p>
-<blockquote>
-<p>私钥由Bob自行妥善保管。</p>
-</blockquote>
+<li><p><code>设备独立性</code>：逻辑像素抽象了底层设备的像素密度，使开发者能够在不同屏幕密度的设备上设计一致的布局。</p>
 </li>
-<li><p>Bob将自己的公钥发送给Alicea</p>
-<blockquote>
-<p>Bob的公钥被窃听者Eve截获也没关系。</p>
-<p>将公钥发送给Alice，表示Bob请Alice用这个公钥对消息进行加密并发送给他。</p>
-</blockquote>
+<li><p><code>自适应布局</code>：Flutter的布局系统会根据设备的屏幕大小和像素密度自动调整布局，确保UI元素的正确渲染。</p>
 </li>
-<li><p>Alice用Bob的公钥对消息进行加密。</p>
-<blockquote>
-<p> 加密后的消息只有用Bob的私钥才能够解密。</p>
-<p>虽然Alice拥有Bob的公钥，但用Bob的公钥是无法对密文进行解密的。</p>
-</blockquote>
-</li>
-<li><p>Alice将密文发送给Bobo</p>
-<blockquote>
-<p> 密文被窃听者Eve截获也没关系。Eve可能拥有Bob的公钥，但是用Bob的公钥是无法进行解密的。</p>
-</blockquote>
-</li>
-<li><p>Bob用自己的私钥对密文进行解密。</p>
-<blockquote>
-<p>请参考下图, 看一看在Alice和Bob之间到底传输了哪些信息。其实它们之间所传输的信息只有两个：Bob的公钥以及用Bob的公钥加密的密文。由于Bob的私钥没有出现在通信内容中，因此窃听者Eve无法对密文进行解密。</p>
-</blockquote>
+<li><p><code>分辨率独立性</code>：使用逻辑像素可以创建在不同设备上外观相似的用户界面，无论它们的物理像素密度如何变化。</p>
 </li>
 </ol>
-</blockquote>
-<p><img src="1538732846031.png" alt="1538732846031"></p>
-<blockquote>
-<p>窃听者Eve可能拥有Bob的公钥，但是Bob的公钥只是加密密钥，而不是解密密钥，因此窃听者Eve就无法完成解密操作。</p>
-</blockquote>
-<h3 id="4-2-RSA"><a href="#4-2-RSA" class="headerlink" title="4.2 RSA"></a>4.2 RSA</h3><blockquote>
-<p>RSA是一种非对称加密算法，它的名字是由它的三位开发者，即RonRivest、AdiShamir和LeonardAdleman 的姓氏的首字母组成的（Rivest-Shamir-Leonard）。</p>
-<p>RSA可以被用于非对称加密和数字签名.</p>
-<p>1983年，RSA公司为RSA算法在美国取得了专利，但现在该专利已经过期。</p>
-</blockquote>
-<h4 id="4-2-1-RSA加密"><a href="#4-2-1-RSA加密" class="headerlink" title="4.2.1 RSA加密"></a>4.2.1 RSA加密</h4><blockquote>
-<p>在RSA中，明文、密钥和密文都是数字。RSA的加密过程可以用下列公式来表达，如下。</p>
-</blockquote>
-<p><font color="red">密文=明文 ^ E  mod     N（RSA加密）</font></p>
-<blockquote>
-<p>也就是说，RSA的密文是对代表明文的数字的E次方求modN的结果。换句话说，就是将明文自己做E次乘法，然后将其结果除以N求余数，这个余数就是密文。</p>
-<p>对，就这么简单。仅仅对明文进行乘方运算并求mod即可，这就是整个加密的过程。在对称密码中，出现了很多复杂的函数和操作，就像做炒鸡蛋一样将<strong>比特序列</strong>挪来挪去，还要进行XOR(按位异或)等运算才能完成，但RSA却不同，它非常简洁。</p>
-<p>对了，加密公式中出现的两个数一一一E和N，到底都是什么数呢？RSA的加密是求明文的E次方modN，因此只要知道E和N这两个数，任何人都可以完成加密的运算。所以说，E和N是RSA加密的密钥，也就是说，<strong>E和N的组合就是公钥</strong>。</p>
-<p>不过，E和N并不是随便什么数都可以的，它们是经过严密计算得出的。顺便说一句，<strong>E是加密（Encryption）的首字母，N是数字（Number)的首字母</strong>。</p>
-<p>有一个很容易引起误解的地方需要大家注意一一E和N这两个数并不是密钥对（公钥和私钥的密钥对）。E和N两个数才组成了一个公钥，因此我们一般会写成 “公钥是(E，N)” 或者 “公钥是{E, N}” 这样的形式，将E和N用括号括起来。</p>
-<p>现在大家应该已经知道，<strong>RSA的加密就是 “求E次方的modN”</strong>，接下来我们来看看RSA的解密。</p>
-</blockquote>
-<h4 id="4-2-2-RSA解密"><a href="#4-2-2-RSA解密" class="headerlink" title="4.2.2 RSA解密"></a>4.2.2 RSA解密</h4><blockquote>
-<p>RSA的解密和加密一样简单，可以用下面的公式来表达：</p>
-</blockquote>
-<p><font color="red">明文=密文^D mod N（RSA解密）</font></p>
-<blockquote>
-<p>也就是说，对表示密文的数字的D次方求modN就可以得到明文。换句话说，将密文自己做D次乘法，再对其结果除以N求余数，就可以得到明文。</p>
-<p>这里所使用的数字N和加密时使用的数字N是相同的。<strong>数D和数N组合起来就是RSA的解密密钥，因此D和N的组合就是私钥</strong>。只有知道D和N两个数的人才能够完成解密的运算。</p>
-<p>大家应该已经注意到，<strong>在RSA中，加密和解密的形式是相同的。加密是求 “E次方的mod N”，而解密则是求 “D次方的modN”</strong>，这真是太美妙了。</p>
-<p>当然，D也并不是随便什么数都可以的，作为解密密钥的D，和数字E有着相当紧密的联系。否则，用E加密的结果可以用D来解密这样的机制是无法实现的。</p>
-<p>顺便说一句，<strong>D是解密〈Decryption）的首字母，N是数字（Number）的首字母</strong>。</p>
-<p>我们将上面讲过的内容整理一下，如下表所示。</p>
-</blockquote>
-<p><img src="1538732904820.png" alt="1538732904820"></p>
-<p><strong>RSA的加密和解密</strong></p>
-<p><img src="1538732995510.png" alt="1538732995510"></p>
-<h3 id="4-3-ECC椭圆曲线"><a href="#4-3-ECC椭圆曲线" class="headerlink" title="4.3 ECC椭圆曲线"></a>4.3 ECC椭圆曲线</h3><blockquote>
+<h2 id="flutter-screenutil的布局原理"><a href="#flutter-screenutil的布局原理" class="headerlink" title="flutter_screenutil的布局原理"></a><code>flutter_screenutil</code>的布局原理</h2><p><code>flutter_screenutil</code>是一个用于在不同屏幕尺寸和像素密度（PPI）设备上实现自适应布局。它基于设备的屏幕宽度和高度进行布局适配，提供了一种简单而方便的方式来处理不同分辨率的设备。</p>
+<p><code>flutter_screenutil</code>的布局原理基于以下几个步骤：</p>
 <ol>
-<li><p>概念</p>
-<p>椭圆曲线密码学（英语：Elliptic curve cryptography，缩写为 ECC），一种建立公开密钥加密的算法，基于椭圆曲线数学。椭圆曲线在密码学中的使用是在1985年由Neal Koblitz和Victor Miller分别独立提出的。</p>
-<p>ECC的主要优势是在某些情况下它比其他的方法使用更小的密钥——比如RSA加密算法——提供相当的或更高等级的安全。</p>
-<p>椭圆曲线密码学的许多形式有稍微的不同，所有的都依赖于被广泛承认的解决椭圆曲线离散对数问题的困难性上。与传统的基于大质数因子分解困难性的加密方法不同，ECC通过椭圆曲线方程式的性质产生密钥。</p>
-<p>ECC 164位的密钥产生的一个安全级相当于RSA 1024位密钥提供的保密强度，而且计算量较小，处理速度更快，存储空间和传输带宽占用较少。目前我国<code>居民二代身份证</code>正在使用 256 位的椭圆曲线密码，虚拟货币<code>比特币</code>也选择ECC作为加密算法。</p>
-<p>具体算法详解参考： </p>
-<ul>
-<li><p><a href="https://www.cnblogs.com/Kalafinaian/p/7392505.html" target="_blank" rel="noopener">https://www.cnblogs.com/Kalafinaian/p/7392505.html</a></p>
+<li><p><code>获取设备的屏幕宽度和高度：</code>flutter_screenutil<code>通过Flutter的</code>MediaQuery`类获取设备的屏幕宽度和高度。</p>
 </li>
-<li><p><a href="https://blog.csdn.net/taifei/article/details/73277247" target="_blank" rel="noopener">https://blog.csdn.net/taifei/article/details/73277247</a></p>
+<li><p><code>计算屏幕宽度的缩放比例：</code>根据开发者预设的设计稿尺寸（通常以逻辑像素为单位），以及设备的实际屏幕宽度，计算出一个缩放比例。这个缩放比例用于将设计稿中的尺寸转换为适应当前设备的实际尺寸。</p>
 </li>
-</ul>
+<li><p>将布局尺寸转换为适应当前设备的实际尺寸：使用缩放比例，将设计稿中的尺寸（通常以逻辑像素为单位）转换为适应当前设备的实际尺寸（通常以物理像素为单位）。这样，无论设备的屏幕宽度和像素密度如何，都可以保持布局在不同设备上的一致性。</p>
 </li>
-<li><p>数学原理</p>
-<p>不管是RSA还是ECC或者其它，公钥加密算法都是依赖于某个正向计算很简单（多项式时间复杂度），而逆向计算很难（指数级时间复杂度）的数学问题。</p>
-<p>椭圆曲线依赖的数学难题是:</p>
-<p><code>k为正整数，P是椭圆曲线上的点（称为基点）, k*P=Q , 已知Q和P，很难计算出k</code></p>
+<li><p>在Flutter应用程序中应用适配尺寸：使用<code>flutter_screenutil</code>提供的工具类和方法，将转换后的适应设备的尺寸应用到Flutter小部件中。这样，您就可以使用适应设备的实际尺寸来定义布局、字体大小、间距等。</p>
 </li>
 </ol>
-</blockquote>
-<h3 id="4-4-非对称加密解惑"><a href="#4-4-非对称加密解惑" class="headerlink" title="4.4 非对称加密解惑"></a>4.4 非对称加密解惑</h3><ul>
-<li><p><strong>非对称加密比对称加密机密性更高吗?</strong></p>
-<blockquote>
-<p>这个问题无法回答, 以为机密性高低是根据秘钥长度而变化的</p>
-</blockquote>
+<p>总结来说，<code>flutter_screenutil</code>的布局原理是根据设备的屏幕宽度和高度，以及开发者预设的设计稿尺寸，计算出一个缩放比例，然后将设计稿中的尺寸转换为适应当前设备的实际尺寸，最后在Flutter应用程序中应用适配尺寸。</p>
+<p>使用<code>flutter_screenutil</code>可以简化开发者在不同设备上进行布局适配的工作，提供了一种方便的方式来处理屏幕尺寸和像素密度的差异，使得应用在不同设备上呈现一致的视觉效果。</p>
+<h2 id="使用flutter-screenutil布局可能会存在哪些问题"><a href="#使用flutter-screenutil布局可能会存在哪些问题" class="headerlink" title="使用flutter_screenutil布局可能会存在哪些问题"></a>使用<code>flutter_screenutil</code>布局可能会存在哪些问题</h2><p>尽管<code>flutter_screenutil</code>在Flutter应用程序中实现布局适配方面提供了便利，但在使用过程中可能会遇到一些问题，包括：</p>
+<ol>
+<li><p><code>布局不准确</code>：由于屏幕尺寸和像素密度的差异，使用flutter_screenutil进行布局适配可能会导致布局在某些设备上不准确。例如，某些设备可能具有非标准的像素密度或屏幕尺寸，导致布局比例不符合预期。</p>
 </li>
-<li><p><strong>采用1024bit 秘钥长度的非对称加密, 和采用128bit秘钥长度的对称加密中, 是秘钥更长的非对称加密更安全吗?</strong></p>
-<blockquote>
-<p>不是。</p>
-<p>非对称加密的密钥长度不能与对称加密的密钥长度进行直接比较。下表是一张密钥长度的比较表（本表摘自《应用密码学》），根据这张表我们可以看出，1024比特的公钥密码与128比特的对称密码相比，反而是128比特的对称密码抵御暴力破解的能力更强。</p>
-</blockquote>
+<li><p><code>字体大小变化</code>：在使用flutter_screenutil进行布局适配时，字体大小也会被自动缩放。这可能会导致在某些设备上字体大小过小或过大，影响应用的可读性和用户体验。</p>
 </li>
-</ul>
-<table>
-<thead>
-<tr>
-<th align="center">对称加密秘钥长度</th>
-<th align="center">非对称加密秘钥长度</th>
-</tr>
-</thead>
-<tbody><tr>
-<td align="center">128 比特</td>
-<td align="center">2304 比特</td>
-</tr>
-<tr>
-<td align="center">112 比特</td>
-<td align="center">1792 比特</td>
-</tr>
-<tr>
-<td align="center">80 比特</td>
-<td align="center">768 比特</td>
-</tr>
-<tr>
-<td align="center">64 比特</td>
-<td align="center">512 比特</td>
-</tr>
-<tr>
-<td align="center">56 比特</td>
-<td align="center">384 比特</td>
-</tr>
-</tbody></table>
-<ul>
-<li><p><strong>有了非对称加密， 以后对称加密会被替代吗？</strong></p>
-<blockquote>
-<p>不会。</p>
-<p>一般来说，在采用具备同等机密性的密钥长度的情况下，<font color="red">非对称加密的处理速度只有对称加密的几百分之一</font>。因此，非对称加密并不适合用来对很长的消息内容进行加密。根据目的的不同，还可能会配合使用对称加密和非对称加密，例如，混合密码系统就是将这两种密码组合而成的。</p>
-</blockquote>
+<li><p><code>图片质量问题</code>：当使用flutter_screenutil将设计稿中的尺寸转换为适应设备的实际尺寸时，如果图片分辨率不足够高，可能会导致在高像素密度设备上显示模糊或失真的图片。</p>
 </li>
-</ul>
+<li><p><code>多屏幕适配问题</code>：flutter_screenutil主要基于设备的屏幕宽度进行适配，而在某些情况下，仅考虑宽度可能不足够。例如，对于横屏模式或平板电脑等具有不同布局需求的设备，可能需要额外的适配策略。</p>
+</li>
+<li><p><code>对第三方库的兼容性</code>：flutter_screenutil可能与某些第三方库或自定义小部件存在兼容性问题。一些库或小部件可能不会自动适应flutter_screenutil的布局适配，需要额外的处理来确保一致的布局效果。</p>
+</li>
+</ol>
+<p>为了解决这些问题，可以采取一些措施：</p>
+<ol>
+<li><code>根据实际情况调整适配策略</code>：对于特定的设备或布局需求，可以针对性地调整适配策略，而不仅仅依赖于flutter_screenutil的自动适配。</li>
+</ol>
+<ol start="2">
+<li><p><code>额外的适配处理</code>：对于特定的布局元素或第三方库，可能需要额外的适配处理来确保正确的布局效果。可以通过手动计算和调整尺寸或与库的开发者进行沟通，以解决兼容性问题。</p>
+</li>
+<li><p><code>测试和调试</code>：在不同设备上进行测试和调试，尤其是对于不同的屏幕尺寸和像素密度，以确保布局在各种情况下都具有良好的适配效果。</p>
+</li>
+</ol>
+<h2 id="结论"><a href="#结论" class="headerlink" title="结论"></a>结论</h2><p>在本篇博文中，我们探讨了PPI、DPI、逻辑像素、物理像素、px和dp在Flutter中的概念。以及<code>flutter_screenutil</code>的布局原理和局限性。我们了解到PPI和DPI表示像素密度，逻辑像素提供了设备独立的布局和渲染单位，物理像素是屏幕上的实际像素。通过理解这些概念并进行逻辑像素和物理像素之间的转换，Flutter开发者可以在不同设备上创建外观一致且适应性良好的用户界面。</p>
+<p>使用逻辑像素可以确保您的Flutter应用程序在不同像素密度的设备上呈现出良好的外观和功能。通过利用Flutter内置的机制和MediaQuery类，您可以创建适应不同屏幕尺寸的应用程序，为用户提供最佳的体验。</p>
 
     </article>
     <!-- license  -->
     
         <div class="license-wrapper">
             <p>Author：<a href="http://www.ayaseeri.com">驿路星辰</a>
-            <p>原文链接：<a href="http://www.ayaseeri.com/2020/05/08/crypt-four-md/">http://www.ayaseeri.com/2020/05/08/crypt-four-md/</a>
-            <p>发表日期：<a href="http://www.ayaseeri.com/2020/05/08/crypt-four-md/">May 8th 2020</a>
-            <p>更新日期：<a href="http://www.ayaseeri.com/2020/05/08/crypt-four-md/">May 8th 2020</a>
+            <p>原文链接：<a href="http://www.ayaseeri.com/2023/06/07/explain-ppi-dp-px/">http://www.ayaseeri.com/2023/06/07/explain-ppi-dp-px/</a>
+            <p>发表日期：<a href="http://www.ayaseeri.com/2023/06/07/explain-ppi-dp-px/">June 7th 2023</a>
+            <p>更新日期：<a href="http://www.ayaseeri.com/2023/06/07/explain-ppi-dp-px/">June 7th 2023</a>
             <p>版权声明：本文采用<a rel="license noopener" href="http://creativecommons.org/licenses/by-nc/4.0/" target="_blank">知识共享署名-非商业性使用 4.0 国际许可协议</a>进行许可</p>
         </div>
     
@@ -588,17 +491,12 @@ height:50vh;
     <ul class="post-paginator">
         <li class="next">
             
-                <div class="nextSlogan">Next Post</div>
-                <a href= "/2020/05/12/crypt-five-md/" title= "5.单向散列函数(获取消息的指纹)---《图解密码学》">
-                    <div class="nextTitle">5.单向散列函数(获取消息的指纹)---《图解密码学》</div>
-                </a>
-            
         </li>
         <li class="previous">
             
                 <div class="prevSlogan">Previous Post</div>
-                <a href= "/2020/05/05/crypt-three-md/" title= "3. 分组密码的模式(分组密码是如何迭代)---《图解密码学》">
-                    <div class="prevTitle">3. 分组密码的模式(分组密码是如何迭代)---《图解密码学》</div>
+                <a href= "/2023/04/19/difference-between-Inkwell-GestureDetector/" title= "InkWell与GestureDetector的区别">
+                    <div class="prevTitle">InkWell与GestureDetector的区别</div>
                 </a>
             
         </li>
@@ -682,7 +580,7 @@ top:50vh;
         <div class="toc-catalog">
             <span class="iconfont-archer catalog-icon">&#xe613;</span><span>CATALOG</span>
         </div>
-        <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-非对称加密通信流程"><span class="toc-number">1.</span> <span class="toc-text">4.1 非对称加密通信流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-RSA"><span class="toc-number">2.</span> <span class="toc-text">4.2 RSA</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-1-RSA加密"><span class="toc-number">2.1.</span> <span class="toc-text">4.2.1 RSA加密</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-2-2-RSA解密"><span class="toc-number">2.2.</span> <span class="toc-text">4.2.2 RSA解密</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-ECC椭圆曲线"><span class="toc-number">3.</span> <span class="toc-text">4.3 ECC椭圆曲线</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-非对称加密解惑"><span class="toc-number">4.</span> <span class="toc-text">4.4 非对称加密解惑</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#理解Flutter中的PPI、DPI、逻辑像素、物理像素"><span class="toc-number">1.</span> <span class="toc-text">理解Flutter中的PPI、DPI、逻辑像素、物理像素</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#PPI和DPI"><span class="toc-number">1.1.</span> <span class="toc-text">PPI和DPI</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#计算手机的PPI"><span class="toc-number">1.1.1.</span> <span class="toc-text">计算手机的PPI</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#逻辑像素和物理像素"><span class="toc-number">1.2.</span> <span class="toc-text">逻辑像素和物理像素</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑像素（dp或dip）"><span class="toc-number">1.2.1.</span> <span class="toc-text">逻辑像素（dp或dip）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#物理像素（px）"><span class="toc-number">1.2.2.</span> <span class="toc-text">物理像素（px）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#逻辑像素和物理像素之间的转换"><span class="toc-number">1.2.3.</span> <span class="toc-text">逻辑像素和物理像素之间的转换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用逻辑像素的好处"><span class="toc-number">1.3.</span> <span class="toc-text">使用逻辑像素的好处</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#flutter-screenutil的布局原理"><span class="toc-number">1.4.</span> <span class="toc-text">flutter_screenutil的布局原理</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#使用flutter-screenutil布局可能会存在哪些问题"><span class="toc-number">1.5.</span> <span class="toc-text">使用flutter_screenutil布局可能会存在哪些问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#结论"><span class="toc-number">1.6.</span> <span class="toc-text">结论</span></a></li></ol></li></ol>
     </div>
     
     <div class="back-top iconfont-archer">&#xe639;</div>

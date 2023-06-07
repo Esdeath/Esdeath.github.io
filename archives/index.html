@@ -354,6 +354,31 @@
     
     
     <article class="index-post">
+        <a class="abstract-title" href = "/2023/06/07/explain-ppi-dp-px/" >
+            
+                <span>理解Flutter中的PPI、DPI、逻辑像素、物理像素</span>
+        </a>
+        <div class="abstract-content">
+            理解Flutter中的PPI、DPI、逻辑像素、物理像素在移动应用开发中，有几个术语经常用于描述屏幕显示和分辨率。对于Flutter开发者来说，清楚地理解这些术语及其之间的关系非常重要。在本篇技术博文中，我们将解释PPI、DPI、逻辑像素、物理像素、px和dp的含义，以及它们在Flutter中的相互关系.
+PPI和DPIPPI代表每英寸像素密度，而DPI代表每英寸点密度。在移动设备上，PPI和DPI通常可以互换使用，用来表示屏幕的像素密度。它们表示每英寸屏幕上的像素或点的数量。较高的PPI或DPI值表示更高的像素密度，图像更清晰、细节更丰富。
+计算手机的PPI要计算手机的PPI，需要知道...
+        </div>
+        <div class="abstract-post-meta">
+            <!-- date  -->
+            <div class="abstract-date">
+                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2023/06/07</span>
+            </div>
+            <!-- tags  -->
+            
+        </div>
+    </article>
+    
+    
+    
+    
+    
+    
+    <article class="index-post">
         <a class="abstract-title" href = "/2023/04/19/difference-between-Inkwell-GestureDetector/" >
             
                 <span>InkWell与GestureDetector的区别</span>
@@ -405,19 +430,17 @@ InkWellInkWell 是一个具有 Material Design 风格的可交互小部件。当
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/08/29/flutter-ios-plugin-delegate-error/" >
+        <a class="abstract-title" href = "/2020/08/29/flutter-mvvm/" >
             
-                <span>Flutter中针对iOS封装Plugin组件注意事项</span>
+                <span>Flutter中使用Provider实现MVVM架构</span>
         </a>
         <div class="abstract-content">
-            封装Plugin组件注意事项问题类型:https://github.com/flutter/flutter/issues/74024iOS组件可能要用到appdelegate中的相关的回调方法。此时针对具有bool返回值会有的回调方法会有问题:
-
-如果返回YES ,则先调用的组件会导致后调用的组件相同的回调方法无法执行
-如果返回NO,在冷启动的时候,回调方法不会被吊起。
-
-处理方法可以通过统一返回FlutterPluginAppLifeCycleDelegate调用方法来处理
-1.声明FlutterPluginAppLifeCycleDelegate
-123456@interface Y...
+            MVVM介绍MVVM架构分为M(Model)、V(View)、VM(ViewModel)三个部分，他们分别处理自己的分工，在View和Model之间使用ViewModel作为中介者，使View和Model不受业务逻辑影响。
+Model: 模型层，处理Api数据、模型相关业务
+View: 视图层，UI呈现、使用者互动等。
+ViewModel: 视图模型，处理逻辑、将数据绑定给View展示。
+Controller: 负责主要事情就是将View和ViewModel进行绑定，生命周期管理
+MVVM的核心思想即：通过ViewModel在View和Model之间建立一个连接，实现View和Model...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -435,17 +458,19 @@ InkWellInkWell 是一个具有 Material Design 风格的可交互小部件。当
     
     
     <article class="index-post">
-        <a class="abstract-title" href = "/2020/08/29/flutter-mvvm/" >
+        <a class="abstract-title" href = "/2020/08/29/flutter-ios-plugin-delegate-error/" >
             
-                <span>Flutter中使用Provider实现MVVM架构</span>
+                <span>Flutter中针对iOS封装Plugin组件注意事项</span>
         </a>
         <div class="abstract-content">
-            MVVM介绍MVVM架构分为M(Model)、V(View)、VM(ViewModel)三个部分，他们分别处理自己的分工，在View和Model之间使用ViewModel作为中介者，使View和Model不受业务逻辑影响。
-Model: 模型层，处理Api数据、模型相关业务
-View: 视图层，UI呈现、使用者互动等。
-ViewModel: 视图模型，处理逻辑、将数据绑定给View展示。
-Controller: 负责主要事情就是将View和ViewModel进行绑定，生命周期管理
-MVVM的核心思想即：通过ViewModel在View和Model之间建立一个连接，实现View和Model...
+            封装Plugin组件注意事项问题类型:https://github.com/flutter/flutter/issues/74024iOS组件可能要用到appdelegate中的相关的回调方法。此时针对具有bool返回值会有的回调方法会有问题:
+
+如果返回YES ,则先调用的组件会导致后调用的组件相同的回调方法无法执行
+如果返回NO,在冷启动的时候,回调方法不会被吊起。
+
+处理方法可以通过统一返回FlutterPluginAppLifeCycleDelegate调用方法来处理
+1.声明FlutterPluginAppLifeCycleDelegate
+123456@interface Y...
         </div>
         <div class="abstract-post-meta">
             <!-- date  -->
@@ -596,34 +621,6 @@ Alice 和 Bob 的故事
             <!-- date  -->
             <div class="abstract-date">
                 <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/05/12</span>
-            </div>
-            <!-- tags  -->
-            
-        </div>
-    </article>
-    
-    
-    
-    
-    
-    
-    <article class="index-post">
-        <a class="abstract-title" href = "/2020/05/08/crypt-four-md/" >
-            
-                <span>4.非对称加密(公钥加密,私钥解密)---《图解密码学》</span>
-        </a>
-        <div class="abstract-content">
-            1&quot;非对称加密也叫公钥密码: 使用公钥加密, 使用私钥解密&quot;
-
-
-
-在对称密码中，由于加密和解密的密钥是相同的，因此必须向接收者配送密钥。用于解密的密钥必须被配送给接收者，这一问题称为密钥配送问题。如果使用非对称加密也可以称为公钥密码，则无需向接收者配送用于解密的密钥，这样就解决了密钥配送问题。可以说非对称加密是密码学历史上最伟大的发明。
-非对称加密中，密钥分为加密密钥和解密密钥两种。发送者用加密密钥对消息进行加密，接收者用解密密钥对密文进行解密。要理解公钥密码，清楚地区分加密密钥和解密密钥是非常重要的。加密密钥是发送者加密时使用的，而解密密钥则是接收者解密时使用的。...
-        </div>
-        <div class="abstract-post-meta">
-            <!-- date  -->
-            <div class="abstract-date">
-                <span class="abstract-calander iconfont-archer">&#xe676;</span><span class="abstract-time">2020/05/08</span>
             </div>
             <!-- tags  -->
             
@@ -892,9 +889,24 @@ Alice 和 Bob 的故事
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 18
+        Total : 19
         </div>
         <!-- search  -->
         
@@ -907,6 +919,11 @@ Alice 和 Bob 的故事
     
     <div class="archive-year"> 2023 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/07</span><a class="archive-post-title" href= "/2023/06/07/explain-ppi-dp-px/" >理解Flutter中的PPI、DPI、逻辑像素、物理像素</a>
+        </li>
     
     
         <li class="archive-post-item">
@@ -929,12 +946,12 @@ Alice 和 Bob 的故事
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2020/08/29/flutter-ios-plugin-delegate-error/" >Flutter中针对iOS封装Plugin组件注意事项</a>
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2020/08/29/flutter-mvvm/" >Flutter中使用Provider实现MVVM架构</a>
         </li>
     
     
         <li class="archive-post-item">
-            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2020/08/29/flutter-mvvm/" >Flutter中使用Provider实现MVVM架构</a>
+            <span class="archive-post-date">08/29</span><a class="archive-post-title" href= "/2020/08/29/flutter-ios-plugin-delegate-error/" >Flutter中针对iOS封装Plugin组件注意事项</a>
         </li>
     
     
