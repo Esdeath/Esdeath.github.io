@@ -28,7 +28,7 @@
 <meta property="og:description" content="理解Flutter中的PPI、DPI、逻辑像素、物理像素在移动应用开发中，有几个术语经常用于描述屏幕显示和分辨率。对于Flutter开发者来说，清楚地理解这些术语及其之间的关系非常重要。在本篇技术博文中，我们将解释PPI、DPI、逻辑像素、物理像素、px和dp的含义，以及它们在Flutter中的相互关系. PPI和DPIPPI代表每英寸像素密度，而DPI代表每英寸点密度。在移动设备上，PPI和DP">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-06-07T06:24:12.000Z">
-<meta property="article:modified_time" content="2023-06-07T06:58:05.458Z">
+<meta property="article:modified_time" content="2023-06-07T07:08:26.558Z">
 <meta property="article:author" content="驿路星辰">
 <meta name="twitter:card" content="summary">
     <meta http-equiv="Cache-control" content="no-cache">
@@ -439,13 +439,13 @@ height:50vh;
 <h2 id="flutter-screenutil的布局原理"><a href="#flutter-screenutil的布局原理" class="headerlink" title="flutter_screenutil的布局原理"></a><code>flutter_screenutil</code>的布局原理</h2><p><code>flutter_screenutil</code>是一个用于在不同屏幕尺寸和像素密度（PPI）设备上实现自适应布局。它基于设备的屏幕宽度和高度进行布局适配，提供了一种简单而方便的方式来处理不同分辨率的设备。</p>
 <p><code>flutter_screenutil</code>的布局原理基于以下几个步骤：</p>
 <ol>
-<li><p><code>获取设备的屏幕宽度和高度：</code>flutter_screenutil<code>通过Flutter的</code>MediaQuery`类获取设备的屏幕宽度和高度。</p>
+<li><p><code>获取设备的屏幕宽度和高度</code>：<code>flutter_screenutil</code>通过Flutter的<code>MediaQuery</code>类获取设备的屏幕宽度和高度。</p>
 </li>
-<li><p><code>计算屏幕宽度的缩放比例：</code>根据开发者预设的设计稿尺寸（通常以逻辑像素为单位），以及设备的实际屏幕宽度，计算出一个缩放比例。这个缩放比例用于将设计稿中的尺寸转换为适应当前设备的实际尺寸。</p>
+<li><p><code>计算屏幕宽度的缩放比例</code>：根据开发者预设的设计稿尺寸（通常以逻辑像素为单位），以及设备的实际屏幕宽度，计算出一个缩放比例。这个缩放比例用于将设计稿中的尺寸转换为适应当前设备的实际尺寸。</p>
 </li>
-<li><p>将布局尺寸转换为适应当前设备的实际尺寸：使用缩放比例，将设计稿中的尺寸（通常以逻辑像素为单位）转换为适应当前设备的实际尺寸（通常以物理像素为单位）。这样，无论设备的屏幕宽度和像素密度如何，都可以保持布局在不同设备上的一致性。</p>
+<li><p><code>将布局尺寸转换为适应当前设备的实际尺寸</code>：使用缩放比例，将设计稿中的尺寸（通常以逻辑像素为单位）转换为适应当前设备的实际尺寸（通常以物理像素为单位）。这样，无论设备的屏幕宽度和像素密度如何，都可以保持布局在不同设备上的一致性。</p>
 </li>
-<li><p>在Flutter应用程序中应用适配尺寸：使用<code>flutter_screenutil</code>提供的工具类和方法，将转换后的适应设备的尺寸应用到Flutter小部件中。这样，您就可以使用适应设备的实际尺寸来定义布局、字体大小、间距等。</p>
+<li><p><code>在Flutter应用程序中应用适配尺寸</code>：使用<code>flutter_screenutil</code>提供的工具类和方法，将转换后的适应设备的尺寸应用到Flutter小部件中。这样，您就可以使用适应设备的实际尺寸来定义布局、字体大小、间距等。</p>
 </li>
 </ol>
 <p>总结来说，<code>flutter_screenutil</code>的布局原理是根据设备的屏幕宽度和高度，以及开发者预设的设计稿尺寸，计算出一个缩放比例，然后将设计稿中的尺寸转换为适应当前设备的实际尺寸，最后在Flutter应用程序中应用适配尺寸。</p>
@@ -490,6 +490,11 @@ height:50vh;
     <!-- paginator  -->
     <ul class="post-paginator">
         <li class="next">
+            
+                <div class="nextSlogan">Next Post</div>
+                <a href= "/2023/06/25/how-to-multi-select/" title= "如何实现多项选择">
+                    <div class="nextTitle">如何实现多项选择</div>
+                </a>
             
         </li>
         <li class="previous">
@@ -808,9 +813,24 @@ top:50vh;
     
     
     
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     <div class="total-and-search">
         <div class="total-archive">
-        Total : 19
+        Total : 20
         </div>
         <!-- search  -->
         
@@ -823,6 +843,11 @@ top:50vh;
     
     <div class="archive-year"> 2023 </div>
     <ul class="year-list">
+    
+    
+        <li class="archive-post-item">
+            <span class="archive-post-date">06/25</span><a class="archive-post-title" href= "/2023/06/25/how-to-multi-select/" >如何实现多项选择</a>
+        </li>
     
     
         <li class="archive-post-item">
